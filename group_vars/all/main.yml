@@ -47,3 +47,6 @@ docker:
   compose:
     enabled: true
     version: 1.25.0
+
+golang:
+  version: 1.13.5
