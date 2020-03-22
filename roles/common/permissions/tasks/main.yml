@@ -1,0 +1,35 @@
+---
+- name: "Retrieving files in home folder"
+  find:
+    paths:
+      - "/home/{{ username }}"
+    file_type: file
+    hidden: true
+  register: home
+
+- name: "Changing owner for files in home folder"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: file
+  with_items: "{{ home['files'] }}"
+
+- name: "Retrieving directories in home folder"
+  find:
+    paths:
+      - "/home/{{ username }}"
+    file_type: directory
+    hidden: true
+    excludes:
+      - "snap"
+  register: home
+
+- name: "Changing owner for directories in home folder"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    recurse: true
+    state: directory
+  with_items: "{{ home['files'] }}"
