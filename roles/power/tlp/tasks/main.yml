@@ -1,0 +1,28 @@
+---
+- name: "Adding tlp repository"
+  apt_repository:
+    repo: ppa:linrunner/tlp
+    filename: tlp
+    state: present
+
+- name: "Installing tlp"
+  apt:
+    name:
+      - tlp
+      - tlp-rdw
+    update_cache: true
+    state: present
+
+- name: "Enabling restore device state on startup"
+  lineinfile:
+    path: /etc/tlp.conf
+    regexp: RESTORE_DEVICE_STATE_ON_STARTUP=0
+    line: RESTORE_DEVICE_STATE_ON_STARTUP=1
+    state: present
+
+- name: "Disabling sound power save on battery"
+  lineinfile:
+    path: /etc/tlp.conf
+    regexp: SOUND_POWER_SAVE_ON_BAT=1
+    line: SOUND_POWER_SAVE_ON_BAT=0
+    state: present
