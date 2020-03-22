@@ -1,0 +1,29 @@
+---
+- name: "Checking if repository exists"
+  stat:
+    path: "/home/{{ username }}/.git"
+  register: git
+
+- name: "Initializing repository"
+  command:
+    cmd: git init
+    chdir: "/home/{{ username }}"
+  when: not git.stat.exists
+
+- name: "Adding remote"
+  command:
+    cmd: "git remote add origin {{ repository }}"
+    chdir: "/home/{{ username }}"
+  when: not git.stat.exists
+
+- name: "Fetching origin"
+  command:
+    cmd: git fetch origin
+    chdir: "/home/{{ username }}"
+  when: not git.stat.exists
+
+- name: "Resetting to latest version of master"
+  command:
+    cmd: git reset origin/master --hard
+    chdir: "/home/{{ username }}"
+  when: not git.stat.exists
