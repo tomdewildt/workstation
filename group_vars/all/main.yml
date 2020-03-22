@@ -63,3 +63,11 @@ javascript:
     enabled: true
   netlify_cli:
     enabled: true
+
+python:
+  black:
+    enabled: true
+  pylint:
+    enabled: true
+  virtualenv:
+    enabled: true
