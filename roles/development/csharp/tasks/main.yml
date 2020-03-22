@@ -1,0 +1,15 @@
+---
+- name: "Adding microsoft packages"
+  apt:
+    deb: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+    update_cache: true
+    state: present
+
+- name: "Installing dotnet"
+  apt:
+    name:
+      - "dotnet-sdk-{{ csharp.version }}"
+      - "aspnetcore-runtime-{{ csharp.version }}"
+      - "dotnet-runtime-{{ csharp.version }}"
+    update_cache: true
+    state: present
