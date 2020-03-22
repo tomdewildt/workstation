@@ -1,0 +1,44 @@
+---
+- name: "Installing android dependencies"
+  apt:
+    name: openjdk-8-jdk
+    update_cache: true
+    state: present
+
+- name: "Creating android directory"
+  file:
+    path: /opt/android
+    state: directory
+
+- name: "Installing android tools"
+  unarchive:
+    src: https://dl.google.com/android/repository/commandlinetools-linux-{{ android.tools.version }}_latest.zip
+    dest: /opt/android
+    remote_src: yes
+    creates: /opt/android/tools
+
+- name: "Accepting android licenses"
+  shell: yes | /opt/android/tools/bin/sdkmanager --sdk_root=/opt/android --licenses
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+  changed_when: false
+
+- name: "Installing android packages"
+  shell: /opt/android/tools/bin/sdkmanager --sdk_root=/opt/android "{{ item }}"
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+  changed_when: false
+  with_items:
+    - tools
+    - emulator
+    - platform-tools
+    - build-tools;{{ android.build.version }}
+    - platforms;android-{{ android.platform.version }}
+    - system-images;android-{{ android.platform.version }};default;x86
+
+- name: "Adding user to the plugdev group"
+  user:
+    name: "{{ username }}"
+    groups:
+      - plugdev
+    append: true
