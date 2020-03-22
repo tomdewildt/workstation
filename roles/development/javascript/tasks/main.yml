@@ -1,0 +1,52 @@
+---
+- name: "Adding node key"
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: "Adding node repository"
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_{{ javascript.version }} bionic main
+    filename: node-{{ javascript.version }}
+    state: present
+
+- name: "Installing node"
+  apt:
+    name: nodejs
+    update_cache: yes
+    state: present
+
+- name: "Installing create-react-app"
+  npm:
+    name: create-react-app
+    global: yes
+    state: present
+  when: javascript.create_react_app.enabled
+
+- name: "Installing eslint"
+  npm:
+    name: eslint
+    global: yes
+    state: present
+  when: javascript.eslint.enabled
+
+- name: "Installing expo-cli"
+  npm:
+    name: expo-cli
+    global: yes
+    state: present
+  when: javascript.expo_cli.enabled
+
+- name: "Installing gatsby-cli"
+  npm:
+    name: gatsby-cli
+    global: yes
+    state: present
+  when: javascript.gatsby_cli.enabled
+
+- name: "Installing netlify-cli"
+  npm:
+    name: netlify-cli
+    global: yes
+    state: present
+  when: javascript.netlify_cli.enabled
