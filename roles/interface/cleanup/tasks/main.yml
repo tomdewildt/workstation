@@ -1,0 +1,28 @@
+---
+- name: "Hiding i3 gnome flashback from applications"
+  lineinfile:
+    path: /usr/share/applications/i3-gnome-flashback.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
+
+- name: "Hiding compton from applications"
+  lineinfile:
+    path: /usr/share/applications/compton.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
+
+- name: "Hiding regolith terminal from applications"
+  lineinfile:
+    path: /usr/share/applications/st.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
+
+- name: "Hiding remontoire from applications"
+  lineinfile:
+    path: /usr/share/applications/org.regolith-linux.remontoire.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
