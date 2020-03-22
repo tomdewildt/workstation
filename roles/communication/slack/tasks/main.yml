@@ -1,0 +1,6 @@
+---
+- name: "Installing slack"
+  snap:
+    name: slack
+    classic: true
+    state: present
