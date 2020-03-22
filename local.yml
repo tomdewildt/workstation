@@ -43,3 +43,4 @@
     - interface/cleanup
     - interface/screen
     - common/config
+    - common/permissions
