@@ -1,0 +1,17 @@
+---
+- name: "Adding mongo client key"
+  apt_key:
+    url: https://www.mongodb.org/static/pgp/server-4.2.asc
+    state: present
+
+- name: "Adding mongo client repository"
+  apt_repository:
+    repo: deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+    filename: mongo-org
+    state: present
+
+- name: "Installing mongo client"
+  apt:
+    name: mongodb-org-shell
+    update_cache: true
+    state: present

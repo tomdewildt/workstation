@@ -1,0 +1,6 @@
+---
+- name: "Installing postman"
+  snap:
+    name: postman
+    classic: false
+    state: present

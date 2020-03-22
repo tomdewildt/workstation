@@ -23,3 +23,7 @@
     - power/intel
     - power/powertop
     - power/tlp
+    - tools/mongo
+    - tools/postgres
+    - tools/postman
+    - tools/vpn
