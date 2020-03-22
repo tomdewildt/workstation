@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: true
+  roles:
+    - common/curl
+    - common/dig
+    - common/exfat
+    - common/git
+    - common/make
+    - common/nmap
+    - common/time
+    - common/tweaks
+    - common/unzip
+    - common/wget

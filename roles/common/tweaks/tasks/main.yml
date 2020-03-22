@@ -1,0 +1,6 @@
+---
+- name: "Installing gnome tweaks"
+  apt:
+    name: gnome-tweaks
+    update_cache: yes
+    state: present

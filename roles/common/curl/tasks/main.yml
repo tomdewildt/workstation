@@ -1,0 +1,6 @@
+---
+- name: "Installing curl"
+  apt:
+    name: curl
+    update_cache: yes
+    state: present

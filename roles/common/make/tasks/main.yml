@@ -1,0 +1,6 @@
+---
+- name: "Installing make"
+  apt:
+    name: build-essential
+    update_cache: yes
+    state: present
