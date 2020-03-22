@@ -1,0 +1,6 @@
+---
+- name: "Installing powertop"
+  apt:
+    name: powertop
+    update_cache: true
+    state: present

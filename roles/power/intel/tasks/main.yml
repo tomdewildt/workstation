@@ -1,0 +1,16 @@
+---
+- name: "Installing intel-microcode & iucode-tool"
+  apt:
+    name:
+      - intel-microcode
+      - iucode-tool
+    update_cache: true
+    state: present
+
+- name: "Moving i915.conf to modprobe folder"
+  copy:
+    src: files/i915.conf
+    dest: /etc/modprobe.d/i915.conf
+    owner: root
+    group: root
+    mode: "644"

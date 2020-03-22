@@ -20,3 +20,6 @@
     - drivers/nvidia
     - drivers/wireless
     - media/spotify
+    - power/intel
+    - power/powertop
+    - power/tlp
