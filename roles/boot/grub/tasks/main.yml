@@ -1,0 +1,46 @@
+---
+- name: "Setting grub flags"
+  lineinfile:
+    path: /etc/default/grub
+    regexp: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+    line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_rev_override=1 acpi_osi=Linux nouveau.modeset=0 pcie_aspm=force drm.vblankoffdelay=1 scsi_mod.use_blk_mq=1 nouveau.runpm=0 mem_sleep_default=deep"
+    state: present
+
+- name: "Setting grub default to saved"
+  lineinfile:
+    path: /etc/default/grub
+    regexp: GRUB_DEFAULT=0
+    line: GRUB_DEFAULT=saved
+    state: present
+
+- name: "Setting grub save default to true"
+  lineinfile:
+    path: /etc/default/grub
+    line: GRUB_SAVEDEFAULT=true
+    state: present
+
+- name: "Setting grub theme"
+  lineinfile:
+    path: /etc/default/grub
+    line: GRUB_THEME="/boot/grub/themes/primitivistical/theme.txt"
+    state: present
+
+- name: "Creating themes folder"
+  file:
+    path: /boot/grub/themes
+    owner: root
+    group: root
+    mode: "644"
+    state: directory
+
+- name: "Moving primitivistical theme to themes folder"
+  copy:
+    src: files/primitivistical
+    dest: /boot/grub/themes
+    owner: root
+    group: root
+    mode: "644"
+
+- name: "Updating grub settings"
+  command: update-grub
+  changed_when: false
