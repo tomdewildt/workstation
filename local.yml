@@ -18,3 +18,4 @@
     - communication/discord
     - communication/slack
     - drivers/nvidia
+    - drivers/wireless
