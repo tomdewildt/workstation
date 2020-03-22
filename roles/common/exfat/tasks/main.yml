@@ -1,0 +1,8 @@
+---
+- name: "Installing exfat"
+  apt:
+    name:
+      - exfat-fuse
+      - exfat-utils
+    update_cache: yes
+    state: present
