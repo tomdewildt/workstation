@@ -42,3 +42,8 @@ dart:
   flutter:
     enabled: true
     version: 1.12.13+hotfix.8
+
+docker:
+  compose:
+    enabled: true
+    version: 1.25.0
