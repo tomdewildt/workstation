@@ -12,3 +12,25 @@ android:
 
 clojure:
   version: 1.10.1.492
+
+code:
+  extensions:
+    - arcticicestudio.nord-visual-studio-code
+    - dart-code.dart-code
+    - dart-code.flutter
+    - betterthantomorrow.calva
+    - ms-dotnettools.csharp
+    - ms-azuretools.vscode-docker
+    - ms-vscode.go
+    - redhat.java
+    - dsznajder.es7-react-js-snippets
+    - msjsdiag.debugger-for-chrome
+    - dbaeumer.vscode-eslint
+    - ms-python.python
+    - rust-lang.rust
+    - visualstudioexptteam.vscodeintellicode
+    - yzhang.markdown-all-in-one
+    - editorconfig.editorconfig
+    - bungcip.better-toml
+    - redhat.vscode-yaml
+    - mikestead.dotenv
