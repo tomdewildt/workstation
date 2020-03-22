@@ -9,3 +9,6 @@ android:
     version: 28
   tools:
     version: 6200805
+
+clojure:
+  version: 1.10.1.492
