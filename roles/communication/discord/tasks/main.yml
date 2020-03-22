@@ -1,0 +1,6 @@
+---
+- name: "Installing discord"
+  snap:
+    name: discord
+    classic: false
+    state: present
