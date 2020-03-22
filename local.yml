@@ -42,3 +42,4 @@
     - interface/background
     - interface/cleanup
     - interface/screen
+    - common/config
