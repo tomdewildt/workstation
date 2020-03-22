@@ -50,3 +50,16 @@ docker:
 
 golang:
   version: 1.13.5
+
+javascript:
+  version: 12.x
+  create_react_app:
+    enabled: true
+  eslint:
+    enabled: true
+  expo_cli:
+    enabled: true
+  gatsby_cli:
+    enabled: true
+  netlify_cli:
+    enabled: true
