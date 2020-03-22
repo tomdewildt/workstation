@@ -1,0 +1,6 @@
+---
+- name: "Installing wget"
+  apt:
+    name: wget
+    update_cache: yes
+    state: present
