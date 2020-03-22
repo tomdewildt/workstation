@@ -4,3 +4,4 @@
   roles:
     - common/curl
     - common/dig
+    - common/exfat
