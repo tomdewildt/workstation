@@ -1,0 +1,6 @@
+---
+- name: "Installing java"
+  apt:
+    name: default-jdk
+    update_cache: true
+    state: present
