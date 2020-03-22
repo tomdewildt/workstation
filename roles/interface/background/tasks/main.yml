@@ -1,0 +1,47 @@
+---
+- name: "Installing dconf dependencies"
+  apt:
+    name: python-psutil
+    update_cache: yes
+    state: present
+
+- name: "Moving regolith-default.jpg to backgrounds folder"
+  copy:
+    src: files/regolith-default.jpg
+    dest: /usr/share/backgrounds/regolith-default.jpg
+    owner: root
+    group: root
+    mode: "644"
+
+- name: "Setting desktop background"
+  become: true
+  become_user: "{{ username }}"
+  dconf:
+    key: /org/gnome/desktop/background/picture-uri
+    value: "'file:///usr/share/backgrounds/regolith-default.jpg'"
+    state: present
+  ignore_errors: true
+
+- name: "Setting screensaver background"
+  become: true
+  become_user: "{{ username }}"
+  dconf:
+    key: /org/gnome/desktop/screensaver/picture-uri
+    value: "'file:///usr/share/backgrounds/regolith-default.jpg'"
+    state: present
+  ignore_errors: true
+
+- name: "Retrieving unused backgrounds"
+  find:
+    paths:
+      - /usr/share/backgrounds
+    file_type: file
+    excludes:
+      - regolith-default.jpg
+  register: backgrounds
+
+- name: "Removing unused backgrounds"
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ backgrounds['files'] }}"

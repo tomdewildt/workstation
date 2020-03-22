@@ -39,3 +39,6 @@
     - development/python
     - development/rust
     - development/vagrant
+    - interface/background
+    - interface/cleanup
+    - interface/screen
