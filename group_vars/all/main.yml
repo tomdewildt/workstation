@@ -34,3 +34,6 @@ code:
     - bungcip.better-toml
     - redhat.vscode-yaml
     - mikestead.dotenv
+
+csharp:
+  version: 3.1
