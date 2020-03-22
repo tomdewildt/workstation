@@ -21,3 +21,4 @@
     - drivers/wireless
     - media/spotify
     - power/intel
+    - power/powertop
