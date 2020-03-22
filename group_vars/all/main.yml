@@ -1,3 +1,11 @@
 ---
 username: tomdewildt
 repository: https://github.com/tomdewildt/config.git
+
+android:
+  build:
+    version: 28.0.3
+  platform:
+    version: 28
+  tools:
+    version: 6200805
