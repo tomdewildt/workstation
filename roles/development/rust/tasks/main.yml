@@ -1,0 +1,10 @@
+---
+- name: "Downloading rust install script"
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rust.sh
+    mode: "755"
+
+- name: "Installing rust"
+  command: /tmp/rust.sh -y --no-modify-path
+  changed_when: false
