@@ -1,0 +1,10 @@
+- name: "Installing flutter"
+  unarchive:
+    src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v{{ dart.flutter.version }}-stable.tar.xz
+    dest: /opt
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "755"
+    remote_src: yes
+    creates: /opt/flutter
+  when: dart.flutter.enabled
