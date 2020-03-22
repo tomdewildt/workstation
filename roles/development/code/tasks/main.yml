@@ -1,0 +1,18 @@
+---
+- name: "Installing code"
+  snap:
+    name: code
+    classic: true
+    state: present
+
+- name: "Installing extensions"
+  command: code --user-data-dir /home/{{ username }}/.config/Code --install-extension {{ item }}
+  changed_when: "'successfully' in cmd.stdout"
+  register: cmd
+  with_items: "{{ code.extensions }}"
+
+- name: "Increasing file watch limit"
+  lineinfile:
+    path: /etc/sysctl.conf
+    line: fs.inotify.max_user_watches=524288
+    state: present
