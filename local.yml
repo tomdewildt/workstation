@@ -11,3 +11,4 @@
     - common/time
     - common/tweaks
     - common/unzip
+    - common/wget
