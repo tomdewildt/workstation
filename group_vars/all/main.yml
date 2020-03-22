@@ -71,3 +71,8 @@ python:
     enabled: true
   virtualenv:
     enabled: true
+
+vagrant:
+  version: 2.2.7
+  plugins:
+    - vagrant-disksize
