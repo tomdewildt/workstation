@@ -40,3 +40,4 @@
     - development/rust
     - development/vagrant
     - interface/background
+    - interface/cleanup
