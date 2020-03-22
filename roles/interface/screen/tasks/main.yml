@@ -1,0 +1,18 @@
+---
+- name: "Uninstalling regolith gdm3 theme"
+  apt:
+    name: regolith-gdm3-theme
+    update_cache: true
+    state: absent
+
+- name: "Moving regolith.css to themes folder"
+  copy:
+    src: files/regolith.css
+    dest: /usr/share/gnome-shell/theme/regolith.css
+    owner: root
+    group: root
+    mode: "644"
+
+- name: "Updating gdm3 config"
+  command: update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/regolith.css 20
+  changed_when: false
