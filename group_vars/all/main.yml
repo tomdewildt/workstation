@@ -37,3 +37,8 @@ code:
 
 csharp:
   version: 3.1
+
+dart:
+  flutter:
+    enabled: true
+    version: 1.12.13+hotfix.8
