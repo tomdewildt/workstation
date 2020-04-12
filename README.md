@@ -1,5 +1,6 @@
 # Workstation
-![CI Status](https://github.com/tomdewildt/workstation/workflows/ci/badge.svg?branch=master)
+[![Build](https://img.shields.io/github/workflow/status/tomdewildt/workstation/ci/master)](https://github.com/tomdewildt/workstation/actions?query=workflow%3Aci)
+[![License](https://img.shields.io/github/license/tomdewildt/workstation)](https://github.com/tomdewildt/workstation/blob/master/LICENSE)
 
 This repository contains the configuration and setup scripts for my development workstation. I use [Regolith](https://regolith-linux.org/) ([Ubuntu 18.04](https://ubuntu.com/)) as my operating system and my primary workstation is a Dell XPS 15 7590.
 
