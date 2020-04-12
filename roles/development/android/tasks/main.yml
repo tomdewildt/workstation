@@ -1,7 +1,12 @@
 ---
 - name: "Installing android dependencies"
   apt:
-    name: openjdk-8-jdk
+    name:
+      - openjdk-8-jdk
+      - qemu-kvm
+      - libvirt-bin
+      - ubuntu-vm-builder
+      - bridge-utils
     update_cache: true
     state: present
 
@@ -34,11 +39,12 @@
     - platform-tools
     - build-tools;{{ android.build.version }}
     - platforms;android-{{ android.platform.version }}
-    - system-images;android-{{ android.platform.version }};default;x86
+    - system-images;android-{{ android.platform.version }};google_apis_playstore;x86
 
-- name: "Adding user to the plugdev group"
+- name: "Adding user to the plugdev & kvm group"
   user:
     name: "{{ username }}"
     groups:
       - plugdev
+      - kvm
     append: true
