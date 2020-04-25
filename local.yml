@@ -24,6 +24,7 @@
     - power/powertop
     - power/tlp
     - tools/mongo
+    - tools/ngrok
     - tools/postgres
     - tools/postman
     - tools/vpn
