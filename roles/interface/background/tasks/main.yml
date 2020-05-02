@@ -5,10 +5,10 @@
     update_cache: yes
     state: present
 
-- name: "Moving regolith-default.jpg to backgrounds folder"
+- name: "Moving regolith-default.png to backgrounds folder"
   copy:
-    src: files/regolith-default.jpg
-    dest: /usr/share/backgrounds/regolith-default.jpg
+    src: files/regolith-default.png
+    dest: /usr/share/backgrounds/regolith-default.png
     owner: root
     group: root
     mode: "644"
@@ -18,7 +18,7 @@
   become_user: "{{ username }}"
   dconf:
     key: /org/gnome/desktop/background/picture-uri
-    value: "'file:///usr/share/backgrounds/regolith-default.jpg'"
+    value: "'file:///usr/share/backgrounds/regolith-default.png'"
     state: present
   ignore_errors: true
 
@@ -27,7 +27,7 @@
   become_user: "{{ username }}"
   dconf:
     key: /org/gnome/desktop/screensaver/picture-uri
-    value: "'file:///usr/share/backgrounds/regolith-default.jpg'"
+    value: "'file:///usr/share/backgrounds/regolith-default.png'"
     state: present
   ignore_errors: true
 
@@ -37,7 +37,7 @@
       - /usr/share/backgrounds
     file_type: file
     excludes:
-      - regolith-default.jpg
+      - regolith-default.png
   register: backgrounds
 
 - name: "Removing unused backgrounds"
