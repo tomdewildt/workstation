@@ -13,6 +13,13 @@
     state: present
     create: true
 
+- name: "Hiding minicom from applications"
+  lineinfile:
+    path: /usr/share/applications/minicom.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
+
 - name: "Hiding regolith terminal from applications"
   lineinfile:
     path: /usr/share/applications/st.desktop
