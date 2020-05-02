@@ -1,4 +1,15 @@
 ---
+- name: "Installing i3xrocks extensions"
+  apt:
+    name:
+      - i3xrocks-net-traffic
+      - i3xrocks-memory
+      - i3xrocks-cpu-usage
+      - i3xrocks-battery
+      - i3xrocks-time
+    update_cache: true
+    state: present
+
 - name: "Uninstalling regolith gdm3 theme"
   apt:
     name: regolith-gdm3-theme
