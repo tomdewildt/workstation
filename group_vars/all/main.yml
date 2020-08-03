@@ -21,7 +21,7 @@ code:
     - betterthantomorrow.calva
     - ms-dotnettools.csharp
     - ms-azuretools.vscode-docker
-    - ms-vscode.go
+    - golang.go
     - redhat.java
     - dsznajder.es7-react-js-snippets
     - msjsdiag.debugger-for-chrome
