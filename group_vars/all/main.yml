@@ -28,6 +28,7 @@ code:
     - dbaeumer.vscode-eslint
     - ms-python.python
     - rust-lang.rust
+    - vadimcn.vscode-lldb
     - visualstudioexptteam.vscodeintellicode
     - yzhang.markdown-all-in-one
     - editorconfig.editorconfig
