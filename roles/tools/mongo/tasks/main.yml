@@ -6,7 +6,7 @@
 
 - name: "Adding mongo client repository"
   apt_repository:
-    repo: deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+    repo: deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
     filename: mongo-org
     state: present
 
