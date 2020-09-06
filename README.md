@@ -58,11 +58,15 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install MongoDB Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
+[Install Ngrok](https://ngrok.com/download)
+
 [Install OpenVPN Client](https://torguard.net/knowledgebase.php?action=displayarticle&id=53)
 
 [Install Postgres Client](https://help.ubuntu.com/community/PostgreSQL#Client_Installation)
 
 [Install Postman](https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/#installing-postman-on-linux)
+
+[Install Wireshark](https://computingforgeeks.com/how-to-install-wireshark-on-ubuntu-desktop/)
 
 [Install Android Tools](https://github.com/codepath/android_guides/wiki/Installing-Android-SDK-Tools)
 
