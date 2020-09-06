@@ -28,6 +28,7 @@
     - tools/postgres
     - tools/postman
     - tools/vpn
+    - tools/wireshark
     - development/android
     - development/clojure
     - development/code
