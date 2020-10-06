@@ -26,6 +26,7 @@ code:
     - dsznajder.es7-react-js-snippets
     - msjsdiag.debugger-for-chrome
     - dbaeumer.vscode-eslint
+    - orta.vscode-jest
     - ms-python.python
     - rust-lang.rust
     - vadimcn.vscode-lldb
