@@ -1,0 +1,6 @@
+---
+- name: "Installing net-tools"
+  apt:
+    name: net-tools
+    update_cache: yes
+    state: present
