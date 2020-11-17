@@ -1,0 +1,6 @@
+---
+- name: "Installing neofetch"
+  apt:
+    name: neofetch
+    update_cache: yes
+    state: present
