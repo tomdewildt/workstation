@@ -33,3 +33,10 @@
     line: NoDisplay=true
     state: present
     create: true
+
+- name: "Hiding regolith from applications"
+  lineinfile:
+    path: /usr/share/applications/regolith.desktop
+    line: NoDisplay=true
+    state: present
+    create: true
