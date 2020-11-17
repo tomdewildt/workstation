@@ -1,6 +1,14 @@
 ---
+- name: "Downloading neofetch install script"
+  unarchive:
+    src: https://github.com/dylanaraps/neofetch/archive/7.1.0.zip
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/neofetch-7.1.0
+
 - name: "Installing neofetch"
-  apt:
-    name: neofetch
-    update_cache: yes
-    state: present
+  make:
+    chdir: /tmp/neofetch-7.1.0
+    file: Makefile
+    target: install
+  changed_when: false
