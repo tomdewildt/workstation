@@ -1,6 +1,5 @@
 ---
-- name: "Installing nmap"
+- name: Install nmap
   apt:
     name: nmap
-    update_cache: yes
-    state: present
+    state: latest
