@@ -1,0 +1,24 @@
+---
+- name: Create lightdm directory
+  file:
+    path: /usr/share/lightdm/lightdm-gtk-greeter.conf.d
+    state: directory
+
+- name: Create background directory
+  file:
+    path: /usr/share/backgrounds
+    state: directory
+
+- name: Download theme install script
+  unarchive:
+    src: https://github.com/tomdewildt/cahuella-lightdm-theme/archive/v0.1.0.zip
+    dest: /tmp
+    remote_src: true
+    creates: /tmp/cahuella-lightdm-theme-0.1.0
+
+- name: Install theme
+  make:
+    chdir: /tmp/cahuella-lightdm-theme-0.1.0
+    file: Makefile
+    target: install
+  changed_when: false
