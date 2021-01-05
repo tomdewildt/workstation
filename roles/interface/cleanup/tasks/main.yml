@@ -1,42 +1,20 @@
 ---
-- name: "Hiding i3 gnome flashback from applications"
-  lineinfile:
-    path: /usr/share/applications/i3-gnome-flashback.desktop
-    line: NoDisplay=true
-    state: present
-    create: true
+- name: Remove unused applications
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - htop
+    - vim
+    - xterm
 
-- name: "Hiding compton from applications"
+- name: Hide internal applications
   lineinfile:
-    path: /usr/share/applications/compton.desktop
+    path: /usr/share/applications/{{ item }}
     line: NoDisplay=true
     state: present
     create: true
-
-- name: "Hiding minicom from applications"
-  lineinfile:
-    path: /usr/share/applications/minicom.desktop
-    line: NoDisplay=true
-    state: present
-    create: true
-
-- name: "Hiding regolith terminal from applications"
-  lineinfile:
-    path: /usr/share/applications/st.desktop
-    line: NoDisplay=true
-    state: present
-    create: true
-
-- name: "Hiding remontoire from applications"
-  lineinfile:
-    path: /usr/share/applications/org.regolith-linux.remontoire.desktop
-    line: NoDisplay=true
-    state: present
-    create: true
-
-- name: "Hiding regolith from applications"
-  lineinfile:
-    path: /usr/share/applications/regolith.desktop
-    line: NoDisplay=true
-    state: present
-    create: true
+  with_items:
+    - compton.desktop
+    - org.regolith-linux.remontoire.desktop
+    - regolith.desktop

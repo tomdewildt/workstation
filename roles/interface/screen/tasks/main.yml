@@ -1,5 +1,11 @@
 ---
-- name: "Installing regolith looks"
+- name: Add regolith repository
+  apt_repository:
+    repo: ppa:regolith-linux/release
+    filename: regolith-linux-ubuntu-release-focal
+    state: present
+
+- name: Install regolith looks
   apt:
     name:
       - regolith-look-ayu
@@ -10,34 +16,14 @@
       - regolith-look-nord
       - regolith-look-solarized-dark
       - regolith-look-ubuntu
-    update_cache: true
-    state: present
+    state: latest
 
-- name: "Installing i3xrocks extensions"
+- name: Install i3xrocks extensions
   apt:
     name:
-      - i3xrocks-net-traffic
-      - i3xrocks-memory
-      - i3xrocks-cpu-usage
       - i3xrocks-battery
+      - i3xrocks-cpu-usage
+      - i3xrocks-memory
+      - i3xrocks-net-traffic
       - i3xrocks-time
-    update_cache: true
-    state: present
-
-- name: "Uninstalling regolith gdm3 theme"
-  apt:
-    name: regolith-gdm3-theme
-    update_cache: true
-    state: absent
-
-- name: "Moving regolith.css to themes folder"
-  copy:
-    src: files/regolith.css
-    dest: /usr/share/gnome-shell/theme/regolith.css
-    owner: root
-    group: root
-    mode: "644"
-
-- name: "Updating gdm3 config"
-  command: update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/regolith.css 20
-  changed_when: false
+    state: latest

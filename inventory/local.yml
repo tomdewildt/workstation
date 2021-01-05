@@ -1,0 +1,7 @@
+---
+workstation:
+  hosts:
+    localhost:
+      ansible_host: localhost
+      ansible_user: tomdewildt
+      ansible_connection: local

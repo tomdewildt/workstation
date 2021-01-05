@@ -1,6 +1,5 @@
 ---
-- name: "Installing dig"
+- name: Install dig
   apt:
     name: dnsutils
-    update_cache: yes
-    state: present
+    state: latest

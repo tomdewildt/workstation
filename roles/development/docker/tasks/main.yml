@@ -1,39 +1,35 @@
 ---
-- name: "Installing docker dependencies"
-  apt:
-    name:
-      - ca-certificates
-      - software-properties-common
-    update_cache: true
-    state: present
-
-- name: "Adding docker key"
+- name: Add docker key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /etc/apt/trusted.gpg.d/docker.gpg
     state: present
 
-- name: "Adding docker repository"
+- name: Add docker repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
     filename: docker
     state: present
 
-- name: "Installing docker"
+- name: Install docker
   apt:
-    name: docker-ce
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
     update_cache: true
-    state: present
+    state: latest
 
-- name: "Adding user to the docker group"
+- name: Add user to docker group
   user:
-    name: "{{ username }}"
+    name: "{{ ansible_user }}"
     groups:
       - docker
     append: true
 
-- name: "Installing docker-compose"
+- name: Install docker compose
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ docker.compose.version }}/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
-    mode: "755"
+    mode: 0755
   when: docker.compose.enabled

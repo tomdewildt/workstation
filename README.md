@@ -2,7 +2,7 @@
 [![Build](https://img.shields.io/github/workflow/status/tomdewildt/workstation/ci/master)](https://github.com/tomdewildt/workstation/actions?query=workflow%3Aci)
 [![License](https://img.shields.io/github/license/tomdewildt/workstation)](https://github.com/tomdewildt/workstation/blob/master/LICENSE)
 
-This repository contains the configuration and setup scripts for my development workstation. I use [Regolith](https://regolith-linux.org/) ([Ubuntu 18.04](https://ubuntu.com/)) as my operating system and my primary workstation is a Dell XPS 15 7590.
+This repository contains the configuration and setup scripts for my development workstation. I use [Regolith](https://regolith-linux.org/) ([Ubuntu 20.04](https://ubuntu.com/)) as my operating system and my primary workstation is a Dell XPS 15 7590.
 
 # How to run
 
@@ -13,7 +13,8 @@ Prerequisites:
 
 ### Local
 
-1. Run ```sudo make run/local``` to execute the playbook.
+1. Run ```make init``` to initialize the environment.
+2. Run ```make run/local``` to execute the playbook.
 
 ### Virtual
 
@@ -24,9 +25,9 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 # References
 
-[Ansible Docs](https://docs.ansible.com/)
+[Ansible Docs](https://docs.ansible.com)
 
-[Vagrant Docs](https://www.vagrantup.com/docs/)
+[Vagrant Docs](https://www.vagrantup.com/docs)
 
 [Ansible Pull Docs](https://docs.ansible.com/ansible/latest/cli/ansible-pull.html)
 
@@ -34,63 +35,65 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Dell XPS 9570 Ubuntu Respin](https://github.com/JackHack96/dell-xps-9570-ubuntu-respin)
 
+[Dell XPS 9500 Ubuntu Install](https://medium.com/@asad.manji/my-journey-installing-ubuntu-20-04-on-the-dell-xps-15-9500-2020-8ac8560373d1)
+
 [Better Battery Life On Ubuntu](https://medium.com/@tomwwright/better-battery-life-on-ubuntu-17-10-4588b7f72def)
 
-[How To Fix Windows And Linux Different Times](https://www.howtogeek.com/323390/how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/)
-
-[Install Chrome](https://itsfoss.com/install-chrome-ubuntu/)
+[Install Chrome](https://support.google.com/chrome/a/answer/9025903?hl=en)
 
 [Install Firefox](https://support.mozilla.org/en-US/kb/install-firefox-linux)
 
-[Install Discord](https://www.addictivetips.com/ubuntu-linux-tips/install-discord-on-linux/)
+[Install Slack](https://slack.com/intl/en-nl/downloads/linux)
 
-[Install Slack](https://linuxize.com/post/how-to-install-slack-on-ubuntu-18-04/)
+[Install Teams](https://docs.microsoft.com/en-us/microsoftteams/get-clients#linux)
 
-[Install Killer AX1650 Driver](https://support.killernetworking.com/knowledge-base/killer-ax1650-in-debian-ubuntu-16-04/)
+[Install Intel Driver](https://software.intel.com/security-software-guidance/secure-coding/loading-microcode-os)
 
-[Install NVIDIA Driver](https://medium.com/@antonioszeto/how-to-install-nvidia-driver-on-ubuntu-18-04-7b464bab43e6)
+[Install NVIDIA Driver](https://www.nvidia.com/Download/driverResults.aspx/166883/en-us)
 
-[Install Spotify](https://itsfoss.com/install-spotify-ubuntu-linux/)
+[Install Shotwell](https://wiki.gnome.org/Apps/Shotwell/BuildingAndInstalling)
 
-[Install Powertop](https://zoomadmin.com/HowToInstall/UbuntuPackage/powertop)
+[Install Spotify](https://www.spotify.com/us/download/linux)
 
-[Install TLP](https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html)
+[Install Powertop](https://wiki.archlinux.org/index.php/powertop#Installation)
 
-[Install MongoDB Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+[Install TLP](https://wiki.archlinux.org/index.php/TLP#Installation)
+
+[Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
 
 [Install Ngrok](https://ngrok.com/download)
 
-[Install OpenVPN Client](https://torguard.net/knowledgebase.php?action=displayarticle&id=53)
+[Install OpenVPN Client](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux)
 
-[Install Postgres Client](https://help.ubuntu.com/community/PostgreSQL#Client_Installation)
+[Install Postgres Client](https://www.postgresql.org/download/linux/ubuntu)
 
-[Install Postman](https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/#installing-postman-on-linux)
+[Install Wireshark](https://www.wireshark.org/docs/wsug_html/#_installing_from_debs_under_debian_ubuntu_and_other_debian_derivatives)
 
-[Install Wireshark](https://computingforgeeks.com/how-to-install-wireshark-on-ubuntu-desktop/)
-
-[Install Android Tools](https://github.com/codepath/android_guides/wiki/Installing-Android-SDK-Tools)
+[Install Android SDK](https://developer.android.com/studio#downloads)
 
 [Install Clojure](https://clojure.org/guides/getting_started)
 
-[Install Visual Studio Code](https://code.visualstudio.com/docs/setup/linux)
+[Install Csharp](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-)
 
-[Install Csharp](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1804)
+[Install Docker](https://docs.docker.com/engine/install/ubuntu/)
 
-[Install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
+[Install Docker Compose](https://docs.docker.com/compose/install/)
 
-[Install Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
+[Install Flutter](https://flutter.dev/docs/get-started/install/linux)
 
 [Install Go](https://golang.org/doc/install)
 
-[Install Java](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04)
+[Install Java](https://openjdk.java.net/install/index.html)
 
-[Install Javascript](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/)
+[Install Javascript](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
 
-[Install Python](https://docs.python-guide.org/starting/install3/linux/)
+[Install Python](https://wiki.python.org/moin/BeginnersGuide/Download)
 
 [Install Rust](https://www.rust-lang.org/tools/install)
 
 [Install Vagrant](https://www.vagrantup.com/docs/installation/)
+
+[Install Visual Studio Code](https://code.visualstudio.com/docs/setup/linux)
 
 [Hide GNOME Applications](https://unix.stackexchange.com/questions/383536/hide-icons-from-gnome-launcher-applications-page-in-fedora-26)
 

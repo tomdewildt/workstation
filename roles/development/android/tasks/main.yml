@@ -1,49 +1,52 @@
 ---
-- name: "Installing android dependencies"
+- name: Install android dependencies
   apt:
-    name:
-      - openjdk-8-jdk
-      - qemu-kvm
-      - libvirt-bin
-      - ubuntu-vm-builder
-      - bridge-utils
-    update_cache: true
-    state: present
+    name: openjdk-8-jdk
+    state: latest
 
-- name: "Creating android directory"
+- name: Create android directory
   file:
     path: /opt/android
     state: directory
 
-- name: "Installing android tools"
+- name: Create android tools directory
+  file:
+    path: /opt/android/cmdline-tools
+    state: directory
+
+- name: Install android tools
   unarchive:
     src: https://dl.google.com/android/repository/commandlinetools-linux-{{ android.tools.version }}_latest.zip
-    dest: /opt/android
-    remote_src: yes
-    creates: /opt/android/tools
+    dest: /opt/android/cmdline-tools
+    remote_src: true
+    creates: /opt/android/cmdline-tools/latest
 
-- name: "Accepting android licenses"
-  shell: yes | /opt/android/tools/bin/sdkmanager --sdk_root=/opt/android --licenses
+- name: Rename android tools
+  command:
+    cmd: mv /opt/android/cmdline-tools/cmdline-tools /opt/android/cmdline-tools/latest
+    creates: /opt/android/cmdline-tools/latest
+
+- name: Accept android licenses
+  shell: yes | /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose --licenses
   environment:
     JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-  changed_when: false
+  changed_when: "'Accepted' not in cmd.stdout"
+  register: cmd
 
-- name: "Installing android packages"
-  shell: /opt/android/tools/bin/sdkmanager --sdk_root=/opt/android "{{ item }}"
+- name: Install android packages
+  shell: /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose "{{ item }}"
   environment:
     JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-  changed_when: false
+  changed_when: "'Install' in cmd.stdout"
+  register: cmd
   with_items:
-    - tools
-    - emulator
-    - platform-tools
     - build-tools;{{ android.build.version }}
     - platforms;android-{{ android.platform.version }}
-    - system-images;android-{{ android.platform.version }};google_apis_playstore;x86
+    - system-images;android-{{ android.platform.version }};google_apis;x86
 
-- name: "Adding user to the plugdev & kvm group"
+- name: Add user to the plugdev & kvm group
   user:
-    name: "{{ username }}"
+    name: "{{ ansible_user }}"
     groups:
       - plugdev
       - kvm

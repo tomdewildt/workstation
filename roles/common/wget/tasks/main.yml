@@ -1,6 +1,5 @@
 ---
-- name: "Installing wget"
+- name: Install wget
   apt:
     name: wget
-    update_cache: yes
-    state: present
+    state: latest

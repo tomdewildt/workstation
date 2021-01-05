@@ -1,18 +1,17 @@
 ---
-- name: "Installing clojure dependencies"
+- name: Install clojure dependencies
   apt:
     name:
       - rlwrap
       - default-jdk
-    update_cache: true
-    state: present
+    state: latest
 
-- name: "Downloading clojure install script"
+- name: Download clojure install script
   get_url:
     url: https://download.clojure.org/install/linux-install-{{ clojure.version }}.sh
     dest: /tmp/clojure.sh
     mode: 0755
 
-- name: "Installing clojure"
+- name: Install clojure
   command: /tmp/clojure.sh
   changed_when: false

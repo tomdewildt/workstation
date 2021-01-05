@@ -1,31 +1,20 @@
 ---
-- name: "Installing python"
+- name: Install python
   apt:
     name:
-      - python
-      - python-pip
-      - python3
-      - python3-pip
-    update_cache: true
-    state: present
+      - python{{ python.version }}
+      - python{{ python.version }}-pip
+    state: latest
 
-- name: "Installing black"
+- name: Install packages
   pip:
-    name: black
+    name: "{{ item }}"
     executable: pip3
-    state: present
-  when: python.black.enabled
+    state: latest
+  with_items: "{{ python.packages }}"
 
-- name: "Installing pylint"
-  pip:
-    name: pylint
-    executable: pip3
-    state: present
-  when: python.pylint.enabled
-
-- name: "Installing virtualenv"
-  pip:
-    name: virtualenv
-    executable: pip3
-    state: present
-  when: python.virtualenv.enabled
+- name: Set python default to python{{ python.version }}
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python{{ python.version }}

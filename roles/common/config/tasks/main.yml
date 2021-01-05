@@ -1,29 +1,29 @@
 ---
-- name: "Checking if repository exists"
+- name: Check if repository exists
   stat:
-    path: "/home/{{ username }}/.git"
+    path: /home/{{ ansible_user }}/.git
   register: git
 
-- name: "Initializing repository"
+- name: Initialize repository
   command:
     cmd: git init
-    chdir: "/home/{{ username }}"
+    chdir: /home/{{ ansible_user }}
   when: not git.stat.exists
 
-- name: "Adding remote"
+- name: Set git remote to {{ config.repository }}
   command:
-    cmd: "git remote add origin {{ repository }}"
-    chdir: "/home/{{ username }}"
+    cmd: git remote add origin {{ config.repository }}
+    chdir: /home/{{ ansible_user }}
   when: not git.stat.exists
 
-- name: "Fetching origin"
+- name: Fetch origin
   command:
     cmd: git fetch origin
-    chdir: "/home/{{ username }}"
+    chdir: /home/{{ ansible_user }}
   when: not git.stat.exists
 
-- name: "Resetting to latest version of master"
+- name: Reset to latest version of master
   command:
     cmd: git reset origin/master --hard
-    chdir: "/home/{{ username }}"
+    chdir: /home/{{ ansible_user }}
   when: not git.stat.exists

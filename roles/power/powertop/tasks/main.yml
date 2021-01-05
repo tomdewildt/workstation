@@ -1,6 +1,5 @@
 ---
-- name: "Installing powertop"
+- name: Install powertop
   apt:
     name: powertop
-    update_cache: true
-    state: present
+    state: latest

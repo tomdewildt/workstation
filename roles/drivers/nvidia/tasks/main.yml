@@ -1,22 +1,7 @@
 ---
-- name: "Adding NVIDIA repository"
-  apt_repository:
-    repo: ppa:graphics-drivers/ppa
-    filename: graphics-drivers
-    state: present
-
-- name: "Installing NVIDIA driver"
+- name: Install nvidia driver
   apt:
     name:
-      - nvidia-driver-435
+      - nvidia-driver-455
       - nvidia-settings
-    update_cache: true
-    state: present
-
-- name: "Enabling modesetting on NVIDIA driver"
-  copy:
-    src: files/nvidia-drm.conf
-    dest: /etc/modprobe.d/nvidia-drm.conf
-    owner: root
-    group: root
-    mode: "644"
+    state: latest

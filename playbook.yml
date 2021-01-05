@@ -1,0 +1,54 @@
+---
+- hosts: workstation
+  become: true
+  pre_tasks:
+    - name: Update & upgrade packages
+      apt:
+        name: "*"
+        update_cache: true
+        state: latest
+  roles:
+    - common/curl
+    - common/dig
+    - common/exfat
+    - common/git
+    - common/make
+    - common/net-tools
+    - common/nmap
+    - common/time
+    - common/tweaks
+    - common/unzip
+    - common/wget
+    - boot/grub
+    - browsing/chrome
+    - browsing/firefox
+    - communication/slack
+    - communication/teams
+    - drivers/intel
+    - drivers/nvidia
+    - media/shotwell
+    - media/spotify
+    - power/powertop
+    - power/tlp
+    - tools/mongo
+    - tools/ngrok
+    - tools/postgres
+    - tools/vpn
+    - tools/wireshark
+    - development/android
+    - development/clojure
+    - development/code
+    - development/csharp
+    - development/dart
+    - development/docker
+    - development/golang
+    - development/java
+    - development/javascript
+    - development/python
+    - development/rust
+    - development/vagrant
+    - interface/cleanup
+    - interface/login
+    - interface/screen
+    - common/config
+    - common/permissions

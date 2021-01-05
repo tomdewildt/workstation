@@ -1,40 +1,41 @@
 ---
-username: tomdewildt
-repository: https://github.com/tomdewildt/config.git
+config:
+  repository: https://github.com/tomdewildt/config.git
 
 android:
   build:
-    version: 28.0.3
+    version: 30.0.3
   platform:
-    version: 28
+    version: 30
   tools:
-    version: 6200805
+    version: 6858069
 
 clojure:
-  version: 1.10.1.492
+  version: 1.10.1.763
 
 code:
   extensions:
-    - arcticicestudio.nord-visual-studio-code
-    - dart-code.dart-code
-    - dart-code.flutter
+    - bungcip.better-toml
     - betterthantomorrow.calva
     - ms-dotnettools.csharp
+    - dart-code.dart-code
+    - msjsdiag.debugger-for-chrome
     - ms-azuretools.vscode-docker
+    - mikestead.dotenv
+    - editorconfig.editorconfig
+    - dsznajder.es7-react-js-snippets
+    - dbaeumer.vscode-eslint
+    - dart-code.flutter
     - golang.go
     - redhat.java
-    - dsznajder.es7-react-js-snippets
-    - msjsdiag.debugger-for-chrome
-    - dbaeumer.vscode-eslint
-    - ms-python.python
-    - rust-lang.rust
     - vadimcn.vscode-lldb
-    - visualstudioexptteam.vscodeintellicode
     - yzhang.markdown-all-in-one
-    - editorconfig.editorconfig
-    - bungcip.better-toml
+    - arcticicestudio.nord-visual-studio-code
+    - ms-python.python
+    - mechatroner.rainbow-csv
+    - rust-lang.rust
+    - visualstudioexptteam.vscodeintellicode
     - redhat.vscode-yaml
-    - mikestead.dotenv
 
 csharp:
   version: 3.1
@@ -42,38 +43,31 @@ csharp:
 dart:
   flutter:
     enabled: true
-    version: 1.12.13+hotfix.8
+    version: 1.22.5
 
 docker:
   compose:
     enabled: true
-    version: 1.25.0
+    version: 1.27.4
 
 golang:
-  version: 1.13.5
+  version: 1.15.6
 
 javascript:
-  version: 12.x
-  create_react_app:
-    enabled: true
-  eslint:
-    enabled: true
-  expo_cli:
-    enabled: true
-  gatsby_cli:
-    enabled: true
-  netlify_cli:
-    enabled: true
+  version: 14.x
+  packages:
+    - create-react-app
+    - eslint
+    - expo-cli
+    - gatsby-cli
+    - netlify-cli
 
 python:
-  black:
-    enabled: true
-  pylint:
-    enabled: true
-  virtualenv:
-    enabled: true
+  version: 3
+  packages:
+    - black
+    - pylint
+    - virtualenv
 
 vagrant:
-  version: 2.2.7
-  plugins:
-    - vagrant-disksize
+  version: 2.2.14

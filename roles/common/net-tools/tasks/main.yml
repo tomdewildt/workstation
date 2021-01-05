@@ -1,6 +1,5 @@
 ---
-- name: "Installing net-tools"
+- name: Install net tools
   apt:
     name: net-tools
-    update_cache: yes
-    state: present
+    state: latest

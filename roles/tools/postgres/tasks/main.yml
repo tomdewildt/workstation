@@ -1,6 +1,5 @@
 ---
-- name: "Installing postgres client"
+- name: Install postgres client
   apt:
     name: postgresql-client
-    update_cache: true
-    state: present
+    state: latest
