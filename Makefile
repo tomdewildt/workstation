@@ -1,4 +1,4 @@
-.PHONY: run/local run/virtual vm/start vm/stop vm/remove lint
+.PHONY: init run/local run/virtual vm/start vm/stop vm/remove lint
 .DEFAULT_GOAL := help
 
 NAMESPACE := tomdewildt
@@ -12,11 +12,16 @@ help: ## Show this help
 
 ##
 
+init: ## Initialize the environment
+	ansible-galaxy collection install community.general
+
+##
+
 run/local: ## Run on the local machine
-	sudo ansible-playbook local.yml
+	ansible-playbook playbook.yml --ask-become-pass --inventory inventory/local.yml
 
 run/virtual: ## Run on the virtual machine
-	vagrant ssh -c "ansible-playbook /vagrant/local.yml -e 'username=vagrant'"
+	ansible-playbook playbook.yml --ask-become-pass --inventory inventory/virtual.yml
 
 ##
 
@@ -32,5 +37,5 @@ vm/remove: ## Remove the virtual machine
 ##
 
 lint: ## Run lint & syntax check
-	ansible-playbook --syntax-check local.yml
-	ansible-lint --force-color local.yml
+	ansible-playbook --syntax-check playbook.yml --inventory inventory/local.yml
+	ansible-lint --force-color playbook.yml
