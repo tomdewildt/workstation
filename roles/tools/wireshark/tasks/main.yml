@@ -1,41 +1,34 @@
 ---
-- name: "Adding wireshark repository"
-  apt_repository:
-    repo: ppa:wireshark-dev/stable
-    filename: wireshark
-    state: present
-
-- name: "Installing wireshark"
+- name: Install wireshark
   apt:
     name: wireshark
-    update_cache: true
-    state: present
+    state: latest
 
-- name: "Configuring wireshark"
+- name: Configure wireshark
   debconf:
     name: wireshark-common
     question: wireshark-common/install-setuid
     value: "true"
     vtype: boolean
 
-- name: "Reconfigure wireshark"
+- name: Reconfigure wireshark
   command: dpkg-reconfigure -f noninteractive wireshark-common
   changed_when: false
 
-- name: "Changing group for dumpcap binary"
+- name: Set dumpcap group to wireshark
   file:
     path: /usr/bin/dumpcap
     group: wireshark
-    mode: "750"
+    mode: 0754
     state: file
 
-- name: "Setting cap to dumpcap"
-  command: setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
+- name: Set cap to dumpcap
+  command: setcap -v cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
   changed_when: false
 
-- name: "Adding user to the wireshark group"
+- name: Add user to wireshark group
   user:
-    name: "{{ username }}"
+    name: "{{ ansible_user }}"
     groups:
       - wireshark
     append: true
