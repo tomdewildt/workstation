@@ -1,35 +1,33 @@
 ---
-- name: "Retrieving files in home folder"
+- name: Find files in home folder
   find:
     paths:
-      - "/home/{{ username }}"
+      - /home/{{ ansible_user }}
     file_type: file
     hidden: true
   register: home
 
-- name: "Changing owner for files in home folder"
+- name: Set owner to {{ ansible_user }} for files in home folder
   file:
     path: "{{ item.path }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     state: file
-  with_items: "{{ home['files'] }}"
+  with_items: "{{ home.files }}"
 
-- name: "Retrieving directories in home folder"
+- name: Find directories in home folder
   find:
     paths:
-      - "/home/{{ username }}"
+      - /home/{{ ansible_user }}
     file_type: directory
     hidden: true
-    excludes:
-      - "snap"
   register: home
 
-- name: "Changing owner for directories in home folder"
+- name: Set owner to {{ ansible_user }} for directories in home folder
   file:
     path: "{{ item.path }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     recurse: true
     state: directory
-  with_items: "{{ home['files'] }}"
+  with_items: "{{ home.files }}"
