@@ -1,6 +1,18 @@
 ---
-- name: "Installing spotify"
-  snap:
-    name: spotify
-    classic: false
+- name: Add spotify key
+  apt_key:
+    url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
+    keyring: /etc/apt/trusted.gpg.d/spotify.gpg
     state: present
+
+- name: Add spotify repository
+  apt_repository:
+    repo: deb [arch=amd64] http://repository.spotify.com stable non-free
+    filename: spotify
+    state: present
+
+- name: Install spotify
+  apt:
+    name: spotify-client
+    update_cache: true
+    state: latest
