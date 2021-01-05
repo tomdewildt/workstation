@@ -1,6 +1,5 @@
 ---
-- name: "Installing firefox"
+- name: Install firefox
   apt:
     name: firefox
-    update_cache: true
-    state: present
+    state: latest
