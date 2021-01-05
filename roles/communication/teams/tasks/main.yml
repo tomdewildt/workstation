@@ -1,0 +1,23 @@
+---
+- name: Add microsoft key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+    state: present
+
+- name: Add teams repository
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+    filename: teams
+    state: present
+
+- name: Install teams
+  apt:
+    name: teams
+    update_cache: true
+    state: latest
+
+- name: Remove teams autostart config
+  file:
+    path: /home/{{ ansible_user }}/.config/autostart/teams.desktop
+    state: absent
