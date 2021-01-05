@@ -1,10 +1,14 @@
 ---
-- name: "Downloading rust install script"
+- name: Download rust install script
   get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rust.sh
-    mode: "755"
+    mode: 0755
 
-- name: "Installing rust"
+- name: Install rust
   command: /tmp/rust.sh -y --no-modify-path
-  changed_when: false
+  environment:
+    CARGO_HOME: /home/{{ ansible_user }}/.cargo
+    RUSTUP_HOME: /home/{{ ansible_user }}/.rustup
+  changed_when: "'installing' in cmd.stdout"
+  register: cmd
