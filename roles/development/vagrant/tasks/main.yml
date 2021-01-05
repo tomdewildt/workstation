@@ -1,17 +1,10 @@
 ---
-- name: "Installing vagrant dependencies"
+- name: Install vagrant dependencies
   apt:
     name: virtualbox
-    update_cache: true
     state: present
 
-- name: "Installing vagrant package"
+- name: Install vagrant
   apt:
     deb: https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/vagrant_{{ vagrant.version }}_x86_64.deb
-    update_cache: true
     state: present
-
-- name: "Installing plugins"
-  command: vagrant plugin install {{ item }}
-  changed_when: false
-  with_items: "{{ vagrant.plugins }}"
