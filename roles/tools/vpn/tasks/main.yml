@@ -1,8 +1,7 @@
 ---
-- name: "Installing openvpn client"
+- name: Install openvpn client
   apt:
     name:
       - network-manager-openvpn
       - network-manager-openvpn-gnome
-    update_cache: true
-    state: present
+    state: latest
