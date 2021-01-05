@@ -15,5 +15,5 @@ jobs:
       - name: Run lint
         uses: ansible/ansible-lint-action@master
         with:
-          targets: "local.yml"
+          targets: "playbook.yml"
           args: ""
