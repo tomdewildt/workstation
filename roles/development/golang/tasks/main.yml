@@ -1,6 +1,6 @@
 ---
-- name: "Installing golang"
+- name: Install golang
   unarchive:
     src: https://dl.google.com/go/go{{ golang.version }}.linux-amd64.tar.gz
     dest: /opt
-    remote_src: yes
+    remote_src: true
