@@ -1,7 +1,8 @@
 skip_list:
-  - 106
-  - 204
-  - 208
-  - 303
-  - 305
-  - 306
+  - 106 # Role name does not match pattern
+  - 204 # Lines should be no longer than 160 chars
+  - 208 # File permissions unset or incorrect
+  - 303 # Using command rather than module
+  - 305 # Use shell only when shell functionality is required
+  - 306 # Shells that use pipes should set the pipefail option
+  - 403 # Package installs should not use latest
