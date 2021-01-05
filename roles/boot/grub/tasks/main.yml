@@ -1,46 +1,39 @@
 ---
-- name: "Setting grub flags"
+- name: Set grub flags
   lineinfile:
     path: /etc/default/grub
-    regexp: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
-    line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_rev_override=1 acpi_osi=Linux nouveau.modeset=0 pcie_aspm=force drm.vblankoffdelay=1 scsi_mod.use_blk_mq=1 nouveau.runpm=0 mem_sleep_default=deep"
+    regexp: ^#?GRUB_CMDLINE_LINUX_DEFAULT
+    line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_rev_override=1 acpi_osi=Linux pcie_aspm=force nouveau.modeset=0 nouveau.runpm=0 mem_sleep_default=deep"
     state: present
 
-- name: "Setting grub default to saved"
+- name: Set grub default to saved
   lineinfile:
     path: /etc/default/grub
-    regexp: GRUB_DEFAULT=0
+    regexp: ^#?GRUB_DEFAULT
     line: GRUB_DEFAULT=saved
     state: present
 
-- name: "Setting grub save default to true"
+- name: Set grub save default to true
   lineinfile:
     path: /etc/default/grub
+    regexp: ^#?GRUB_SAVEDEFAULT
     line: GRUB_SAVEDEFAULT=true
     state: present
 
-- name: "Setting grub theme"
-  lineinfile:
-    path: /etc/default/grub
-    line: GRUB_THEME="/boot/grub/themes/primitivistical/theme.txt"
-    state: present
+- name: Download theme install script
+  unarchive:
+    src: https://github.com/tomdewildt/minimal-grub-theme/archive/v0.1.0.zip
+    dest: /tmp
+    remote_src: true
+    creates: /tmp/minimal-grub-theme-0.1.0
 
-- name: "Creating themes folder"
-  file:
-    path: /boot/grub/themes
-    owner: root
-    group: root
-    mode: "644"
-    state: directory
+- name: Install theme
+  make:
+    chdir: /tmp/minimal-grub-theme-0.1.0
+    file: Makefile
+    target: install
+  changed_when: false
 
-- name: "Moving primitivistical theme to themes folder"
-  copy:
-    src: files/primitivistical
-    dest: /boot/grub/themes
-    owner: root
-    group: root
-    mode: "644"
-
-- name: "Updating grub settings"
+- name: Update grub settings
   command: update-grub
   changed_when: false
