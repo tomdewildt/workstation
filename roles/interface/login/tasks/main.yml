@@ -9,6 +9,14 @@
     path: /usr/share/backgrounds
     state: directory
 
+- name: Configure lightdm
+  copy:
+    src: lightdm/
+    dest: /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Download theme install script
   unarchive:
     src: https://github.com/tomdewildt/cahuella-lightdm-theme/archive/v0.1.0.zip
