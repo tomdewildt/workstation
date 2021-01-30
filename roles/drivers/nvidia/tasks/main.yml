@@ -2,6 +2,6 @@
 - name: Install nvidia driver
   apt:
     name:
-      - nvidia-driver-455
+      - nvidia-driver-460
       - nvidia-settings
     state: latest
