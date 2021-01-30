@@ -7,7 +7,7 @@
 
 - name: Add slack repository
   apt_repository:
-    repo: deb [arch=amd64] https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+    repo: deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
     filename: slack
     state: present
 
