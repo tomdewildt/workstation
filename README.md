@@ -47,6 +47,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Teams](https://docs.microsoft.com/en-us/microsoftteams/get-clients#linux)
 
+[Install Zoom](https://support.zoom.us/hc/en-us/articles/204206269-Installing-or-updating-Zoom-on-Linux#h_adcc0b66-b2f4-468b-bc7a-12c182f354b7)
+
 [Install Intel Driver](https://software.intel.com/security-software-guidance/secure-coding/loading-microcode-os)
 
 [Install NVIDIA Driver](https://www.nvidia.com/Download/driverResults.aspx/166883/en-us)
