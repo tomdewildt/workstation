@@ -71,3 +71,6 @@ python:
 
 vagrant:
   version: 2.2.14
+
+weka:
+  version: 3.8.5
