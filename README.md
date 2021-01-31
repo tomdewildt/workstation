@@ -69,6 +69,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Postgres Client](https://www.postgresql.org/download/linux/ubuntu)
 
+[Install Weka](https://waikato.github.io/weka-wiki/downloading_weka/#linux)
+
 [Install Wireshark](https://www.wireshark.org/docs/wsug_html/#_installing_from_debs_under_debian_ubuntu_and_other_debian_derivatives)
 
 [Install Android SDK](https://developer.android.com/studio#downloads)
