@@ -43,6 +43,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Firefox](https://support.mozilla.org/en-US/kb/install-firefox-linux)
 
+[Install Discord](https://support.discord.com/hc/en-us/articles/360034561191-Installation-Guide)
+
 [Install Slack](https://slack.com/intl/en-nl/downloads/linux)
 
 [Install Teams](https://docs.microsoft.com/en-us/microsoftteams/get-clients#linux)
