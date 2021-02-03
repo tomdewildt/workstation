@@ -95,6 +95,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Python](https://wiki.python.org/moin/BeginnersGuide/Download)
 
+[Install R](https://cran.r-project.org/)
+
 [Install Rust](https://www.rust-lang.org/tools/install)
 
 [Install Vagrant](https://www.vagrantup.com/docs/installation/)
