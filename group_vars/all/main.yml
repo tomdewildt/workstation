@@ -62,6 +62,9 @@ javascript:
     - gatsby-cli
     - netlify-cli
 
+r:
+  version: 4.0
+
 python:
   version: 3
   packages:
