@@ -48,6 +48,7 @@
     - development/java
     - development/javascript
     - development/python
+    - development/r
     - development/rust
     - development/vagrant
     - interface/cleanup
