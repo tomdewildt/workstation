@@ -32,6 +32,7 @@
     - media/spotify
     - power/powertop
     - power/tlp
+    - tools/dbeaver
     - tools/mongo
     - tools/ngrok
     - tools/postgres
