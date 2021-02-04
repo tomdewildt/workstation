@@ -64,6 +64,9 @@ javascript:
 
 r:
   version: 4.0
+  studio:
+    enabled: true
+    version: 1.4.1103
 
 python:
   version: 3
