@@ -99,6 +99,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install R](https://cran.r-project.org/)
 
+[Install RStudio](https://rstudio.com/products/rstudio/download/#download)
+
 [Install Rust](https://www.rust-lang.org/tools/install)
 
 [Install Vagrant](https://www.vagrantup.com/docs/installation/)

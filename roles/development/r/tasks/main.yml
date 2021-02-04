@@ -1,4 +1,11 @@
 ---
+- name: Install r dependencies
+  apt:
+    name:
+      - libssl-dev
+      - libcurl4-openssl-dev
+    state: latest
+
 - name: Add r key
   apt_key:
     id: E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -17,3 +24,17 @@
     name: r-base
     update_cache: true
     state: latest
+
+- name: Add rstudio key
+  apt_key:
+    id: 3F32EE77E331692F
+    keyserver: keys.gnupg.net
+    keyring: /etc/apt/trusted.gpg.d/rstudio.gpg
+    state: present
+  when: r.studio.enabled
+
+- name: Install rstudio
+  apt:
+    deb: https://download1.rstudio.org/desktop/bionic/amd64/rstudio-{{ r.studio.version }}-amd64.deb
+    state: present
+  when: r.studio.enabled
