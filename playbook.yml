@@ -10,6 +10,7 @@
   roles:
     - common/curl
     - common/dig
+    - common/disks
     - common/exfat
     - common/git
     - common/make
