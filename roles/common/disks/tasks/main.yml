@@ -1,0 +1,5 @@
+---
+- name: Install disks
+  apt:
+    name: gnome-disk-utility
+    state: latest
