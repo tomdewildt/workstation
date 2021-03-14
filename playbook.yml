@@ -37,7 +37,6 @@
     - tools/ngrok
     - tools/postgres
     - tools/vpn
-    - tools/weka
     - tools/wireshark
     - development/android
     - development/clojure
