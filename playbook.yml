@@ -34,6 +34,7 @@
     - power/powertop
     - power/tlp
     - tools/dbeaver
+    - tools/graphviz
     - tools/mongo
     - tools/ngrok
     - tools/postgres
