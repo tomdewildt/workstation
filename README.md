@@ -11,6 +11,8 @@ Prerequisites:
 * ansible version ```2.8.5``` or later
 * ansible-lint version ```4.2.0``` or later
 
+Please download version ```8.1.1``` of the proprietary [NVIDIA cuDNN](https://developer.nvidia.com/rdp/cudnn-download) library to `./roles/drivers/nvidia/files/cudnn/cudnn-v8.1.1.tgz` before executing the playbook.
+
 ### Local
 
 1. Run ```make init``` to initialize the environment.
@@ -54,6 +56,10 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 [Install Intel Driver](https://software.intel.com/security-software-guidance/secure-coding/loading-microcode-os)
 
 [Install NVIDIA Driver](https://www.nvidia.com/Download/driverResults.aspx/166883/en-us)
+
+[Install CUDA Driver](https://developer.nvidia.com/cuda-toolkit)
+
+[Install cuDNN](https://developer.nvidia.com/cudnn)
 
 [Install Shotwell](https://wiki.gnome.org/Apps/Shotwell/BuildingAndInstalling)
 
