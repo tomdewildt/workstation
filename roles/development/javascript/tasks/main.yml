@@ -18,8 +18,9 @@
     state: latest
 
 - name: Install packages
-  npm:
+  community.general.npm:
     name: "{{ item }}"
+    unsafe_perm: true
     global: true
     state: latest
   with_items: "{{ javascript.packages }}"
