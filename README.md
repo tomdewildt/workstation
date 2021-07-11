@@ -69,8 +69,6 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install TLP](https://wiki.archlinux.org/index.php/TLP#Installation)
 
-[Install DBeaver](https://dbeaver.io/download/)
-
 [Install Graphviz](https://graphviz.org/download/)
 
 [Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
