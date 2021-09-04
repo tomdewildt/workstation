@@ -66,7 +66,7 @@ r:
   version: 4.0
   studio:
     enabled: true
-    version: 1.4.1103
+    version: 1.4.1717
 
 python:
   version: 3
