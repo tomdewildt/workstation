@@ -69,6 +69,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install TLP](https://wiki.archlinux.org/index.php/TLP#Installation)
 
+[Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)
+
 [Install Graphviz](https://graphviz.org/download/)
 
 [Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
