@@ -38,3 +38,11 @@
     deb: https://download1.rstudio.org/desktop/bionic/amd64/rstudio-{{ r.studio.version }}-amd64.deb
     state: present
   when: r.studio.enabled
+
+- name: Install rstudio theme
+  copy:
+    src: rstudio/nord.rstheme
+    dest: /home/{{ ansible_user }}/.config/rstudio/themes/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
