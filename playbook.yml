@@ -34,6 +34,7 @@
     - media/spotify
     - power/powertop
     - power/tlp
+    - tools/aws
     - tools/graphviz
     - tools/mongo
     - tools/ngrok
