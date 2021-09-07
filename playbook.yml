@@ -35,6 +35,7 @@
     - power/powertop
     - power/tlp
     - tools/aws
+    - tools/gcp
     - tools/graphviz
     - tools/mongo
     - tools/ngrok
