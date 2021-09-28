@@ -19,7 +19,6 @@ code:
     - betterthantomorrow.calva
     - ms-dotnettools.csharp
     - dart-code.dart-code
-    - msjsdiag.debugger-for-chrome
     - ms-azuretools.vscode-docker
     - mikestead.dotenv
     - editorconfig.editorconfig
