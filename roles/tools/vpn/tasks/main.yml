@@ -5,3 +5,11 @@
       - network-manager-openvpn
       - network-manager-openvpn-gnome
     state: latest
+
+- name: Install strongswan client
+  apt:
+    name:
+      - strongswan
+      - libcharon-extra-plugins
+      - network-manager-strongswan
+    state: latest
