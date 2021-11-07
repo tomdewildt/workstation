@@ -25,6 +25,7 @@
     - browsing/chrome
     - browsing/firefox
     - communication/discord
+    - communication/signal
     - communication/slack
     - communication/teams
     - communication/zoom
