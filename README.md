@@ -81,6 +81,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Ngrok](https://ngrok.com/download)
 
+[Install Onlyoffice](https://helpcenter.onlyoffice.com/installation/desktop-install-ubuntu.aspx)
+
 [Install OpenVPN Client](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux)
 
 [Install Postgres Client](https://www.postgresql.org/download/linux/ubuntu)
