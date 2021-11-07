@@ -1,0 +1,18 @@
+---
+- name: Add signal key
+  apt_key:
+    url: https://updates.signal.org/desktop/apt/keys.asc
+    keyring: /etc/apt/trusted.gpg.d/signal.gpg
+    state: present
+
+- name: Add signal repository
+  apt_repository:
+    repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/signal.gpg] https://updates.signal.org/desktop/apt xenial main
+    filename: signal
+    state: present
+
+- name: Install signal
+  apt:
+    name: signal-desktop
+    update_cache: true
+    state: latest
