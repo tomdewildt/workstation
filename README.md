@@ -47,6 +47,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Discord](https://support.discord.com/hc/en-us/articles/360034561191-Installation-Guide)
 
+[Install Signal](https://signal.org/en/download/#)
+
 [Install Slack](https://slack.com/intl/en-nl/downloads/linux)
 
 [Install Teams](https://docs.microsoft.com/en-us/microsoftteams/get-clients#linux)
