@@ -28,7 +28,7 @@
 - name: Add rstudio key
   apt_key:
     id: 3F32EE77E331692F
-    keyserver: keys.gnupg.net
+    keyserver: keyserver.ubuntu.com
     keyring: /etc/apt/trusted.gpg.d/rstudio.gpg
     state: present
   when: r.studio.enabled
