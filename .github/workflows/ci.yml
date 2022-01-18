@@ -17,3 +17,5 @@ jobs:
         with:
           targets: "playbook.yml"
           args: ""
+          override-deps: |
+            rich>=9.5.1,<11.0.0
