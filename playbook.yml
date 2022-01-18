@@ -38,6 +38,7 @@
     - tools/aws
     - tools/gcp
     - tools/graphviz
+    - tools/mendeley
     - tools/mongo
     - tools/ngrok
     - tools/onlyoffice

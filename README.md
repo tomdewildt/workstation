@@ -77,6 +77,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Graphviz](https://graphviz.org/download/)
 
+[Install Mendeley](https://www.mendeley.com/guides/download-mendeley-desktop/ubuntu/instructions)
+
 [Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
 
 [Install Ngrok](https://ngrok.com/download)
