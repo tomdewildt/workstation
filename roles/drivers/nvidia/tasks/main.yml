@@ -1,7 +1,7 @@
 ---
 - name: Add cuda key
   apt_key:
-    url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+    url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
     keyring: /etc/apt/trusted.gpg.d/cuda.gpg
     state: present
 
