@@ -85,11 +85,11 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Onlyoffice](https://helpcenter.onlyoffice.com/installation/desktop-install-ubuntu.aspx)
 
+[Install Postgres Client](https://www.postgresql.org/download/linux/ubuntu)
+
 [Install OpenVPN Client](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux)
 
 [Install Strongswan Client](https://wiki.strongswan.org/projects/strongswan/wiki/InstallationDocumentation)
-
-[Install Postgres Client](https://www.postgresql.org/download/linux/ubuntu)
 
 [Install Wireshark](https://www.wireshark.org/docs/wsug_html/#_installing_from_debs_under_debian_ubuntu_and_other_debian_derivatives)
 
