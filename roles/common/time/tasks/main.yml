@@ -1,10 +1,10 @@
 ---
 - name: Set timezone to europe/amsterdam
-  timezone:
+  community.general.timezone:
     name: Europe/Amsterdam
 
 - name: Set hardware clock to local
-  timezone:
+  community.general.timezone:
     hwclock: local
 
 - name: Configure timesync
