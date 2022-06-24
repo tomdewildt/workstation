@@ -13,7 +13,7 @@ help: ## Show this help
 ##
 
 init: ## Initialize the environment
-	ansible-galaxy collection install community.general
+	ansible-galaxy install -r requirements.yml
 
 ##
 
