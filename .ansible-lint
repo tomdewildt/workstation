@@ -1,8 +1,9 @@
 skip_list:
-  - 106 # Role name does not match pattern
-  - 204 # Lines should be no longer than 160 chars
-  - 208 # File permissions unset or incorrect
-  - 303 # Using command rather than module
-  - 305 # Use shell only when shell functionality is required
-  - 306 # Shells that use pipes should set the pipefail option
-  - 403 # Package installs should not use latest
+  - command-instead-of-module
+  - command-instead-of-shell
+  - fqcn-builtins
+  - package-latest
+  - risky-file-permissions
+  - risky-shell-pipe
+  - role-name
+  - yaml[line-length]
