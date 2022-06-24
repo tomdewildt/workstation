@@ -1,8 +1,8 @@
 ---
 - name: Add mendeley key
   copy:
-    src: mendeley/mendeley.gpg
-    dest: /etc/apt/trusted.gpg.d/mendeley.gpg
+    src: mendeley/mendeleydesktop.gpg
+    dest: /etc/apt/trusted.gpg.d/mendeleydesktop.gpg
     owner: root
     group: root
     mode: 0644
@@ -10,7 +10,7 @@
 - name: Add mendeley repository
   apt_repository:
     repo: deb [arch=amd64] https://desktop-download.mendeley.com/download/apt stable main
-    filename: mendeley
+    filename: mendeleydesktop
     state: present
 
 - name: Install mendeley
