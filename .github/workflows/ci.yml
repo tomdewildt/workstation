@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup ansible
-        run: ansible-galaxy collection install community.general
       - name: Run lint
         uses: ansible/ansible-lint-action@main
         with:
