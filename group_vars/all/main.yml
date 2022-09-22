@@ -17,6 +17,8 @@ code:
   extensions:
     - bungcip.better-toml
     - betterthantomorrow.calva
+    - streetsidesoftware.code-spell-checker
+    - streetsidesoftware.code-spell-checker-dutch
     - ms-dotnettools.csharp
     - dart-code.dart-code
     - ms-azuretools.vscode-docker
