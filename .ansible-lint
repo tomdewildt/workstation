@@ -1,9 +1,9 @@
 skip_list:
   - command-instead-of-module
   - command-instead-of-shell
-  - fqcn-builtins
+  - experimental
+  - fqcn[action-core]
+  - name[template]
   - package-latest
-  - risky-file-permissions
   - risky-shell-pipe
-  - role-name
   - yaml[line-length]

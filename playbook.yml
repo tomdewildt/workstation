@@ -1,5 +1,6 @@
 ---
-- hosts: workstation
+- name: Workstation Playbook
+  hosts: workstation
   become: true
   pre_tasks:
     - name: Update & upgrade packages

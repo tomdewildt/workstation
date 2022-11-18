@@ -28,7 +28,7 @@
     creates: /tmp/minimal-grub-theme-0.1.0
 
 - name: Install theme
-  make:
+  community.general.make:
     chdir: /tmp/minimal-grub-theme-0.1.0
     file: Makefile
     target: install
