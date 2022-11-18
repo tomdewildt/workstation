@@ -25,7 +25,7 @@
     creates: /tmp/cahuella-lightdm-theme-0.1.0
 
 - name: Install theme
-  make:
+  community.general.make:
     chdir: /tmp/cahuella-lightdm-theme-0.1.0
     file: Makefile
     target: install
