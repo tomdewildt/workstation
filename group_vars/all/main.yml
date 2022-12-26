@@ -55,7 +55,7 @@ golang:
   version: 1.19.3
 
 javascript:
-  version: 14.x
+  version: 18.x
   packages:
     - create-react-app
     - eslint
