@@ -55,6 +55,7 @@
     - development/golang
     - development/java
     - development/javascript
+    - development/packer
     - development/python
     - development/r
     - development/rust

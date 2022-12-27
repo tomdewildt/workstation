@@ -111,6 +111,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Javascript](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
 
+[Install Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
+
 [Install Python](https://wiki.python.org/moin/BeginnersGuide/Download)
 
 [Install R](https://cran.r-project.org/)
