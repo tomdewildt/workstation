@@ -39,6 +39,7 @@
     - tools/aws
     - tools/gcp
     - tools/graphviz
+    - tools/imager
     - tools/mendeley
     - tools/mongo
     - tools/ngrok
