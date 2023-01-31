@@ -79,8 +79,6 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
-[Install Mendeley](https://www.mendeley.com/guides/download-mendeley-desktop/ubuntu/instructions)
-
 [Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
 
 [Install Ngrok](https://ngrok.com/download)
@@ -94,6 +92,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 [Install Strongswan Client](https://wiki.strongswan.org/projects/strongswan/wiki/InstallationDocumentation)
 
 [Install Wireshark](https://www.wireshark.org/docs/wsug_html/#_installing_from_debs_under_debian_ubuntu_and_other_debian_derivatives)
+
+[Install Zotero](https://github.com/retorquere/zotero-deb#primary-source)
 
 [Install Android SDK](https://developer.android.com/studio#downloads)
 
