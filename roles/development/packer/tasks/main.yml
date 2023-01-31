@@ -1,4 +1,10 @@
 ---
+- name: Install packer dependencies
+  apt:
+    name: qemu-user-static
+    update_cache: true
+    state: latest
+
 - name: Add hashicorp key
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg

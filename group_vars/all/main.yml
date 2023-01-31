@@ -28,6 +28,7 @@ code:
     - dbaeumer.vscode-eslint
     - dart-code.flutter
     - golang.go
+    - hashicorp.hcl
     - redhat.java
     - vadimcn.vscode-lldb
     - yzhang.markdown-all-in-one
