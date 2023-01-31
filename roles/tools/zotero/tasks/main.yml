@@ -1,0 +1,18 @@
+---
+- name: Add zotero key
+  apt_key:
+    url: https://raw.githubusercontent.com/retorquere/zotero-deb/master/zotero-archive-keyring.gpg
+    keyring: /etc/apt/trusted.gpg.d/zotero.gpg
+    state: present
+
+- name: Add zotero repository
+  apt_repository:
+    repo: deb [arch=amd64] https://zotero.retorque.re/file/apt-package-archive ./
+    filename: zotero
+    state: present
+
+- name: Install zotero
+  apt:
+    name: zotero
+    update_cache: true
+    state: latest
