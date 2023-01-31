@@ -40,13 +40,13 @@
     - tools/gcp
     - tools/graphviz
     - tools/imager
-    - tools/mendeley
     - tools/mongo
     - tools/ngrok
     - tools/onlyoffice
     - tools/postgres
     - tools/vpn
     - tools/wireshark
+    - tools/zotero
     - development/android
     - development/clojure
     - development/code
