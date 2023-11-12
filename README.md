@@ -69,6 +69,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)
 
+[Install AZ CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux)
+
 [Install GCP CLI](https://cloud.google.com/sdk/docs/install)
 
 [Install Graphviz](https://graphviz.org/download/)
