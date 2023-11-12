@@ -1,18 +1,18 @@
 ---
 - name: Add google cloud key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     keyring: /etc/apt/trusted.gpg.d/google-cloud.gpg
     state: present
 
 - name: Add google cloud repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://packages.cloud.google.com/apt cloud-sdk main
     filename: google-cloud
     state: present
 
 - name: Install gcp cli
-  apt:
+  ansible.builtin.apt:
     name: google-cloud-sdk
     update_cache: true
     state: latest

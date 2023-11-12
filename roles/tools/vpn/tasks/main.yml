@@ -1,13 +1,13 @@
 ---
 - name: Install openvpn client
-  apt:
+  ansible.builtin.apt:
     name:
       - network-manager-openvpn
       - network-manager-openvpn-gnome
     state: latest
 
 - name: Install strongswan client
-  apt:
+  ansible.builtin.apt:
     name:
       - strongswan
       - libcharon-extra-plugins

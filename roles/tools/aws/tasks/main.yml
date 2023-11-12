@@ -1,11 +1,11 @@
 ---
 - name: Download aws cli install script
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: /tmp
     remote_src: true
     creates: /tmp/aws
 
 - name: Install aws cli
-  command: /tmp/aws/install --update
+  ansible.builtin.command: /tmp/aws/install --update
   changed_when: false
