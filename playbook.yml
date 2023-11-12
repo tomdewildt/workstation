@@ -58,6 +58,7 @@
     - development/python
     - development/r
     - development/rust
+    - development/terraform
     - development/vagrant
     - interface/cleanup
     - interface/login
