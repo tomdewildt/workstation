@@ -1,13 +1,13 @@
 ---
 - name: Install tlp
-  apt:
+  ansible.builtin.apt:
     name:
       - tlp
       - tlp-rdw
     state: latest
 
 - name: Find default tlp config
-  find:
+  ansible.builtin.find:
     paths:
       - /etc/tlp.d
     file_type: file
@@ -16,21 +16,21 @@
   register: config
 
 - name: Remove default tlp config
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ config.files }}"
 
 - name: Configure tlp
-  copy:
+  ansible.builtin.copy:
     src: tlp/
     dest: /etc/tlp.d/
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Enable tlp
-  service:
+  ansible.builtin.service:
     name: tlp
     state: started
     enabled: true
