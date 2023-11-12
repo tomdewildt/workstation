@@ -1,4 +1,5 @@
 profile: production
+offline: false
 skip_list:
   - command-instead-of-shell
   - name[template]
