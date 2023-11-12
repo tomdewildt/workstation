@@ -8,15 +8,15 @@
     hwclock: local
 
 - name: Configure timesync
-  copy:
+  ansible.builtin.copy:
     src: timesync/timesyncd.conf
     dest: /etc/systemd/timesyncd.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Restart timesync
-  service:
+  ansible.builtin.service:
     name: systemd-timesyncd
     state: restarted
     enabled: true

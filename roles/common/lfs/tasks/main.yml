@@ -1,18 +1,18 @@
 ---
 - name: Add lfs key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packagecloud.io/github/git-lfs/gpgkey
     keyring: /etc/apt/trusted.gpg.d/lfs.gpg
     state: present
 
 - name: Add lfs repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://packagecloud.io/github/git-lfs/ubuntu focal main
     filename: lfs
     state: present
 
 - name: Install lfs
-  apt:
+  ansible.builtin.apt:
     name: git-lfs
     update_cache: true
     state: latest

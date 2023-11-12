@@ -1,5 +1,5 @@
 ---
 - name: Install intel driver
-  apt:
+  ansible.builtin.apt:
     name: intel-microcode
     state: latest

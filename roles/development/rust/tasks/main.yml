@@ -1,12 +1,12 @@
 ---
 - name: Download rust install script
-  get_url:
+  ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rust.sh
-    mode: 0755
+    mode: "0755"
 
 - name: Install rust
-  command: /tmp/rust.sh -y --no-modify-path
+  ansible.builtin.command: /tmp/rust.sh -y --no-modify-path
   environment:
     CARGO_HOME: /home/{{ ansible_user }}/.cargo
     RUSTUP_HOME: /home/{{ ansible_user }}/.rustup

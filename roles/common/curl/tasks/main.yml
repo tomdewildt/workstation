@@ -1,5 +1,5 @@
 ---
 - name: Install curl
-  apt:
+  ansible.builtin.apt:
     name: curl
     state: latest

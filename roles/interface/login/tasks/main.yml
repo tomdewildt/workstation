@@ -1,24 +1,30 @@
 ---
 - name: Create lightdm directory
-  file:
+  ansible.builtin.file:
     path: /usr/share/lightdm/lightdm-gtk-greeter.conf.d
+    owner: root
+    group: root
+    mode: "0755"
     state: directory
 
 - name: Create background directory
-  file:
+  ansible.builtin.file:
     path: /usr/share/backgrounds
+    owner: root
+    group: root
+    mode: "0755"
     state: directory
 
 - name: Configure lightdm
-  copy:
+  ansible.builtin.copy:
     src: lightdm/
     dest: /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Download theme install script
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://github.com/tomdewildt/cahuella-lightdm-theme/archive/v0.1.0.zip
     dest: /tmp
     remote_src: true

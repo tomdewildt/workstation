@@ -1,19 +1,19 @@
 ---
 - name: Add onlyoffice key
-  apt_key:
+  ansible.builtin.apt_key:
     id: CB2DE8E5
     keyserver: keyserver.ubuntu.com
     keyring: /etc/apt/trusted.gpg.d/onlyoffice.gpg
     state: present
 
 - name: Add onlyoffice repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://download.onlyoffice.com/repo/debian squeeze main
     filename: onlyoffice
     state: present
 
 - name: Install onlyoffice
-  apt:
+  ansible.builtin.apt:
     name: onlyoffice-desktopeditors
     update_cache: true
     state: latest

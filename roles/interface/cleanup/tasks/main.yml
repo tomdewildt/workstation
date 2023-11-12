@@ -1,6 +1,6 @@
 ---
 - name: Remove unused applications
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: absent
   with_items:
@@ -9,9 +9,12 @@
     - xterm
 
 - name: Hide internal applications
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /usr/share/applications/{{ item }}
     line: NoDisplay=true
+    owner: root
+    group: root
+    mode: "0644"
     state: present
     create: true
   with_items:

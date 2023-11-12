@@ -1,9 +1,9 @@
+profile: production
+offline: false
 skip_list:
-  - command-instead-of-module
   - command-instead-of-shell
-  - experimental
-  - fqcn[action-core]
   - name[template]
   - package-latest
   - risky-shell-pipe
+  - role-name[path]
   - yaml[line-length]

@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Setup ansible
+        run: ansible-galaxy install -r requirements.yml
       - name: Run lint
-        uses: ansible/ansible-lint-action@main
-        with:
-          targets: "playbook.yml"
-          args: ""
+        uses: ansible/ansible-lint@main

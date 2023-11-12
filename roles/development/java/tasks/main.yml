@@ -1,5 +1,5 @@
 ---
 - name: Install java
-  apt:
+  ansible.builtin.apt:
     name: default-jdk
     state: latest

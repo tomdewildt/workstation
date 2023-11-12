@@ -1,11 +1,11 @@
 ---
 - name: Add zoom key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://zoom.us/linux/download/pubkey
     keyring: /etc/apt/trusted.gpg.d/zoom.gpg
     state: present
 
 - name: Install zoom
-  apt:
+  ansible.builtin.apt:
     deb: https://zoom.us/client/latest/zoom_amd64.deb
     state: present

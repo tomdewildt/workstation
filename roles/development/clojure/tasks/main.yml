@@ -1,17 +1,17 @@
 ---
 - name: Install clojure dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - rlwrap
       - default-jdk
     state: latest
 
 - name: Download clojure install script
-  get_url:
+  ansible.builtin.get_url:
     url: https://download.clojure.org/install/linux-install-{{ clojure.version }}.sh
     dest: /tmp/clojure.sh
-    mode: 0755
+    mode: "0755"
 
 - name: Install clojure
-  command: /tmp/clojure.sh
+  ansible.builtin.command: /tmp/clojure.sh
   changed_when: false

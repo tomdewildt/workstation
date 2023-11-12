@@ -1,27 +1,27 @@
 ---
 - name: Set grub flags
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/grub
     regexp: ^#?GRUB_CMDLINE_LINUX_DEFAULT
     line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_rev_override=1 acpi_osi=Linux pcie_aspm=force nouveau.modeset=0 nouveau.runpm=0 mem_sleep_default=deep"
     state: present
 
 - name: Set grub default to saved
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/grub
     regexp: ^#?GRUB_DEFAULT
     line: GRUB_DEFAULT=saved
     state: present
 
 - name: Set grub save default to true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/grub
     regexp: ^#?GRUB_SAVEDEFAULT
     line: GRUB_SAVEDEFAULT=true
     state: present
 
 - name: Download theme install script
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://github.com/tomdewildt/minimal-grub-theme/archive/v0.1.0.zip
     dest: /tmp
     remote_src: true
@@ -35,5 +35,5 @@
   changed_when: false
 
 - name: Update grub settings
-  command: update-grub
+  ansible.builtin.command: update-grub
   changed_when: false
