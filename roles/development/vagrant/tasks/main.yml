@@ -1,10 +1,10 @@
 ---
 - name: Install vagrant dependencies
-  apt:
+  ansible.builtin.apt:
     name: virtualbox
     state: present
 
 - name: Install vagrant
-  apt:
+  ansible.builtin.apt:
     deb: https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/vagrant_{{ vagrant.version }}_x86_64.deb
     state: present

@@ -1,30 +1,30 @@
 ---
 - name: Add microsoft key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
     keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
     state: present
 
 - name: Add code repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     filename: vscode
     state: present
 
 - name: Install code
-  apt:
+  ansible.builtin.apt:
     name: code
     update_cache: true
     state: latest
 
 - name: Install extensions
-  command: code --extensions-dir /home/{{ ansible_user }}/.vscode/extensions --user-data-dir /home/{{ ansible_user }}/.config/Code --install-extension {{ item }}
+  ansible.builtin.command: code --extensions-dir /home/{{ ansible_user }}/.vscode/extensions --user-data-dir /home/{{ ansible_user }}/.config/Code --install-extension {{ item }}
   changed_when: "'successfully' in cmd.stdout"
   register: cmd
   with_items: "{{ code.extensions }}"
 
 - name: Set file watch limit to 524288
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/sysctl.conf
     regexp: ^#?fs.inotify.max_user_watches
     line: fs.inotify.max_user_watches=524288

@@ -1,24 +1,24 @@
 ---
 - name: Install packer dependencies
-  apt:
+  ansible.builtin.apt:
     name: qemu-user-static
     update_cache: true
     state: latest
 
 - name: Add hashicorp key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     keyring: /etc/apt/trusted.gpg.d/hashicorp.gpg
     state: present
 
 - name: Add hashicorp repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
     filename: hashicorp
     state: present
 
 - name: Install packer
-  apt:
+  ansible.builtin.apt:
     name: packer
     update_cache: true
     state: latest

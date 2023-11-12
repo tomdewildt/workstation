@@ -1,40 +1,46 @@
 ---
 - name: Install android dependencies
-  apt:
+  ansible.builtin.apt:
     name: openjdk-8-jdk
     state: latest
 
 - name: Create android directory
-  file:
+  ansible.builtin.file:
     path: /opt/android
+    owner: root
+    group: root
+    mode: "0755"
     state: directory
 
 - name: Create android tools directory
-  file:
+  ansible.builtin.file:
     path: /opt/android/cmdline-tools
+    owner: root
+    group: root
+    mode: "0755"
     state: directory
 
 - name: Install android tools
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://dl.google.com/android/repository/commandlinetools-linux-{{ android.tools.version }}_latest.zip
     dest: /opt/android/cmdline-tools
     remote_src: true
     creates: /opt/android/cmdline-tools/latest
 
 - name: Rename android tools
-  command:
+  ansible.builtin.command:
     cmd: mv /opt/android/cmdline-tools/cmdline-tools /opt/android/cmdline-tools/latest
     creates: /opt/android/cmdline-tools/latest
 
 - name: Accept android licenses
-  shell: yes | /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose --licenses
+  ansible.builtin.shell: yes | /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose --licenses
   environment:
     JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
   changed_when: "'Accepted' not in cmd.stdout"
   register: cmd
 
 - name: Install android packages
-  shell: /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose "{{ item }}"
+  ansible.builtin.shell: /opt/android/cmdline-tools/latest/bin/sdkmanager --sdk_root=/opt/android --verbose "{{ item }}"
   environment:
     JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
   changed_when: "'Install' in cmd.stdout"
@@ -45,7 +51,7 @@
     - system-images;android-{{ android.platform.version }};google_apis;x86
 
 - name: Add user to the plugdev & kvm group
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups:
       - plugdev

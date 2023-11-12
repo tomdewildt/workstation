@@ -1,13 +1,17 @@
 ---
+- name: Add python repository
+  ansible.builtin.apt_repository:
+    repo: ppa:deadsnakes/ppa
+    filename: python
+    state: present
+
 - name: Install python
-  apt:
-    name:
-      - python{{ python.version }}
-      - python{{ python.version }}-pip
+  ansible.builtin.apt:
+    name: python{{ python.version }}
     state: latest
 
 - name: Install packages
-  pip:
+  ansible.builtin.pip:
     name: "{{ item }}"
     executable: pip3
     state: latest
