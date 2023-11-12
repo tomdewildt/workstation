@@ -35,6 +35,7 @@
     - power/powertop
     - power/tlp
     - tools/aws
+    - tools/az
     - tools/gcp
     - tools/graphviz
     - tools/imager
