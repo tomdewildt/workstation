@@ -1,6 +1,6 @@
 ---
 - name: Find files in home folder
-  find:
+  ansible.builtin.find:
     paths:
       - /home/{{ ansible_user }}
     file_type: file
@@ -8,7 +8,7 @@
   register: home
 
 - name: Set owner to {{ ansible_user }} for files in home folder
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
@@ -16,7 +16,7 @@
   with_items: "{{ home.files }}"
 
 - name: Find directories in home folder
-  find:
+  ansible.builtin.find:
     paths:
       - /home/{{ ansible_user }}
     file_type: directory
@@ -24,7 +24,7 @@
   register: home
 
 - name: Set owner to {{ ansible_user }} for directories in home folder
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

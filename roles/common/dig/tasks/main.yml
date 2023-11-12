@@ -1,5 +1,5 @@
 ---
 - name: Install dig
-  apt:
+  ansible.builtin.apt:
     name: dnsutils
     state: latest

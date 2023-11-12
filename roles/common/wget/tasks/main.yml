@@ -1,5 +1,5 @@
 ---
 - name: Install wget
-  apt:
+  ansible.builtin.apt:
     name: wget
     state: latest

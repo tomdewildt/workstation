@@ -1,6 +1,6 @@
 ---
 - name: Install exfat
-  apt:
+  ansible.builtin.apt:
     name:
       - exfat-fuse
       - exfat-utils

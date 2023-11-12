@@ -1,5 +1,5 @@
 ---
 - name: Install make
-  apt:
+  ansible.builtin.apt:
     name: build-essential
     state: latest
