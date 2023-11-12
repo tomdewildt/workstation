@@ -119,6 +119,8 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Rust](https://www.rust-lang.org/tools/install)
 
+[Install Terraform](https://developer.hashicorp.com/terraform/install)
+
 [Install Vagrant](https://www.vagrantup.com/docs/installation/)
 
 [Install Visual Studio Code](https://code.visualstudio.com/docs/setup/linux)
