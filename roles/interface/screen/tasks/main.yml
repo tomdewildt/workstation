@@ -1,12 +1,12 @@
 ---
 - name: Add regolith repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: ppa:regolith-linux/release
     filename: regolith-linux-ubuntu-release-focal
     state: present
 
 - name: Install regolith looks
-  apt:
+  ansible.builtin.apt:
     name:
       - regolith-look-ayu
       - regolith-look-ayu-dark
@@ -19,7 +19,7 @@
     state: latest
 
 - name: Install i3xrocks extensions
-  apt:
+  ansible.builtin.apt:
     name:
       - i3xrocks-battery
       - i3xrocks-cpu-usage
