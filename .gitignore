@@ -26,6 +26,9 @@
 
 # A common archive format used on Unix-like systems. Generally used in conjunction with compressors such as gzip, bzip2, compress or xz to create .tar.gz, .tar.bz2, .tar.Z or tar.xz files.
 *.tar
+*.tar.bz2
+*.tar.gz
+*.tar.xz
 *.tgz
 
 ### Linux ###
