@@ -73,11 +73,7 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install GCP CLI](https://cloud.google.com/sdk/docs/install)
 
-[Install Graphviz](https://graphviz.org/download/)
-
 [Install Raspberry Pi Imager](https://www.raspberrypi.com/software/)
-
-[Install Mongo Client](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu)
 
 [Install Ngrok](https://ngrok.com/download)
 
@@ -89,37 +85,17 @@ Run ```make vm/stop``` to stop the virtual machine and ```make vm/remove``` to r
 
 [Install Strongswan Client](https://wiki.strongswan.org/projects/strongswan/wiki/InstallationDocumentation)
 
-[Install Wireshark](https://www.wireshark.org/docs/wsug_html/#_installing_from_debs_under_debian_ubuntu_and_other_debian_derivatives)
-
-[Install Zotero](https://github.com/retorquere/zotero-deb#primary-source)
-
-[Install Android SDK](https://developer.android.com/studio#downloads)
-
-[Install Clojure](https://clojure.org/guides/getting_started)
-
-[Install Csharp](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-)
-
 [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
 
 [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-[Install Flutter](https://flutter.dev/docs/get-started/install/linux)
-
 [Install Go](https://golang.org/doc/install)
-
-[Install Java](https://openjdk.java.net/install/index.html)
 
 [Install Javascript](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
 
 [Install Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
 
 [Install Python](https://wiki.python.org/moin/BeginnersGuide/Download)
-
-[Install R](https://cran.r-project.org/)
-
-[Install RStudio](https://rstudio.com/products/rstudio/download/#download)
-
-[Install Rust](https://www.rust-lang.org/tools/install)
 
 [Install Terraform](https://developer.hashicorp.com/terraform/install)
 
