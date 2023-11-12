@@ -1,5 +1,0 @@
----
-- name: Install gnome tweaks
-  ansible.builtin.apt:
-    name: gnome-tweaks
-    state: latest
