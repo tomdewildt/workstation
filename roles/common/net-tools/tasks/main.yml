@@ -1,5 +1,0 @@
----
-- name: Install net tools
-  ansible.builtin.apt:
-    name: net-tools
-    state: latest
