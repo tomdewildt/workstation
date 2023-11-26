@@ -1,0 +1,10 @@
+---
+- name: Linux Workstation Playbook
+  hosts: workstation
+  pre_tasks:
+    - name: Update & upgrade packages
+      become: true
+      ansible.builtin.apt:
+        name: "*"
+        update_cache: true
+        state: latest
