@@ -14,3 +14,4 @@
     - common/exfat
     - common/git
     - common/lfs
+    - common/make
