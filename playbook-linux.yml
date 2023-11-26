@@ -17,3 +17,4 @@
     - common/make
     - common/nmap
     - common/unzip
+    - common/wget
