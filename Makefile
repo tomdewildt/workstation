@@ -1,4 +1,4 @@
-.PHONY: init run/local run/virtual vm/start vm/stop vm/remove lint
+.PHONY: init run/linux run/macos lint
 .DEFAULT_GOAL := help
 
 NAMESPACE := tomdewildt
@@ -17,25 +17,15 @@ init: ## Initialize the environment
 
 ##
 
-run/local: ## Run on the local machine
-	ansible-playbook playbook.yml --ask-become-pass --inventory inventory/local.yml
+run/linux: ## Run on a linux machine
+	ansible-playbook playbook-linux.yml --ask-become-pass --inventory inventory/default.yml
 
-run/virtual: ## Run on the virtual machine
-	ansible-playbook playbook.yml --ask-become-pass --inventory inventory/virtual.yml
-
-##
-
-vm/start: ## Start the virtual machine
-	vagrant up
-
-vm/stop: ## Stop the virtual machine
-	vagrant halt
-
-vm/remove: ## Remove the virtual machine
-	vagrant destroy
+run/macos: ## Run on a macos machine
+	ansible-playbook playbook-macos.yml --ask-become-pass --inventory inventory/default.yml
 
 ##
 
 lint: ## Run lint & syntax check
-	ansible-playbook --syntax-check playbook.yml --inventory inventory/local.yml
-	ansible-lint --force-color playbook.yml
+	ansible-playbook --syntax-check playbook-linux.yml --inventory inventory/default.yml
+	ansible-playbook --syntax-check playbook-macos.yml --inventory inventory/default.yml
+	ansible-lint --force-color playbook-linux.yml playbook-macos.yml
