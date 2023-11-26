@@ -1,5 +1,0 @@
----
-- name: Install disks
-  ansible.builtin.apt:
-    name: gnome-disk-utility
-    state: latest
