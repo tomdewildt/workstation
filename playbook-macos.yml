@@ -20,3 +20,5 @@
         upgrade_all: true
       register: result
       until: result is successful
+  roles:
+    - common/curl

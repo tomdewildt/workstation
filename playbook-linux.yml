@@ -8,3 +8,5 @@
         name: "*"
         update_cache: true
         state: latest
+  roles:
+    - common/curl
