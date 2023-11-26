@@ -6,15 +6,18 @@
       ansible.builtin.stat:
         path: /opt/homebrew/bin
       register: homebrew
+
     - name: Install homebrew
       ansible.builtin.shell: >
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       when: not homebrew.stat.exists
+
     - name: Update homebrew
       community.general.homebrew:
         update_homebrew: true
       register: result
       until: result is successful
+
     - name: Update homebrew packages
       community.general.homebrew:
         upgrade_all: true
@@ -25,3 +28,4 @@
     - common/dig
     - common/exfat
     - common/git
+    - common/lfs

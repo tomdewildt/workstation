@@ -13,3 +13,4 @@
     - common/dig
     - common/exfat
     - common/git
+    - common/lfs
