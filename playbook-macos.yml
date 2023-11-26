@@ -2,23 +2,24 @@
 - name: MacOS Workstation Playbook
   hosts: workstation
   pre_tasks:
-    - name: "Check if homebrew is installed"
+    - name: Check if homebrew is installed
       ansible.builtin.stat:
         path: /opt/homebrew/bin
       register: homebrew
-    - name: "Install homebrew"
+    - name: Install homebrew
       ansible.builtin.shell: >
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       when: not homebrew.stat.exists
-    - name: "Update homebrew"
+    - name: Update homebrew
       community.general.homebrew:
         update_homebrew: true
       register: result
       until: result is successful
-    - name: "Update homebrew packages"
+    - name: Update homebrew packages
       community.general.homebrew:
         upgrade_all: true
       register: result
       until: result is successful
   roles:
     - common/curl
+    - common/dig
