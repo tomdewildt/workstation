@@ -30,3 +30,4 @@
     - common/git
     - common/lfs
     - common/make
+    - common/nmap
