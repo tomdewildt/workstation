@@ -1,5 +1,13 @@
 ---
-- name: Install nmap
+- name: Install nmap (linux)
+  become: true
   ansible.builtin.apt:
     name: nmap
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install nmap (macos)
+  community.general.homebrew:
+    name: nmap
+    state: latest
+  when: ansible_distribution == 'MacOSX'
