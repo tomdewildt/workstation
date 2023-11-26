@@ -31,3 +31,4 @@
     - common/lfs
     - common/make
     - common/nmap
+    - common/unzip
