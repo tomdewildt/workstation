@@ -1,18 +1,29 @@
 ---
-- name: Add chrome key
-  ansible.builtin.apt_key:
-    url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-    keyring: /etc/apt/trusted.gpg.d/google.gpg
-    state: present
+- name: Install chrome (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add chrome key (linux)
+      ansible.builtin.apt_key:
+        url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+        keyring: /etc/apt/trusted.gpg.d/google.gpg
+        state: present
 
-- name: Add chrome repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb stable main
-    filename: google-chrome
-    state: present
+    - name: Add chrome repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb stable main
+        filename: google-chrome
+        state: present
 
-- name: Install chrome
-  ansible.builtin.apt:
-    name: google-chrome-stable
-    update_cache: true
+    - name: Install chrome (linux)
+      ansible.builtin.apt:
+        name: google-chrome-stable
+        update_cache: true
+        state: latest
+
+- name: Install chrome (macos)
+  community.general.homebrew_cask:
+    name: google-chrome
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'
