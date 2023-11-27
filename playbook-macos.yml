@@ -37,3 +37,4 @@
     - common/unzip
     - common/wget
     - boot/grub
+    - browsing/chrome
