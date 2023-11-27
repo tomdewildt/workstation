@@ -10,6 +10,8 @@
     - name: Install homebrew
       ansible.builtin.shell: >
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      register: result
+      changed_when: "'Installation successful!' in result.stdout"
       when: not homebrew.stat.exists
 
     - name: Update homebrew

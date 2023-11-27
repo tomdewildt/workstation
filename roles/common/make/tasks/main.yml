@@ -11,4 +11,3 @@
     name: make
     state: latest
   when: ansible_distribution == 'MacOSX'
-
