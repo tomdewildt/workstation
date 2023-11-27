@@ -1,0 +1,7 @@
+---
+- name: Install teams (macos)
+  community.general.homebrew_cask:
+    name: microsoft-teams
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
