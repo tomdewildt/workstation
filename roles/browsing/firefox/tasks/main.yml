@@ -1,5 +1,14 @@
 ---
-- name: Install firefox
+- name: Install firefox (linux)
+  become: true
   ansible.builtin.apt:
     name: firefox
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install firefox (macos)
+  community.general.homebrew_cask:
+    name: firefox
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
