@@ -15,14 +15,17 @@
     - name: Update homebrew
       community.general.homebrew:
         update_homebrew: true
-      register: result
-      until: result is successful
 
     - name: Update homebrew packages
       community.general.homebrew:
         upgrade_all: true
-      register: result
-      until: result is successful
+
+    - name: Install homebrew taps
+      community.general.homebrew_tap:
+        name:
+          - homebrew/core
+          - homebrew/cask
+        state: present
   roles:
     - common/curl
     - common/dig
