@@ -20,3 +20,4 @@
     - common/wget
     - boot/grub
     - browsing/chrome
+    - browsing/firefox
