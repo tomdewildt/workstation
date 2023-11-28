@@ -1,0 +1,13 @@
+---
+- name: Install psql (linux)
+  become: true
+  ansible.builtin.apt:
+    name: postgresql-client
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install psql (macos)
+  community.general.homebrew:
+    name: postgresql
+    state: latest
+  when: ansible_distribution == 'MacOSX'
