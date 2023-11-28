@@ -26,4 +26,5 @@
     - communication/teams
     - drivers/cpu
     - drivers/gpu
+    - media/spotify
     - platform/boot
