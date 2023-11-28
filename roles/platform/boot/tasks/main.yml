@@ -1,5 +1,5 @@
 ---
-- name: Setup grub (linux)
+- name: Setup boot (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
@@ -24,14 +24,14 @@
         line: GRUB_SAVEDEFAULT=true
         state: present
 
-    - name: Download theme install script (linux)
+    - name: Download grub theme install script (linux)
       ansible.builtin.unarchive:
         src: https://github.com/tomdewildt/minimal-grub-theme/archive/v0.1.0.zip
         dest: /tmp
         remote_src: true
         creates: /tmp/minimal-grub-theme-0.1.0
 
-    - name: Install theme (linux)
+    - name: Install grub theme (linux)
       community.general.make:
         chdir: /tmp/minimal-grub-theme-0.1.0
         file: Makefile
