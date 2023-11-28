@@ -1,5 +1,0 @@
----
-- name: Install shotwell
-  ansible.builtin.apt:
-    name: shotwell
-    state: latest
