@@ -55,3 +55,4 @@
     - tools/imager
     - tools/ngrok
     - tools/psql
+    - development/code
