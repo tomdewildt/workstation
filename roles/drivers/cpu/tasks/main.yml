@@ -1,0 +1,7 @@
+---
+- name: Install cpu driver (linux)
+  become: true
+  ansible.builtin.apt:
+    name: intel-microcode
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
