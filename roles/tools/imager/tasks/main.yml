@@ -1,5 +1,14 @@
 ---
-- name: Install raspberry pi imager
+- name: Install raspberry pi imager (linux)
+  become: true
   ansible.builtin.apt:
-    deb: https://downloads.raspberrypi.org/imager/imager_latest_amd64.deb
+    deb: https://downloads.raspberrypi.org/imager/imager_1.7.5_amd64.deb
     state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install raspberry pi imager (macos)
+  community.general.homebrew_cask:
+    name: raspberry-pi-imager
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
