@@ -1,5 +1,0 @@
----
-- name: Install powertop
-  ansible.builtin.apt:
-    name: powertop
-    state: latest
