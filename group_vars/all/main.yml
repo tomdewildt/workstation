@@ -39,3 +39,6 @@ code:
     - tamasfe.even-better-toml
     # YAML
     - redhat.vscode-yaml
+
+golang:
+  version: 1.21.4
