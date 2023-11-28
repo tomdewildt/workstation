@@ -3,6 +3,6 @@
   community.general.homebrew_cask:
     name: microsoft-teams
     install_options: appdir=/Applications
-    sudo_password: "{{ ansible_become_pass }}"
+    sudo_password: "{{ ansible_become_pass | default(omit) }}"
     state: latest
   when: ansible_distribution == 'MacOSX'
