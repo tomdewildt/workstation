@@ -48,3 +48,4 @@
     - drivers/gpu
     - media/spotify
     - platform/boot
+    - platform/power
