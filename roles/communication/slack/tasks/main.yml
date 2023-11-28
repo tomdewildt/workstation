@@ -11,7 +11,7 @@
 
     - name: Add slack repository (linux)
       ansible.builtin.apt_repository:
-        repo: deb https://packagecloud.io/slacktechnologies/slack/debian jessie main
+        repo: deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
         filename: slack
         state: present
 
