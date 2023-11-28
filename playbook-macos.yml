@@ -52,3 +52,4 @@
     - tools/aws
     - tools/az
     - tools/gcp
+    - tools/imager
