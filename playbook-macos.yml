@@ -53,3 +53,4 @@
     - tools/az
     - tools/gcp
     - tools/imager
+    - tools/ngrok
