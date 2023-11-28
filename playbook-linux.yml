@@ -36,3 +36,4 @@
     - tools/ngrok
     - tools/psql
     - development/code
+    - development/docker
