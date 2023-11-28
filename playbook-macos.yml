@@ -54,3 +54,4 @@
     - tools/gcp
     - tools/imager
     - tools/ngrok
+    - tools/psql
