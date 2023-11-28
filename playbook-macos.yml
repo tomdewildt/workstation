@@ -57,3 +57,4 @@
     - tools/psql
     - development/code
     - development/docker
+    - development/golang
