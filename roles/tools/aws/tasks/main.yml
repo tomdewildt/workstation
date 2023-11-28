@@ -1,11 +1,21 @@
 ---
-- name: Download aws cli install script
-  ansible.builtin.unarchive:
-    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-    dest: /tmp
-    remote_src: true
-    creates: /tmp/aws
+- name: Install aws cli (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Download aws cli install script (linux)
+      ansible.builtin.unarchive:
+        src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+        dest: /tmp
+        remote_src: true
+        creates: /tmp/aws
 
-- name: Install aws cli
-  ansible.builtin.command: /tmp/aws/install --update
-  changed_when: false
+    - name: Install aws cli (linux)
+      ansible.builtin.command: /tmp/aws/install --update
+      changed_when: false
+
+- name: Install aws cli (macos)
+  community.general.homebrew:
+    name: awscli
+    state: latest
+  when: ansible_distribution == 'MacOSX'
