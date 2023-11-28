@@ -31,3 +31,4 @@
     - platform/power
     - tools/aws
     - tools/az
+    - tools/gcp
