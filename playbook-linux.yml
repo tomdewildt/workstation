@@ -24,4 +24,5 @@
     - communication/signal
     - communication/slack
     - communication/teams
+    - drivers/cpu
     - platform/boot
