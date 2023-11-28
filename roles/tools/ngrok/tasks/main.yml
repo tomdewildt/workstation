@@ -1,7 +1,16 @@
 ---
-- name: Install ngrok
+- name: Install ngrok (linux)
+  become: true
   ansible.builtin.unarchive:
-    src: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+    src: https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
     dest: /usr/local/bin
     mode: "0755"
     remote_src: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install ngrok (macos)
+  community.general.homebrew_cask:
+    name: ngrok
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
