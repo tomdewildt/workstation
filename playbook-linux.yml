@@ -30,3 +30,4 @@
     - platform/boot
     - platform/power
     - tools/aws
+    - tools/az
