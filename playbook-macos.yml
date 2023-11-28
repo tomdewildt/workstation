@@ -38,10 +38,10 @@
     - common/nmap
     - common/unzip
     - common/wget
-    - boot/grub
     - browsing/chrome
     - browsing/firefox
     - communication/discord
     - communication/signal
     - communication/slack
     - communication/teams
+    - platform/boot
