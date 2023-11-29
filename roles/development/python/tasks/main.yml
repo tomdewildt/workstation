@@ -1,24 +1,30 @@
 ---
-- name: Add python repository
-  ansible.builtin.apt_repository:
-    repo: ppa:deadsnakes/ppa
-    filename: python
-    state: present
+- name: Install python (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add python repository (linux)
+      ansible.builtin.apt_repository:
+        repo: ppa:deadsnakes/ppa
+        filename: python
+        state: present
 
-- name: Install python
-  ansible.builtin.apt:
-    name: python{{ python.version }}
+    - name: Install python (linux)
+      ansible.builtin.apt:
+        name: python{{ python.version }}
+        state: latest
+
+- name: Install python (macos)
+  community.general.homebrew:
+    name: python@{{ python.version }}
     state: latest
+  when: ansible_distribution == 'MacOSX'
 
-- name: Install packages
+- name: Install packages (linux/macos)
   ansible.builtin.pip:
     name: "{{ item }}"
     executable: pip3
     state: latest
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   with_items: "{{ python.packages }}"
-
-- name: Set python default to python{{ python.version }}
-  community.general.alternatives:
-    name: python
-    link: /usr/bin/python
-    path: /usr/bin/python{{ python.version }}
