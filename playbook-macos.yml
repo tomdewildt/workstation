@@ -50,6 +50,7 @@
     - platform/boot
     - platform/clean
     - platform/power
+    - platform/screen
     - tools/aws
     - tools/az
     - tools/gcp
