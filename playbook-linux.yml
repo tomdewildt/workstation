@@ -28,6 +28,7 @@
     - drivers/gpu
     - media/spotify
     - platform/boot
+    - platform/clean
     - platform/power
     - tools/aws
     - tools/az
