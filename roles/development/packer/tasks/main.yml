@@ -1,24 +1,40 @@
 ---
-- name: Install packer dependencies
-  ansible.builtin.apt:
-    name: qemu-user-static
-    update_cache: true
-    state: latest
+- name: Install packer (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Install packer dependencies (linux)
+      ansible.builtin.apt:
+        name: qemu-user-static
+        update_cache: true
+        state: latest
 
-- name: Add hashicorp key
-  ansible.builtin.apt_key:
-    url: https://apt.releases.hashicorp.com/gpg
-    keyring: /etc/apt/trusted.gpg.d/hashicorp.gpg
+    - name: Add packer key (linux)
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        keyring: /etc/apt/trusted.gpg.d/hashicorp.gpg
+        state: present
+
+    - name: Add packer repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
+        filename: hashicorp
+        state: present
+
+    - name: Install packer (linux)
+      ansible.builtin.apt:
+        name: packer
+        update_cache: true
+        state: latest
+
+- name: Add packer tap (macos)
+  community.general.homebrew_tap:
+    name: hashicorp/tap
     state: present
+  when: ansible_distribution == 'MacOSX'
 
-- name: Add hashicorp repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
-    filename: hashicorp
-    state: present
-
-- name: Install packer
-  ansible.builtin.apt:
-    name: packer
-    update_cache: true
+- name: Install packer (macos)
+  community.general.homebrew:
+    name: hashicorp/tap/packer
     state: latest
+  when: ansible_distribution == 'MacOSX'
