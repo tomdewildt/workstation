@@ -60,3 +60,4 @@
     - development/golang
     - development/node
     - development/packer
+    - development/python
