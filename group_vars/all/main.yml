@@ -58,3 +58,6 @@ python:
     - pylint
     - pyright
     - virtualenv
+
+vagrant:
+  version: 2.4.0
