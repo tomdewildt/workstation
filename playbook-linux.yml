@@ -42,3 +42,4 @@
     - development/packer
     - development/python
     - development/terraform
+    - development/vagrant
