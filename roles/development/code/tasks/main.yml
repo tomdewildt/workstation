@@ -28,11 +28,6 @@
         line: fs.inotify.max_user_watches=524288
         state: present
 
-- name: Set code path (linux)
-  ansible.builtin.set_fact:
-    code_path: /usr/bin/code
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
 - name: Install code (macos)
   community.general.homebrew_cask:
     name: visual-studio-code
@@ -40,13 +35,10 @@
     state: latest
   when: ansible_distribution == 'MacOSX'
 
-- name: Set code path (macos)
-  ansible.builtin.set_fact:
-    code_path: /opt/homebrew/bin/code
-  when: ansible_distribution == 'MacOSX'
-
 - name: Install extensions (linux/macos)
-  ansible.builtin.command: "{{ code_path }} --install-extension {{ item }}"
+  ansible.builtin.command: code --install-extension {{ item }}
+  environment: 
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   changed_when: "'successfully' in cmd.stdout"
   register: cmd
   with_items: "{{ code.extensions }}"

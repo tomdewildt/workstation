@@ -21,27 +21,19 @@
         update_cache: true
         state: latest
 
-- name: Set npm path (linux)
-  ansible.builtin.set_fact:
-    npm_path: /usr/bin/npm
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
 - name: Install node (macos)
   community.general.homebrew:
     name: node@{{ node.version.split('.')[0] }}
     state: latest
   when: ansible_distribution == 'MacOSX'
 
-- name: Set npm path (macos)
-  ansible.builtin.set_fact:
-    npm_path: /opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin/npm
-  when: ansible_distribution == 'MacOSX'
-
 - name: Install packages (linux/macos)
+  become: true
   community.general.npm:
     name: "{{ item }}"
     unsafe_perm: true
     global: true
-    executable: "{{ npm_path }}"
     state: latest
+  environment:
+    PATH: "/opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin:{{ ansible_env.PATH }}"
   with_items: "{{ node.packages }}"
