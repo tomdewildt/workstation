@@ -35,9 +35,9 @@
     state: latest
   when: ansible_distribution == 'MacOSX'
 
-- name: Install extensions (linux/macos)
+- name: Install code extensions (linux/macos)
   ansible.builtin.command: code --install-extension {{ item }}
-  environment: 
+  environment:
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   changed_when: "'successfully' in cmd.stdout"
   register: cmd

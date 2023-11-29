@@ -1,5 +1,5 @@
 ---
-- name: Install python (linux)
+- name: Install terraform (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
@@ -21,14 +21,15 @@
         update_cache: true
         state: latest
 
-- name: Add terraform tap (macos)
-  community.general.homebrew_tap:
-    name: hashicorp/tap
-    state: present
+- name: Install terraform (macOS)
   when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Add terraform tap (macos)
+      community.general.homebrew_tap:
+        name: hashicorp/tap
+        state: present
 
-- name: Install terraform (macos)
-  community.general.homebrew:
-    name: hashicorp/tap/terraform
-    state: latest
-  when: ansible_distribution == 'MacOSX'
+    - name: Install terraform (macos)
+      community.general.homebrew:
+        name: hashicorp/tap/terraform
+        state: latest

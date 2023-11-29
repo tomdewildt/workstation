@@ -27,14 +27,15 @@
         update_cache: true
         state: latest
 
-- name: Add packer tap (macos)
-  community.general.homebrew_tap:
-    name: hashicorp/tap
-    state: present
+- name: Install packer (macOS)
   when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Add packer tap (macos)
+      community.general.homebrew_tap:
+        name: hashicorp/tap
+        state: present
 
-- name: Install packer (macos)
-  community.general.homebrew:
-    name: hashicorp/tap/packer
-    state: latest
-  when: ansible_distribution == 'MacOSX'
+    - name: Install packer (macos)
+      community.general.homebrew:
+        name: hashicorp/tap/packer
+        state: latest

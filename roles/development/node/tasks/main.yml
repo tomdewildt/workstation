@@ -27,7 +27,7 @@
     state: latest
   when: ansible_distribution == 'MacOSX'
 
-- name: Install packages (linux/macos)
+- name: Install node packages (linux/macos)
   become: true
   community.general.npm:
     name: "{{ item }}"
