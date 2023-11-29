@@ -59,3 +59,4 @@
     - development/docker
     - development/golang
     - development/node
+    - development/packer
