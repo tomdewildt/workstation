@@ -41,3 +41,4 @@
     - development/node
     - development/packer
     - development/python
+    - development/terraform
