@@ -48,3 +48,13 @@ node:
   packages:
     - cdktf-cli
     - gatsby-cli
+
+python:
+  version: 3.11
+  packages:
+    - ansible-lint
+    - black
+    - poetry
+    - pylint
+    - pyright
+    - virtualenv
