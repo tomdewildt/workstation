@@ -1,0 +1,47 @@
+---
+- name: Install node (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add node key (linux)
+      ansible.builtin.apt_key:
+        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+        keyring: /etc/apt/trusted.gpg.d/nodesource.gpg
+        state: present
+
+    - name: Add node repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://deb.nodesource.com/node_{{ node.version }} focal main
+        filename: nodesource
+        state: present
+
+    - name: Install node (linux)
+      ansible.builtin.apt:
+        name: nodejs
+        update_cache: true
+        state: latest
+
+- name: Set npm path (linux)
+  ansible.builtin.set_fact:
+    npm_path: /usr/bin/npm
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install node (macos)
+  community.general.homebrew:
+    name: node@{{ node.version.split('.')[0] }}
+    state: latest
+  when: ansible_distribution == 'MacOSX'
+
+- name: Set npm path (macos)
+  ansible.builtin.set_fact:
+    npm_path: /opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin/npm
+  when: ansible_distribution == 'MacOSX'
+
+- name: Install packages (linux/macos)
+  community.general.npm:
+    name: "{{ item }}"
+    unsafe_perm: true
+    global: true
+    executable: "{{ npm_path }}"
+    state: latest
+  with_items: "{{ node.packages }}"
