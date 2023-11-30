@@ -1,5 +1,0 @@
----
-- name: Install postgres client
-  ansible.builtin.apt:
-    name: postgresql-client
-    state: latest

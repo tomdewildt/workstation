@@ -1,5 +1,13 @@
 ---
-- name: Install curl
+- name: Install curl (linux)
+  become: true
   ansible.builtin.apt:
     name: curl
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install curl (macos)
+  community.general.homebrew:
+    name: curl
+    state: latest
+  when: ansible_distribution == 'MacOSX'

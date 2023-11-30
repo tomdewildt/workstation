@@ -1,6 +1,14 @@
 ---
-- name: Install golang
+- name: Install golang (linux)
+  become: true
   ansible.builtin.unarchive:
     src: https://dl.google.com/go/go{{ golang.version }}.linux-amd64.tar.gz
     dest: /opt
     remote_src: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install golang (macos)
+  community.general.homebrew:
+    name: go@{{ golang.version.split('.')[0] }}.{{ golang.version.split('.')[1] }}
+    state: latest
+  when: ansible_distribution == 'MacOSX'

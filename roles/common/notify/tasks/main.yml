@@ -1,0 +1,15 @@
+---
+- name: Install notify (linux)
+  become: true
+  ansible.builtin.apt:
+    name:
+      - libnotify-bin
+      - libnotify-cil-dev
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install notify (macos)
+  community.general.homebrew:
+    name: libnotify
+    state: latest
+  when: ansible_distribution == 'MacOSX'

@@ -1,18 +1,29 @@
 ---
-- name: Add signal key
-  ansible.builtin.apt_key:
-    url: https://updates.signal.org/desktop/apt/keys.asc
-    keyring: /etc/apt/trusted.gpg.d/signal.gpg
-    state: present
+- name: Install signal (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add signal key (linux)
+      ansible.builtin.apt_key:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        keyring: /etc/apt/trusted.gpg.d/signal.gpg
+        state: present
 
-- name: Add signal repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/signal.gpg] https://updates.signal.org/desktop/apt xenial main
-    filename: signal
-    state: present
+    - name: Add signal repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/signal.gpg] https://updates.signal.org/desktop/apt xenial main
+        filename: signal
+        state: present
 
-- name: Install signal
-  ansible.builtin.apt:
-    name: signal-desktop
-    update_cache: true
+    - name: Install signal (linux)
+      ansible.builtin.apt:
+        name: signal-desktop
+        update_cache: true
+        state: latest
+
+- name: Install signal (macos)
+  community.general.homebrew_cask:
+    name: signal
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'

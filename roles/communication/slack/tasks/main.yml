@@ -1,18 +1,29 @@
 ---
-- name: Add slack key
-  ansible.builtin.apt_key:
-    url: https://packagecloud.io/slacktechnologies/slack/gpgkey
-    keyring: /etc/apt/trusted.gpg.d/slack.gpg
-    state: present
+- name: Install slack (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add slack key (linux)
+      ansible.builtin.apt_key:
+        url: https://packagecloud.io/slacktechnologies/slack/gpgkey
+        keyring: /etc/apt/trusted.gpg.d/slack.gpg
+        state: present
 
-- name: Add slack repository
-  ansible.builtin.apt_repository:
-    repo: deb https://packagecloud.io/slacktechnologies/slack/debian jessie main
-    filename: slack
-    state: present
+    - name: Add slack repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+        filename: slack
+        state: present
 
-- name: Install slack
-  ansible.builtin.apt:
-    name: slack-desktop
-    update_cache: true
+    - name: Install slack (linux)
+      ansible.builtin.apt:
+        name: slack-desktop
+        update_cache: true
+        state: latest
+
+- name: Install slack (macos)
+  community.general.homebrew_cask:
+    name: slack
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'

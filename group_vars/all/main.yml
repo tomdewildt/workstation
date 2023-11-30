@@ -1,81 +1,67 @@
 ---
 config:
   repository: https://github.com/tomdewildt/config.git
-
-android:
-  build:
-    version: 30.0.3
-  platform:
-    version: 30
-  tools:
-    version: 6858069
-
-clojure:
-  version: 1.10.1.763
+  timezone: Europe/Amsterdam
 
 code:
   extensions:
-    - bungcip.better-toml
-    - betterthantomorrow.calva
+    # AI
+    - github.copilot
+    # Ansible
+    - redhat.ansible
+    # Docker
+    - ms-azuretools.vscode-docker
+    # Dotenv
+    - mikestead.dotenv
+    # General
+    - arcticicestudio.nord-visual-studio-code
+    - mechatroner.rainbow-csv
+    - ms-vsliveshare.vsliveshare
+    - visualstudioexptteam.vscodeintellicode
+    # Golang
+    - golang.go
+    # HCL
+    - hashicorp.hcl
+    # Javascript
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+    # Jupyter
+    - ms-toolsai.jupyter
+    # Markdown
+    - yzhang.markdown-all-in-one
+    # Python
+    - ms-python.black-formatter
+    - ms-python.pylint
+    - ms-python.python
+    - ms-python.vscode-pylance
+    # Spellcheck
     - streetsidesoftware.code-spell-checker
     - streetsidesoftware.code-spell-checker-dutch
-    - ms-dotnettools.csharp
-    - dart-code.dart-code
-    - ms-azuretools.vscode-docker
-    - mikestead.dotenv
-    - editorconfig.editorconfig
-    - dsznajder.es7-react-js-snippets
-    - dbaeumer.vscode-eslint
-    - dart-code.flutter
-    - golang.go
-    - hashicorp.hcl
-    - redhat.java
-    - vadimcn.vscode-lldb
-    - yzhang.markdown-all-in-one
-    - arcticicestudio.nord-visual-studio-code
-    - ms-python.python
-    - mechatroner.rainbow-csv
-    - rust-lang.rust-analyzer
-    - visualstudioexptteam.vscodeintellicode
+    # Terraform
+    - hashicorp.terraform
+    # TOML
+    - tamasfe.even-better-toml
+    # YAML
     - redhat.vscode-yaml
 
-csharp:
-  version: 3.1
-
-dart:
-  flutter:
-    enabled: true
-    version: 1.22.5
-
-docker:
-  compose:
-    enabled: true
-    version: 1.27.4
-
 golang:
-  version: 1.19.3
+  version: 1.21.4
 
-javascript:
+node:
   version: 18.x
   packages:
-    - create-react-app
-    - eslint
-    - expo-cli
+    - cdktf-cli
     - gatsby-cli
-    - netlify-cli
-
-r:
-  version: 4.0
-  studio:
-    enabled: true
-    version: 1.4.1717
 
 python:
-  version: 3
+  version: 3.11
   packages:
+    - ansible-lint
     - black
+    - poetry
     - pylint
+    - pyright
     - virtualenv
 
 vagrant:
-  version: 2.2.15
+  version: 2.4.0

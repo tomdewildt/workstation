@@ -1,35 +1,39 @@
 ---
-- name: Add docker key
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /etc/apt/trusted.gpg.d/docker.gpg
-    state: present
+- name: Install docker (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add docker key (linux)
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        keyring: /etc/apt/trusted.gpg.d/docker.gpg
+        state: present
 
-- name: Add docker repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-    filename: docker
-    state: present
+    - name: Add docker repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        filename: docker
+        state: present
 
-- name: Install docker
-  ansible.builtin.apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-    update_cache: true
+    - name: Install docker (linux)
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        update_cache: true
+        state: latest
+
+    - name: Add user to docker group (linux)
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups:
+          - docker
+        append: true
+
+- name: Install docker (macos)
+  community.general.homebrew_cask:
+    name: docker
+    install_options: appdir=/Applications
     state: latest
-
-- name: Add user to docker group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups:
-      - docker
-    append: true
-
-- name: Install docker compose
-  ansible.builtin.get_url:
-    url: https://github.com/docker/compose/releases/download/{{ docker.compose.version }}/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
-    mode: "0755"
-  when: docker.compose.enabled
+  when: ansible_distribution == 'MacOSX'

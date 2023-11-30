@@ -1,18 +1,29 @@
 ---
-- name: Add google cloud key
-  ansible.builtin.apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    keyring: /etc/apt/trusted.gpg.d/google-cloud.gpg
-    state: present
+- name: Install gcp cli (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add gcp cli key (linux)
+      ansible.builtin.apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        keyring: /etc/apt/trusted.gpg.d/google-cloud.gpg
+        state: present
 
-- name: Add google cloud repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.cloud.google.com/apt cloud-sdk main
-    filename: google-cloud
-    state: present
+    - name: Add gcp cli repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.cloud.google.com/apt cloud-sdk main
+        filename: google-cloud
+        state: present
 
-- name: Install gcp cli
-  ansible.builtin.apt:
+    - name: Install gcp cli (linux)
+      ansible.builtin.apt:
+        name: google-cloud-sdk
+        update_cache: true
+        state: latest
+
+- name: Install gcp cli (macos)
+  community.general.homebrew_cask:
     name: google-cloud-sdk
-    update_cache: true
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'

@@ -1,0 +1,25 @@
+- name: Clean applications (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Remove applications (linux)
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - vim
+        - xterm
+
+    - name: Hide applications (linux)
+      ansible.builtin.lineinfile:
+        path: /usr/share/applications/{{ item }}
+        line: NoDisplay=true
+        owner: root
+        group: root
+        mode: "0644"
+        state: present
+        create: true
+      with_items:
+        - compton.desktop
+        - org.regolith-linux.remontoire.desktop
+        - regolith.desktop

@@ -1,5 +1,13 @@
 ---
-- name: Install unzip
+- name: Install unzip (linux)
+  become: true
   ansible.builtin.apt:
     name: unzip
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install unzip (macos)
+  community.general.homebrew:
+    name: unzip
+    state: latest
+  when: ansible_distribution == 'MacOSX'

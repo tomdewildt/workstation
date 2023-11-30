@@ -1,5 +1,13 @@
 ---
-- name: Install dig
+- name: Install dig (linux)
+  become: true
   ansible.builtin.apt:
     name: dnsutils
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install dig (macos)
+  community.general.homebrew:
+    name: bind
+    state: latest
+  when: ansible_distribution == 'MacOSX'

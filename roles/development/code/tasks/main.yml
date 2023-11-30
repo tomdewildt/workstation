@@ -1,31 +1,44 @@
 ---
-- name: Add microsoft key
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
-    state: present
+- name: Install code (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add code key (linux)
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+        state: present
 
-- name: Add code repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-    filename: vscode
-    state: present
+    - name: Add code repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+        filename: vscode
+        state: present
 
-- name: Install code
-  ansible.builtin.apt:
-    name: code
-    update_cache: true
+    - name: Install code (linux)
+      ansible.builtin.apt:
+        name: code
+        update_cache: true
+        state: latest
+
+    - name: Set file watch limit to 524288 (linux)
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.conf
+        regexp: ^#?fs.inotify.max_user_watches
+        line: fs.inotify.max_user_watches=524288
+        state: present
+
+- name: Install code (macos)
+  community.general.homebrew_cask:
+    name: visual-studio-code
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'
 
-- name: Install extensions
-  ansible.builtin.command: code --extensions-dir /home/{{ ansible_user }}/.vscode/extensions --user-data-dir /home/{{ ansible_user }}/.config/Code --install-extension {{ item }}
+- name: Install code extensions (linux/macos)
+  ansible.builtin.command: code --install-extension {{ item }}
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   changed_when: "'successfully' in cmd.stdout"
   register: cmd
   with_items: "{{ code.extensions }}"
-
-- name: Set file watch limit to 524288
-  ansible.builtin.lineinfile:
-    path: /etc/sysctl.conf
-    regexp: ^#?fs.inotify.max_user_watches
-    line: fs.inotify.max_user_watches=524288
-    state: present

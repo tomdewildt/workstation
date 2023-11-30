@@ -1,18 +1,29 @@
 ---
-- name: Add spotify key
-  ansible.builtin.apt_key:
-    url: https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg
-    keyring: /etc/apt/trusted.gpg.d/spotify.gpg
-    state: present
+- name: Install spotify (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add spotify key (linux)
+      ansible.builtin.apt_key:
+        url: https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg
+        keyring: /etc/apt/trusted.gpg.d/spotify.gpg
+        state: present
 
-- name: Add spotify repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] http://repository.spotify.com stable non-free
-    filename: spotify
-    state: present
+    - name: Add spotify repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] http://repository.spotify.com stable non-free
+        filename: spotify
+        state: present
 
-- name: Install spotify
-  ansible.builtin.apt:
-    name: spotify-client
-    update_cache: true
+    - name: Install spotify (linux)
+      ansible.builtin.apt:
+        name: spotify-client
+        update_cache: true
+        state: latest
+
+- name: Install spotify (macos)
+  community.general.homebrew_cask:
+    name: spotify
+    install_options: appdir=/Applications
     state: latest
+  when: ansible_distribution == 'MacOSX'

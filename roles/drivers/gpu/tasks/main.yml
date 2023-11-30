@@ -1,0 +1,45 @@
+---
+- name: Install gpu driver (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add cuda key (linux)
+      ansible.builtin.apt_key:
+        url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
+        keyring: /etc/apt/trusted.gpg.d/cuda.gpg
+        state: present
+
+    - name: Add cuda repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /
+        filename: cuda
+        state: present
+
+    - name: Pin cuda repository (linux)
+      ansible.builtin.copy:
+        src: cuda/cuda-repository-pin-600
+        dest: /etc/apt/preferences.d/cuda-pin-600
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Install nvidia driver (linux)
+      ansible.builtin.apt:
+        name:
+          - nvidia-driver-535
+          - nvidia-settings
+        state: latest
+
+    - name: Install cuda driver (linux)
+      ansible.builtin.apt:
+        name:
+          - cuda-12-2
+          - nvidia-cuda-toolkit
+        update_cache: true
+        state: latest
+
+    - name: Install cudnn library (linux)
+      ansible.builtin.unarchive:
+        src: cudnn/cudnn-v8.9.4.tar.xz
+        dest: /usr/lib
+        creates: /usr/lib/cuda/include/cudnn.h

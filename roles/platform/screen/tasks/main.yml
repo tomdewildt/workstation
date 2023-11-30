@@ -1,0 +1,71 @@
+---
+- name: Setup screen (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Create lightdm directory (linux)
+      ansible.builtin.file:
+        path: /usr/share/lightdm/lightdm-gtk-greeter.conf.d
+        owner: root
+        group: root
+        mode: "0755"
+        state: directory
+
+    - name: Create background directory (linux)
+      ansible.builtin.file:
+        path: /usr/share/backgrounds
+        owner: root
+        group: root
+        mode: "0755"
+        state: directory
+
+    - name: Configure lightdm (linux)
+      ansible.builtin.copy:
+        src: lightdm/
+        dest: /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Download lightdm theme install script (linux)
+      ansible.builtin.unarchive:
+        src: https://github.com/tomdewildt/cahuella-lightdm-theme/archive/v0.1.0.zip
+        dest: /tmp
+        remote_src: true
+        creates: /tmp/cahuella-lightdm-theme-0.1.0
+
+    - name: Install lightdm theme (linux)
+      community.general.make:
+        chdir: /tmp/cahuella-lightdm-theme-0.1.0
+        file: Makefile
+        target: install
+      changed_when: false
+
+    - name: Add regolith repository (linux)
+      ansible.builtin.apt_repository:
+        repo: ppa:regolith-linux/release
+        filename: regolith-linux-ubuntu-release-focal
+        state: present
+
+    - name: Install regolith looks (linux)
+      ansible.builtin.apt:
+        name:
+          - regolith-look-ayu
+          - regolith-look-ayu-dark
+          - regolith-look-ayu-mirage
+          - regolith-look-cahuella
+          - regolith-look-lascaille
+          - regolith-look-nord
+          - regolith-look-solarized-dark
+          - regolith-look-ubuntu
+        state: latest
+
+    - name: Install i3xrocks extensions (linux)
+      ansible.builtin.apt:
+        name:
+          - i3xrocks-battery
+          - i3xrocks-cpu-usage
+          - i3xrocks-memory
+          - i3xrocks-net-traffic
+          - i3xrocks-time
+        state: latest

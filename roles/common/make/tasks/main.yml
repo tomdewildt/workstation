@@ -1,5 +1,13 @@
 ---
-- name: Install make
+- name: Install make (linux)
+  become: true
   ansible.builtin.apt:
     name: build-essential
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install make (macos)
+  community.general.homebrew:
+    name: make
+    state: latest
+  when: ansible_distribution == 'MacOSX'

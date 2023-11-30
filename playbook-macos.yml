@@ -1,0 +1,70 @@
+---
+- name: MacOS Workstation Playbook
+  hosts: workstation
+  pre_tasks:
+    - name: Check if homebrew is installed
+      ansible.builtin.stat:
+        path: /opt/homebrew/bin
+      register: homebrew
+
+    - name: Install homebrew
+      ansible.builtin.shell: >
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      register: result
+      changed_when: "'Installation successful!' in result.stdout"
+      when: not homebrew.stat.exists
+
+    - name: Update homebrew
+      community.general.homebrew:
+        update_homebrew: true
+
+    - name: Update homebrew packages
+      community.general.homebrew:
+        upgrade_all: true
+
+    - name: Install homebrew taps
+      community.general.homebrew_tap:
+        name:
+          - homebrew/core
+          - homebrew/cask
+        state: present
+  roles:
+    - common/curl
+    - common/dig
+    - common/exfat
+    - common/git
+    - common/lfs
+    - common/make
+    - common/nmap
+    - common/notify
+    - common/unzip
+    - common/wget
+    - browsing/chrome
+    - browsing/firefox
+    - communication/discord
+    - communication/signal
+    - communication/slack
+    - communication/teams
+    - drivers/cpu
+    - drivers/gpu
+    - media/spotify
+    - platform/boot
+    - platform/clean
+    - platform/power
+    - platform/screen
+    - tools/aws
+    - tools/az
+    - tools/gcp
+    - tools/imager
+    - tools/ngrok
+    - tools/psql
+    - development/code
+    - development/docker
+    - development/golang
+    - development/node
+    - development/packer
+    - development/python
+    - development/terraform
+    - development/vagrant
+    - config/files
+    - config/time

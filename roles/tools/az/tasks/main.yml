@@ -1,18 +1,28 @@
 ---
-- name: Add microsoft key
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
-    state: present
+- name: Install azure cli (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add azure cli key (linux)
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+        state: present
 
-- name: Add azure repository
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ focal main
-    filename: azure
-    state: present
+    - name: Add azure cli repository (linux)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ focal main
+        filename: azure
+        state: present
 
-- name: Install azure cli
-  ansible.builtin.apt:
+    - name: Install azure cli (linux)
+      ansible.builtin.apt:
+        name: azure-cli
+        update_cache: true
+        state: latest
+
+- name: Install azure cli (macos)
+  community.general.homebrew:
     name: azure-cli
-    update_cache: true
     state: latest
+  when: ansible_distribution == 'MacOSX'

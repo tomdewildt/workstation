@@ -1,5 +1,13 @@
 ---
-- name: Install wget
+- name: Install wget (linux)
+  become: true
   ansible.builtin.apt:
     name: wget
     state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install wget (macos)
+  community.general.homebrew:
+    name: wget
+    state: latest
+  when: ansible_distribution == 'MacOSX'

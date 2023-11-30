@@ -1,5 +1,14 @@
 ---
-- name: Install discord
+- name: Install discord (linux)
+  become: true
   ansible.builtin.apt:
     deb: https://discord.com/api/download?platform=linux&format=deb
     state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install discord (macos)
+  community.general.homebrew_cask:
+    name: discord
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
