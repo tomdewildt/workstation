@@ -1,6 +1,7 @@
 ---
 config:
   repository: https://github.com/tomdewildt/config.git
+  timezone: Europe/Amsterdam
 
 code:
   extensions:
