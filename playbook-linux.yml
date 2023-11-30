@@ -16,6 +16,7 @@
     - common/lfs
     - common/make
     - common/nmap
+    - common/notify
     - common/unzip
     - common/wget
     - browsing/chrome
