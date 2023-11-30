@@ -1,0 +1,39 @@
+---
+- name: Set config path (linux)
+  ansible.builtin.set_fact:
+    config_path: /home/{{ ansible_user }}
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Set config path (macos)
+  ansible.builtin.set_fact:
+    config_path: /Users/{{ ansible_user }}
+  when: ansible_distribution == 'MacOSX'
+
+- name: Check if repository exists (linux/macos)
+  ansible.builtin.stat:
+    path: "{{ config_path }}/.git"
+  register: git
+
+- name: Initialize repository (linux/macos)
+  ansible.builtin.command: # noqa: command-instead-of-module no-changed-when
+    cmd: git init
+    chdir: "{{ config_path }}"
+  when: not git.stat.exists
+
+- name: Set git remote to {{ config.repository }} (linux/macos)
+  ansible.builtin.command: # noqa: command-instead-of-module no-changed-when
+    cmd: git remote add origin {{ config.repository }}
+    chdir: "{{ config_path }}"
+  when: not git.stat.exists
+
+- name: Fetch origin (linux/macos)
+  ansible.builtin.command: # noqa: command-instead-of-module no-changed-when
+    cmd: git fetch origin
+    chdir: "{{ config_path }}"
+  when: not git.stat.exists
+
+- name: Reset to latest version of master (linux/macos)
+  ansible.builtin.command: # noqa: command-instead-of-module no-changed-when
+    cmd: git reset origin/master --hard
+    chdir: "{{ config_path }}"
+  when: not git.stat.exists
