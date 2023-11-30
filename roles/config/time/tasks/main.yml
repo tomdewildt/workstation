@@ -1,16 +1,16 @@
 ---
-- name: Set timezone to europe/amsterdam (linux/macos)
-  community.general.timezone:
-    name: Europe/Amsterdam
-
-- name: Set hardware clock to local (linux/macos)
-  community.general.timezone:
-    hwclock: local
-
-- name: Configure timesyncd (linux)
+- name: Configure time (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
+    - name: Set timezone to europe/amsterdam (linux)
+      community.general.timezone:
+        name: Europe/Amsterdam
+
+    - name: Set hardware clock to local (linux)
+      community.general.timezone:
+        hwclock: local
+
     - name: Configure timesync (linux)
       ansible.builtin.copy:
         src: timesync/timesyncd.conf
