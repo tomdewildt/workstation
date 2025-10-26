@@ -32,8 +32,14 @@
         append: true
 
 - name: Install docker (macos)
-  community.general.homebrew_cask:
-    name: docker
-    install_options: appdir=/Applications
-    state: latest
   when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Install docker dependencies (macos)
+      ansible.builtin.command: softwareupdate --install-rosetta --agree-to-license
+      changed_when: false
+
+    - name: Install docker (macos)
+      community.general.homebrew_cask:
+        name: docker
+        install_options: appdir=/Applications
+        state: latest
