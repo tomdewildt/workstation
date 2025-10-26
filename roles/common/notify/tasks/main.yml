@@ -10,6 +10,6 @@
 
 - name: Install notify (macos)
   community.general.homebrew:
-    name: libnotify
+    name: terminal-notifier
     state: latest
   when: ansible_distribution == 'MacOSX'
