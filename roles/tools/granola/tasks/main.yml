@@ -1,0 +1,9 @@
+---
+# TODO: install granola (linux)
+
+- name: Install granola (macos)
+  community.general.homebrew_cask:
+    name: granola
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
