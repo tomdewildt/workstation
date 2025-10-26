@@ -10,8 +10,8 @@
     - name: Install homebrew
       ansible.builtin.shell: >
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      register: result
-      changed_when: "'Installation successful!' in result.stdout"
+      register: homebrew_result
+      changed_when: "'Installation successful!' in homebrew_result.stdout"
       when: not homebrew.stat.exists
 
     - name: Update homebrew
@@ -22,12 +22,15 @@
       community.general.homebrew:
         upgrade_all: true
 
-    - name: Install homebrew taps
-      community.general.homebrew_tap:
-        name:
-          - homebrew/core
-          - homebrew/cask
-        state: present
+    - name: Install mas
+      community.general.homebrew:
+        name: mas
+        state: latest
+
+    - name: Update mas apps
+      ansible.builtin.command: mas upgrade
+      register: mas_result
+      changed_when: mas_result.stdout != ""
   roles:
     - common/curl
     - common/dig
@@ -58,6 +61,7 @@
     - platform/hid
     - platform/power
     - platform/screen
+    - security/bitwarden
     - tools/aws
     - tools/az
     - tools/gcp

@@ -1,0 +1,8 @@
+---
+# TODO: install bitwarden (linux)
+
+- name: Install bitwarden (macos)
+  ansible.builtin.command: mas install 1352778147
+  register: bitwarden_result
+  changed_when: bitwarden_result.stdout != "" and "is already installed" not in bitwarden_result.stdout
+  when: ansible_distribution == 'MacOSX'
