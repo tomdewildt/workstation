@@ -1,0 +1,8 @@
+---
+# TODO: install loom (linux)
+
+- name: Install loom (macos)
+  community.general.homebrew_cask:
+    name: loom
+    state: latest
+  when: ansible_distribution == 'MacOSX'
