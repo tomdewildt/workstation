@@ -1,0 +1,8 @@
+---
+# TODO: install whatsapp (linux)
+
+- name: Install whatsapp (macos)
+  ansible.builtin.command: mas install 310633997
+  register: whatsapp_result
+  changed_when: whatsapp_result.stdout != "" and "is already installed" not in whatsapp_result.stdout
+  when: ansible_distribution == 'MacOSX'

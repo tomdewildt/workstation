@@ -47,6 +47,7 @@
     - communication/discord
     - communication/signal
     - communication/slack
+    - communication/whatsapp
     - drivers/cpu
     - drivers/gpu
     - media/spotify
