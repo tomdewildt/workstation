@@ -17,7 +17,7 @@ code:
     - arcticicestudio.nord-visual-studio-code
     - mechatroner.rainbow-csv
     - ms-vsliveshare.vsliveshare
-    - visualstudioexptteam.vscodeintellicode
+    - VisualStudioExptTeam.vscodeintellicode
     # Golang
     - golang.go
     # HCL
@@ -25,15 +25,15 @@ code:
     # Javascript
     - dbaeumer.vscode-eslint
     - esbenp.prettier-vscode
+    - vitest.explorer
     # Jupyter
     - ms-toolsai.jupyter
     # Markdown
     - yzhang.markdown-all-in-one
     # Python
-    - ms-python.black-formatter
-    - ms-python.pylint
     - ms-python.python
     - ms-python.vscode-pylance
+    - teticio.python-envy
     # Spellcheck
     - streetsidesoftware.code-spell-checker
     - streetsidesoftware.code-spell-checker-dutch
