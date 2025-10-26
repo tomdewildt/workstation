@@ -44,19 +44,22 @@
     - tools/drive
     - tools/ffmpeg
     - tools/gcp
-    - tools/graphviz
     - tools/granola
+    - tools/graphviz
     - tools/imager
     - tools/loom
     - tools/ngrok
     - tools/psql
+    - development/claude
     - development/code
+    - development/codex
     - development/docker
     - development/golang
     - development/node
     - development/packer
     - development/python
     - development/terraform
+    - development/uv
     - development/vagrant
     - config/files
     - config/time

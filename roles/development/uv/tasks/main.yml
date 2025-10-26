@@ -1,0 +1,8 @@
+---
+# TODO: install uv (linux)
+
+- name: Install uv (macos)
+  community.general.homebrew:
+    name: uv
+    state: latest
+  when: ansible_distribution == 'MacOSX'

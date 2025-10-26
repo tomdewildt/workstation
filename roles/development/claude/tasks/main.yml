@@ -1,0 +1,10 @@
+---
+- name: Install claude (linux/macos)
+  become: true
+  community.general.npm:
+    name: "@anthropic-ai/claude-code"
+    unsafe_perm: true
+    global: true
+    state: latest
+  environment:
+    PATH: "/opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin:{{ ansible_env.PATH }}"
