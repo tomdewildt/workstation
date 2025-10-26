@@ -33,6 +33,8 @@
     - common/dig
     - common/exfat
     - common/git
+    - common/htop
+    - common/jq
     - common/lfs
     - common/make
     - common/nmap
