@@ -37,3 +37,11 @@ Please make sure that the [Apple Command Line Tools](https://developer.apple.com
 [Dell XPS 9500 Ubuntu Install](https://medium.com/@asad.manji/my-journey-installing-ubuntu-20-04-on-the-dell-xps-15-9500-2020-8ac8560373d1)
 
 [Better Battery Life On Ubuntu](https://medium.com/@tomwwright/better-battery-life-on-ubuntu-17-10-4588b7f72def)
+
+[Defaults Write](https://www.defaults-write.com/)
+
+[MacOS Defaults](https://macos-defaults.com)
+
+[Monitor Realtime Changes To MacOS Defaults](https://github.com/catilac/plistwatch)
+
+[System Preference Settings For MacOS](https://ss64.com/mac/syntax-defaults.html)
