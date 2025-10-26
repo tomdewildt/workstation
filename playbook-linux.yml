@@ -41,8 +41,13 @@
     - security/bitwarden
     - tools/aws
     - tools/az
+    - tools/drive
+    - tools/ffmpeg
     - tools/gcp
+    - tools/graphviz
+    - tools/granola
     - tools/imager
+    - tools/loom
     - tools/ngrok
     - tools/psql
     - development/code
