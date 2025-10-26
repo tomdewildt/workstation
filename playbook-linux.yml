@@ -29,7 +29,9 @@
     - communication/slack
     - communication/whatsapp
     - drivers/cpu
+    - drivers/displaylink
     - drivers/gpu
+    - drivers/logitech
     - media/spotify
     - platform/boot
     - platform/clean

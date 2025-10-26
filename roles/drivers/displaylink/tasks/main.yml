@@ -1,0 +1,9 @@
+---
+# TODO: install displaylink (linux)
+
+- name: Install displaylink (macos)
+  community.general.homebrew_cask:
+    name: displaylink
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
