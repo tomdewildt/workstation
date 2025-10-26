@@ -41,6 +41,7 @@
     - common/notify
     - common/unzip
     - common/wget
+    - browsing/brave
     - browsing/chrome
     - browsing/firefox
     - communication/discord
