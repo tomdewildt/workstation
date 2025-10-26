@@ -1,0 +1,13 @@
+---
+- name: Install jq (linux)
+  become: true
+  ansible.builtin.apt:
+    name: jq
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install jq (macos)
+  community.general.homebrew:
+    name: jq
+    state: latest
+  when: ansible_distribution == 'MacOSX'
