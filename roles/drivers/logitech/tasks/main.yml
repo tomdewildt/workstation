@@ -1,0 +1,9 @@
+---
+# TODO: install logitech driver (linux)
+
+- name: Install logitech driver (macos)
+  community.general.homebrew_cask:
+    name: logi-options-plus
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
