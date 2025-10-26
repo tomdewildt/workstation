@@ -1,0 +1,13 @@
+---
+- name: Install htop (linux)
+  become: true
+  ansible.builtin.apt:
+    name: htop
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install htop (macos)
+  community.general.homebrew:
+    name: htop
+    state: latest
+  when: ansible_distribution == 'MacOSX'
