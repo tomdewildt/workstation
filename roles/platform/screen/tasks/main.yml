@@ -1,5 +1,5 @@
 ---
-- name: Setup screen (linux)
+- name: Configure screen (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
@@ -68,4 +68,228 @@
           - i3xrocks-memory
           - i3xrocks-net-traffic
           - i3xrocks-time
+        state: latest
+
+- name: Configure screen (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Configure dock (macos)
+      community.general.osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+        state: present
+      with_items:
+        # Automatically hide
+        - domain: "com.apple.dock"
+          key: "autohide"
+          type: "bool"
+          value: "true"
+        # Disable magnification
+        - domain: "com.apple.dock"
+          key: "magnification"
+          type: "bool"
+          value: "false"
+        # Disable recent applications
+        - domain: "com.apple.dock"
+          key: "show-recents"
+          type: "bool"
+          value: "false"
+        # Set animation speed to 0.25
+        - domain: "com.apple.dock"
+          key: "autohide-time-modifier"
+          type: "float"
+          value: "0.25"
+        # Set size to 50
+        - domain: "com.apple.dock"
+          key: "tilesize"
+          type: "float"
+          value: "50"
+        # Set orientation to left
+        - domain: "com.apple.dock"
+          key: "orientation"
+          type: "string"
+          value: "left"
+        # Disable hot corners
+        - domain: "com.apple.dock"
+          key: "wvous-tl-corner"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-tl-modifier"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-tr-corner"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-tr-modifier"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-bl-corner"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-bl-modifier"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-br-corner"
+          type: "int"
+          value: "0"
+        - domain: "com.apple.dock"
+          key: "wvous-br-modifier"
+          type: "int"
+          value: "0"
+
+    - name: Configure finder (macos)
+      community.general.osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+        state: present
+      with_items:
+        # Do not write .DS_Store files to network volumes
+        - domain: "com.apple.desktopservices"
+          key: "DSDontWriteNetworkStores"
+          type: "bool"
+          value: "true"
+        # Show hard drives, external hard drives, removable media, and network volumes on the desktop
+        - domain: "com.apple.finder"
+          key: "ShowHardDrivesOnDesktop"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.finder"
+          key: "ShowExternalHardDrivesOnDesktop"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.finder"
+          key: "ShowRemovableMediaOnDesktop"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.finder"
+          key: "ShowMountedServersOnDesktop"
+          type: "bool"
+          value: "true"
+        # Show the path bar
+        - domain: "com.apple.finder"
+          key: "ShowPathbar"
+          type: "bool"
+          value: "true"
+        # Show file extensions
+        - domain: "NSGlobalDomain"
+          key: "AppleShowAllExtensions"
+          type: "bool"
+          value: "true"
+        # Search current folder
+        - domain: "com.apple.finder"
+          key: "FXDefaultSearchScope"
+          type: "string"
+          value: "SCcf"
+        # Save to disk by default
+        - domain: "NSGlobalDomain"
+          key: "NSDocumentSaveNewDocumentsToCloud"
+          type: "bool"
+          value: "false"
+
+    - name: Configure menu (macos)
+      community.general.osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+        state: present
+      with_items:
+        # Show wifi in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC WiFi"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem Preferred Position WiFi"
+          type: "float"
+          value: "267"
+        # Show bluetooth in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC Bluetooth"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem Preferred Position Bluetooth"
+          type: "float"
+          value: "414"
+        # Show audio in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC Sound"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem Preferred Position Sound"
+          type: "float"
+          value: "446"
+        # Show battery in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC Battery"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem Preferred Position Battery"
+          type: "float"
+          value: "305"
+        # Show user icon in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC UserSwitcher"
+          type: "bool"
+          value: "true"
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem Preferred Position UserSwitcher"
+          type: "float"
+          value: "381"
+        # Show spotlight in menu bar
+        - domain: "com.apple.controlcenter"
+          key: "NSStatusItem VisibleCC Spotlight"
+          type: "bool"
+          value: "true"
+        # Always show date in menu bar
+        - domain: "com.apple.menuextra.clock"
+          key: "ShowDate"
+          type: "int"
+          value: "1"
+        # Show seconds in menu bar
+        - domain: "com.apple.menuextra.clock"
+          key: "ShowSeconds"
+          type: "bool"
+          value: "true"
+
+    - name: Configure panels (macos)
+      community.general.osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+        state: present
+      with_items:
+        # Expand save panel by default
+        - domain: "NSGlobalDomain"
+          key: "NSNavPanelExpandedStateForSaveMode"
+          type: "bool"
+          value: "true"
+        # Expand print panel by default
+        - domain: "NSGlobalDomain"
+          key: "PMPrintingExpandedStateForPrint"
+          type: "bool"
+          value: "true"
+        # Automatically quit printer app once the print jobs complete
+        - domain: "com.apple.print.PrintingPrefs"
+          key: "Quit When Finished"
+          type: "bool"
+          value: "true"
+
+    - name: Configure terminal (macos)
+      community.general.homebrew:
+        name: zsh-completions
         state: latest
