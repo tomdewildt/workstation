@@ -1,0 +1,68 @@
+- name: Configure trackpad (macos)
+  when: ansible_distribution == 'MacOSX'
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    # Disable look up & data detectors
+    - domain: "Apple Global Domain"
+      key: "com.apple.trackpad.forceClick"
+      type: "bool"
+      value: "false"
+    - domain: "com.apple.AppleMultitouchTrackpad"
+      key: "TrackpadThreeFingerTapGesture"
+      type: "int"
+      value: "0"
+    - domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+      key: "TrackpadThreeFingerTapGesture"
+      type: "int"
+      value: "0"
+    # Enable natural scrolling (mouse)
+    - domain: "Apple Global Domain"
+      key: "com.apple.swipescrolldirection"
+      type: "bool"
+      value: "true"
+    # Set secondary click to bottom right corner
+    - domain: "Apple Global Domain"
+      key: "ContextMenuGesture"
+      type: "int"
+      value: "1"
+    - domain: "com.apple.AppleMultitouchTrackpad"
+      key: "TrackpadRightClick"
+      type: "bool"
+      value: "false"
+    - domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+      key: "TrackpadRightClick"
+      type: "bool"
+      value: "false"
+    - domain: "com.apple.AppleMultitouchTrackpad"
+      key: "TrackpadCornerSecondaryClick"
+      type: "int"
+      value: "2"
+    - domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+      key: "TrackpadCornerSecondaryClick"
+      type: "int"
+      value: "2"
+
+- name: Configure keyboard (macos)
+  when: ansible_distribution == 'MacOSX'
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    # Disable smart dashes
+    - domain: "Apple Global Domain"
+      key: "NSAutomaticDashSubstitutionEnabled"
+      type: "bool"
+      value: "false"
+    # Disable smart quotes
+    - domain: "Apple Global Domain"
+      key: "NSAutomaticQuoteSubstitutionEnabled"
+      type: "bool"
+      value: "false"

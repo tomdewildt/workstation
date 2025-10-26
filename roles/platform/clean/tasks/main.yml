@@ -1,3 +1,4 @@
+---
 - name: Clean applications (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -23,3 +24,24 @@
         - compton.desktop
         - org.regolith-linux.remontoire.desktop
         - regolith.desktop
+
+- name: Clean applications (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: List applications (macos)
+      ansible.builtin.command: mas list
+      register: mas_list
+      changed_when: false
+
+    - name: Remove applications (macos)
+      ansible.builtin.command: mas uninstall "{{ item }}"
+      become: true
+      with_items:
+        - "682658836" # GarageBand
+        - "408981434" # iMovie
+        - "409183694" # Keynote
+        - "409203825" # Numbers
+        - "409201541" # Pages
+      register: mas_result
+      changed_when: '"Deleted" in mas_result.stdout'
+      when: item in mas_list.stdout

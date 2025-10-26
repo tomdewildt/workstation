@@ -35,6 +35,7 @@
     - media/spotify
     - platform/boot
     - platform/clean
+    - platform/hid
     - platform/power
     - platform/screen
     - tools/aws
