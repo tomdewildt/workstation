@@ -38,6 +38,7 @@
     - platform/hid
     - platform/power
     - platform/screen
+    - security/bitwarden
     - tools/aws
     - tools/az
     - tools/gcp
