@@ -39,6 +39,6 @@
   ansible.builtin.command: code --install-extension {{ item }}
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
-  changed_when: "'successfully' in cmd.stdout"
-  register: cmd
+  changed_when: "'successfully' in extension_result.stdout"
+  register: extension_result
   with_items: "{{ code.extensions }}"

@@ -17,7 +17,7 @@ code:
     - arcticicestudio.nord-visual-studio-code
     - mechatroner.rainbow-csv
     - ms-vsliveshare.vsliveshare
-    - visualstudioexptteam.vscodeintellicode
+    - VisualStudioExptTeam.vscodeintellicode
     # Golang
     - golang.go
     # HCL
@@ -30,8 +30,6 @@ code:
     # Markdown
     - yzhang.markdown-all-in-one
     # Python
-    - ms-python.black-formatter
-    - ms-python.pylint
     - ms-python.python
     - ms-python.vscode-pylance
     # Spellcheck
