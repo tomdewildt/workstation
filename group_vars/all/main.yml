@@ -25,6 +25,7 @@ code:
     # Javascript
     - dbaeumer.vscode-eslint
     - esbenp.prettier-vscode
+    - vitest.explorer
     # Jupyter
     - ms-toolsai.jupyter
     # Markdown
@@ -32,6 +33,7 @@ code:
     # Python
     - ms-python.python
     - ms-python.vscode-pylance
+    - teticio.python-envy
     # Spellcheck
     - streetsidesoftware.code-spell-checker
     - streetsidesoftware.code-spell-checker-dutch
