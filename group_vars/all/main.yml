@@ -48,7 +48,7 @@ golang:
   version: 1.21.4
 
 node:
-  version: 18.x
+  version: 22.x
   packages:
     - cdktf-cli
     - gatsby-cli
