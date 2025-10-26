@@ -37,3 +37,14 @@
     cmd: git reset origin/master --hard
     chdir: "{{ config_path }}"
   when: not git.stat.exists
+
+- name: Symlink config (macos)
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+    state: link
+  with_items:
+    - src: "{{ config_path }}/.config/Code/User/settings.json"
+      dest: "/Users/{{ ansible_user }}/Library/Application Support/Code/User/settings.json"
+  when: ansible_distribution == 'MacOSX'
