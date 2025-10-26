@@ -1,15 +1,13 @@
 ---
-- name: Install notify (linux)
+- name: Install htop (linux)
   become: true
   ansible.builtin.apt:
-    name:
-      - libnotify-bin
-      - libnotify-cil-dev
+    name: htop
     state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Install notify (macos)
+- name: Install htop (macos)
   community.general.homebrew:
-    name: terminal-notifier
+    name: htop
     state: latest
   when: ansible_distribution == 'MacOSX'

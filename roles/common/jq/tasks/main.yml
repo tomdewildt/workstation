@@ -1,15 +1,13 @@
 ---
-- name: Install notify (linux)
+- name: Install jq (linux)
   become: true
   ansible.builtin.apt:
-    name:
-      - libnotify-bin
-      - libnotify-cil-dev
+    name: jq
     state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Install notify (macos)
+- name: Install jq (macos)
   community.general.homebrew:
-    name: terminal-notifier
+    name: jq
     state: latest
   when: ansible_distribution == 'MacOSX'
