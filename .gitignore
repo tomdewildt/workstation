@@ -1,5 +1,6 @@
 ### Ansible ###
 *.retry
+*.lock
 
 ### Archive ###
 # The traditional archive format on Unix-like systems, now used mainly for the creation of static libraries.
