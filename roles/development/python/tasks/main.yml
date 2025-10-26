@@ -14,17 +14,27 @@
         name: python{{ python.version }}
         state: latest
 
-- name: Install python (macos)
-  community.general.homebrew:
-    name: python@{{ python.version }}
-    state: latest
-  when: ansible_distribution == 'MacOSX'
+    # TODO: install pipx (linux)
+    # TODO: install python packages (linux)
 
-- name: Install python packages (linux/macos)
-  ansible.builtin.pip:
-    name: "{{ item }}"
-    executable: pip3
-    state: latest
-  environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
-  with_items: "{{ python.packages }}"
+- name: Install python (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Install python (macos)
+      community.general.homebrew:
+        name: python@{{ python.version }}
+        state: latest
+
+    - name: Install pipx (macos)
+      ansible.builtin.command: python{{ python.version }} -m pip install pipx
+      args:
+        creates: "/opt/homebrew/bin/pipx"
+      environment:
+        PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+    - name: Install python packages (macos)
+      community.general.pipx:
+        name: "{{ item }}"
+        executable: /opt/homebrew/bin/pipx
+        state: latest
+      with_items: "{{ python.packages }}"
