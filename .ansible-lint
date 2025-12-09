@@ -6,4 +6,5 @@ skip_list:
   - package-latest
   - risky-shell-pipe
   - role-name[path]
+  - var-naming[no-role-prefix]
   - yaml[line-length]
