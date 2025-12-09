@@ -15,4 +15,4 @@ jobs:
       - name: Setup ansible
         run: ansible-galaxy install -r requirements.yml
       - name: Run lint
-        uses: ansible/ansible-lint@main
+        uses: ansible/ansible-lint@v25.12.0
