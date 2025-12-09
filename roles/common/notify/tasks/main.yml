@@ -2,9 +2,7 @@
 - name: Install notify (linux)
   become: true
   ansible.builtin.apt:
-    name:
-      - libnotify-bin
-      - libnotify-cil-dev
+    name: libnotify-bin
     state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
