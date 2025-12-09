@@ -3,7 +3,6 @@
   become: true
   ansible.builtin.apt:
     name:
-      - exfat-fuse
-      - exfat-utils
+      - exfatprogs
     state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
