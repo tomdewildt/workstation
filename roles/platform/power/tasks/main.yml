@@ -1,45 +1,14 @@
 ---
-- name: Configure power (linux)
+- name: Setup power (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
+    - name: Install power profiles daemon (linux)
+      ansible.builtin.apt:
+        name: power-profiles-daemon
+        state: latest
+
     - name: Install powertop (linux)
       ansible.builtin.apt:
         name: powertop
         state: latest
-
-    - name: Install tlp (linux)
-      ansible.builtin.apt:
-        name:
-          - tlp
-          - tlp-rdw
-        state: latest
-
-    - name: Find default tlp config (linux)
-      ansible.builtin.find:
-        paths:
-          - /etc/tlp.d
-        file_type: file
-        excludes:
-          - 00-operation.conf
-      register: config
-
-    - name: Remove default tlp config (linux)
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      with_items: "{{ config.files }}"
-
-    - name: Configure tlp (linux)
-      ansible.builtin.copy:
-        src: tlp/
-        dest: /etc/tlp.d/
-        owner: root
-        group: root
-        mode: "0644"
-
-    - name: Enable tlp (linux)
-      ansible.builtin.service:
-        name: tlp
-        state: started
-        enabled: true
