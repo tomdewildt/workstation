@@ -59,8 +59,13 @@
     - development/ngrok
     - development/psql
     - development/uv
+    - media/eog
     - media/loom
+    - media/music
+    - media/snapshot
+    - media/sound-recorder
     - media/spotify
+    - media/totem
     - security/bitwarden
     - tools/drive
     - tools/granola
