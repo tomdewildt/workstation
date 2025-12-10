@@ -1,28 +1,28 @@
 ---
-- name: Install firefox (linux)
+- name: Install brave (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Add firefox repository (linux)
+    - name: Add brave repository (linux)
       ansible.builtin.deb822_repository:
-        name: mozilla
+        name: brave
         types: [deb]
-        uris: [https://packages.mozilla.org/apt]
-        suites: [mozilla]
+        uris: [https://brave-browser-apt-release.s3.brave.com]
+        suites: [stable]
         components: [main]
         architectures: [amd64]
-        signed_by: https://packages.mozilla.org/apt/repo-signing-key.gpg
+        signed_by: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
         state: present
 
-    - name: Install firefox (linux)
+    - name: Install brave (linux)
       ansible.builtin.apt:
-        name: firefox
+        name: brave-browser
         update_cache: true
         state: latest
 
-- name: Install firefox (macos)
+- name: Install brave (macos)
   community.general.homebrew_cask:
-    name: firefox
+    name: brave-browser
     install_options: appdir=/Applications
     state: latest
   when: ansible_distribution == 'MacOSX'
