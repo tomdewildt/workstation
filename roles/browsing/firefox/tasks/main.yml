@@ -1,10 +1,24 @@
 ---
 - name: Install firefox (linux)
   become: true
-  ansible.builtin.apt:
-    name: firefox
-    state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add firefox repository (linux)
+      ansible.builtin.deb822_repository:
+        name: mozilla
+        types: [deb]
+        uris: [https://packages.mozilla.org/apt]
+        suites: [mozilla]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://packages.mozilla.org/apt/repo-signing-key.gpg
+        state: present
+
+    - name: Install firefox (linux)
+      ansible.builtin.apt:
+        name: firefox
+        update_cache: true
+        state: latest
 
 - name: Install firefox (macos)
   community.general.homebrew_cask:
