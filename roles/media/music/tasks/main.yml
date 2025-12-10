@@ -1,0 +1,7 @@
+---
+- name: Install music (linux)
+  become: true
+  ansible.builtin.apt:
+    name: gnome-music
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
