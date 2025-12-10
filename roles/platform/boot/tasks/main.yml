@@ -1,5 +1,5 @@
 ---
-- name: Configure boot (linux)
+- name: Setup boot (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
@@ -7,7 +7,14 @@
       ansible.builtin.lineinfile:
         path: /etc/default/grub
         regexp: ^#?GRUB_CMDLINE_LINUX_DEFAULT
-        line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_rev_override=1 acpi_osi=Linux pcie_aspm=force nouveau.modeset=0 nouveau.runpm=0 mem_sleep_default=deep"
+        line: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+        state: present
+
+    - name: Set grub disable os prober to false (linux)
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: ^#?GRUB_DISABLE_OS_PROBER
+        line: GRUB_DISABLE_OS_PROBER=false
         state: present
 
     - name: Set grub default to saved (linux)
@@ -26,18 +33,33 @@
 
     - name: Download grub theme install script (linux)
       ansible.builtin.unarchive:
-        src: https://github.com/tomdewildt/minimal-grub-theme/archive/v0.1.0.zip
+        src: https://github.com/tomdewildt/minimal-grub-theme/archive/v0.4.0.zip
         dest: /tmp
         remote_src: true
-        creates: /tmp/minimal-grub-theme-0.1.0
+        creates: /tmp/minimal-grub-theme-0.4.0
 
     - name: Install grub theme (linux)
       community.general.make:
-        chdir: /tmp/minimal-grub-theme-0.1.0
+        chdir: /tmp/minimal-grub-theme-0.4.0
         file: Makefile
         target: install
       changed_when: false
 
-    - name: Update grub settings (linux)
-      ansible.builtin.command: update-grub
+    - name: Install plymouth theme dependencies (linux)
+      ansible.builtin.apt:
+        name: plymouth-themes
+        state: latest
+
+    - name: Download plymouth theme install script (linux)
+      ansible.builtin.unarchive:
+        src: https://github.com/tomdewildt/minimal-plymouth-theme/archive/v0.1.0.zip
+        dest: /tmp
+        remote_src: true
+        creates: /tmp/minimal-plymouth-theme-0.1.0
+
+    - name: Install plymouth theme (linux)
+      community.general.make:
+        chdir: /tmp/minimal-plymouth-theme-0.1.0
+        file: Makefile
+        target: install
       changed_when: false
