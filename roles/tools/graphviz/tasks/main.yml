@@ -1,8 +1,0 @@
----
-# TODO: install graphviz (linux)
-
-- name: Install graphviz (macos)
-  community.general.homebrew:
-    name: graphviz
-    state: latest
-  when: ansible_distribution == 'MacOSX'
