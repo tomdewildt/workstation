@@ -3,16 +3,15 @@
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Add signal key (linux)
-      ansible.builtin.apt_key:
-        url: https://updates.signal.org/desktop/apt/keys.asc
-        keyring: /etc/apt/trusted.gpg.d/signal.gpg
-        state: present
-
     - name: Add signal repository (linux)
-      ansible.builtin.apt_repository:
-        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/signal.gpg] https://updates.signal.org/desktop/apt xenial main
-        filename: signal
+      ansible.builtin.deb822_repository:
+        name: signal
+        types: [deb]
+        uris: [https://updates.signal.org/desktop/apt]
+        suites: [xenial]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://updates.signal.org/desktop/apt/keys.asc
         state: present
 
     - name: Install signal (linux)
