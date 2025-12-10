@@ -1,9 +1,0 @@
----
-# TODO: install brave (linux)
-
-- name: Install brave (macos)
-  community.general.homebrew_cask:
-    name: brave-browser
-    install_options: appdir=/Applications
-    state: latest
-  when: ansible_distribution == 'MacOSX'

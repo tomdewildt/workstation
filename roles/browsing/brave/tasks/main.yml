@@ -1,0 +1,28 @@
+---
+- name: Install brave (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add brave repository (linux)
+      ansible.builtin.deb822_repository:
+        name: brave
+        types: [deb]
+        uris: [https://brave-browser-apt-release.s3.brave.com]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        state: present
+
+    - name: Install brave (linux)
+      ansible.builtin.apt:
+        name: brave-browser
+        update_cache: true
+        state: latest
+
+- name: Install brave (macos)
+  community.general.homebrew_cask:
+    name: brave-browser
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
