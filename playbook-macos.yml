@@ -59,6 +59,8 @@
     - browsing/chrome
     - browsing/firefox
     - communication/discord
+    - communication/gmail
+    - communication/meet
     - communication/signal
     - communication/slack
     - communication/whatsapp

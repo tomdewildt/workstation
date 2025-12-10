@@ -1,0 +1,36 @@
+---
+- name: Install meet (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Read browser desktop file (linux)
+      ansible.builtin.slurp:
+        src: /usr/share/applications/{{ browser.default }}.desktop
+      register: browser_file
+
+    - name: Extract browser executable (linux)
+      ansible.builtin.set_fact:
+        browser_executable: "{{ browser_file.content | b64decode | regex_search('^Exec=([^ ]*).*', '\\1', multiline=True) | first }}"
+
+    - name: Ensure icons folder exists (linux)
+      ansible.builtin.file:
+        path: /usr/share/applications/icons
+        state: directory
+        mode: "0755"
+
+    - name: Download meet icon (linux)
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/homarr-labs/dashboard-icons/refs/heads/main/png/google-meet.png
+        dest: /usr/share/applications/icons/google-meet.png
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Copy meet desktop file (linux)
+      ansible.builtin.template:
+        src: templates/meet/meet.desktop.j2
+        dest: /usr/share/applications/google-meet.desktop
+        owner: root
+        group: root
+        mode: "0644"
+# TODO: install meet (macos)
