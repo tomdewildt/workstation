@@ -1,9 +1,0 @@
----
-# TODO: install drive (linux)
-
-- name: Install drive (macos)
-  community.general.homebrew_cask:
-    name: google-drive
-    install_options: appdir=/Applications
-    state: latest
-  when: ansible_distribution == 'MacOSX'
