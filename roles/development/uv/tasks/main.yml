@@ -1,5 +1,9 @@
 ---
-# TODO: install uv (linux)
+- name: Install uv (linux)
+  community.general.pipx:
+    name: uv
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install uv (macos)
   community.general.homebrew:

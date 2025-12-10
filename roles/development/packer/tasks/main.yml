@@ -9,16 +9,15 @@
         update_cache: true
         state: latest
 
-    - name: Add packer key (linux)
-      ansible.builtin.apt_key:
-        url: https://apt.releases.hashicorp.com/gpg
-        keyring: /etc/apt/trusted.gpg.d/hashicorp.gpg
-        state: present
-
     - name: Add packer repository (linux)
-      ansible.builtin.apt_repository:
-        repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
-        filename: hashicorp
+      ansible.builtin.deb822_repository:
+        name: hashicorp
+        types: [deb]
+        uris: [https://apt.releases.hashicorp.com]
+        suites: ["trixie"]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://apt.releases.hashicorp.com/gpg
         state: present
 
     - name: Install packer (linux)

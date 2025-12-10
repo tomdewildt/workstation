@@ -3,16 +3,15 @@
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Add docker key (linux)
-      ansible.builtin.apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        keyring: /etc/apt/trusted.gpg.d/docker.gpg
-        state: present
-
     - name: Add docker repository (linux)
-      ansible.builtin.apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-        filename: docker
+      ansible.builtin.deb822_repository:
+        name: docker
+        types: [deb]
+        uris: [https://download.docker.com/linux/debian]
+        suites: [trixie]
+        components: [stable]
+        architectures: [amd64]
+        signed_by: https://download.docker.com/linux/debian/gpg
         state: present
 
     - name: Install docker (linux)
@@ -21,6 +20,8 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
         update_cache: true
         state: latest
 

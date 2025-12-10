@@ -57,7 +57,7 @@ node:
     - gatsby-cli
 
 python:
-  version: 3.11
+  version: 3.11.14
   packages:
     - ruff
     - pyright

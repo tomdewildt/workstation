@@ -3,21 +3,32 @@
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Install vagrant dependencies (linux)
-      ansible.builtin.apt:
+    - name: Add vagrant dependencies repository (linux)
+      ansible.builtin.deb822_repository:
         name: virtualbox
+        types: [deb]
+        uris: [https://download.virtualbox.org/virtualbox/debian]
+        suites: ["trixie"]
+        components: [contrib]
+        architectures: [amd64]
+        signed_by: https://www.virtualbox.org/download/oracle_vbox_2016.asc
         state: present
 
-    - name: Add vagrant key (linux)
-      ansible.builtin.apt_key:
-        url: https://apt.releases.hashicorp.com/gpg
-        keyring: /etc/apt/trusted.gpg.d/hashicorp.gpg
+    - name: Install vagrant dependencies (linux)
+      ansible.builtin.apt:
+        name: virtualbox-7.2
+        update_cache: true
         state: present
 
     - name: Add vagrant repository (linux)
-      ansible.builtin.apt_repository:
-        repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
-        filename: hashicorp
+      ansible.builtin.deb822_repository:
+        name: hashicorp
+        types: [deb]
+        uris: [https://apt.releases.hashicorp.com]
+        suites: ["trixie"]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://apt.releases.hashicorp.com/gpg
         state: present
 
     - name: Install vagrant (linux)

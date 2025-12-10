@@ -1,32 +1,95 @@
 ---
+- name: Extract python version (linux/macos)
+  ansible.builtin.set_fact:
+    python_version_base: "{{ python.version.split('.')[0] }}.{{ python.version.split('.')[1] }}"
+    python_version_full: "{{ python.version }}"
+
 - name: Install python (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Add python repository (linux)
-      ansible.builtin.apt_repository:
-        repo: ppa:deadsnakes/ppa
-        filename: python
+    - name: Check if python is installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/python{{ python_version_base }}
+      register: python
+
+    - name: Install python dependencies (linux)
+      ansible.builtin.apt:
+        name:
+          - libb2-dev
+          - libbz2-dev
+          - libdbus-1-3
+          - libffi-dev
+          - libgdbm-compat-dev
+          - libgdbm-dev
+          - libgtk-3-0
+          - liblzma-dev
+          - libncurses5-dev
+          - libnss3
+          - libreadline-dev
+          - libreadline6-dev
+          - libssl-dev
+          - libsqlite3-dev
+          - libxml2-dev
+          - libxslt1-dev
+          - libzstd-dev
+          - lzma
+          - tk-dev
+          - uuid-dev
+          - zlib1g-dev
+        update_cache: true
         state: present
 
-    - name: Install python (linux)
-      ansible.builtin.apt:
-        name: python{{ python.version }}
-        state: latest
+    - name: Download python source (linux)
+      ansible.builtin.unarchive:
+        src: https://www.python.org/ftp/python/{{ python_version_full }}/Python-{{ python_version_full }}.tar.xz
+        dest: /tmp/
+        remote_src: true
+      when: not python.stat.exists
 
-    # TODO: install pipx (linux)
-    # TODO: install python packages (linux)
+    - name: Configure python build (linux)
+      ansible.builtin.command:
+        cmd: ./configure --enable-optimizations --with-ensurepip=install
+        chdir: /tmp/Python-{{ python_version_full }}
+      changed_when: true
+      when: not python.stat.exists
+
+    - name: Compile python (linux)
+      ansible.builtin.command:
+        cmd: make -j {{ ansible_processor_cores }}
+        chdir: /tmp/Python-{{ python_version_full }}
+      changed_when: true
+      when: not python.stat.exists
+
+    - name: Install python (linux)
+      ansible.builtin.command:
+        cmd: make altinstall
+        chdir: /tmp/Python-{{ python_version_full }}
+      changed_when: true
+      when: not python.stat.exists
+
+    - name: Install pipx (linux)
+      ansible.builtin.command: python{{ python_version_base }} -m pip install pipx
+      args:
+        creates: /usr/local/bin/pipx
+
+    - name: Install python packages (linux)
+      community.general.pipx:
+        name: "{{ item }}"
+        state: latest
+      with_items: "{{ python.packages }}"
 
 - name: Install python (macos)
   when: ansible_distribution == 'MacOSX'
   block:
     - name: Install python (macos)
       community.general.homebrew:
-        name: python@{{ python.version }}
+        # We use only the major.minor version because brew does not support patch versions
+        name: python@{{ python_version_base }}
         state: latest
 
     - name: Install pipx (macos)
-      ansible.builtin.command: python{{ python.version }} -m pip install pipx
+      ansible.builtin.command: python{{ python_version_base }} -m pip install pipx
       args:
         creates: "/opt/homebrew/bin/pipx"
       environment:
