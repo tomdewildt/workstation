@@ -1,8 +1,0 @@
----
-# TODO: install ffmpeg (linux)
-
-- name: Install ffmpeg (macos)
-  community.general.homebrew:
-    name: ffmpeg
-    state: latest
-  when: ansible_distribution == 'MacOSX'
