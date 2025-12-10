@@ -1,4 +1,7 @@
 ---
+browser:
+  default: brave-browser
+
 config:
   repository: https://github.com/tomdewildt/config.git
   timezone: Europe/Amsterdam
