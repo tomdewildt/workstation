@@ -66,8 +66,8 @@
     - media/sound-recorder
     - media/spotify
     - media/totem
+    - productivity/drive
+    - productivity/granola
     - security/bitwarden
-    - tools/drive
-    - tools/granola
     - config/files
     - config/time

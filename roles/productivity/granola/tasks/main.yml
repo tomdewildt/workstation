@@ -1,6 +1,4 @@
 ---
-# TODO: install granola (linux)
-
 - name: Install granola (macos)
   community.general.homebrew_cask:
     name: granola
