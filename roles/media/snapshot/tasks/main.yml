@@ -1,0 +1,7 @@
+---
+- name: Install snapshot (linux)
+  become: true
+  ansible.builtin.apt:
+    name: gnome-snapshot
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
