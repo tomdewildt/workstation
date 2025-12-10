@@ -3,16 +3,15 @@
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Add azure cli key (linux)
-      ansible.builtin.apt_key:
-        url: https://packages.microsoft.com/keys/microsoft.asc
-        keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
-        state: present
-
     - name: Add azure cli repository (linux)
-      ansible.builtin.apt_repository:
-        repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ focal main
-        filename: azure
+      ansible.builtin.deb822_repository:
+        name: azure
+        types: [deb]
+        uris: [https://packages.microsoft.com/repos/azure-cli/]
+        suites: [bookworm]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://packages.microsoft.com/keys/microsoft.asc
         state: present
 
     - name: Install azure cli (linux)

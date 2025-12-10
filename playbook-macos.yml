@@ -72,20 +72,20 @@
     - development/python
     - development/terraform
     - development/vagrant
+    - development/aws
+    - development/az
     - development/claude
     - development/codex
+    - development/gcp
+    - development/graphviz
+    - development/imager
+    - development/ngrok
+    - development/psql
     - development/uv
     - media/spotify
     - security/bitwarden
-    - tools/aws
-    - tools/az
     - tools/drive
-    - tools/gcp
     - tools/granola
-    - tools/graphviz
-    - tools/imager
     - tools/loom
-    - tools/ngrok
-    - tools/psql
     - config/files
     - config/time

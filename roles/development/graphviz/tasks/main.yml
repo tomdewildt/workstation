@@ -1,0 +1,13 @@
+---
+- name: Install graphviz (linux)
+  become: true
+  ansible.builtin.apt:
+    name: graphviz
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install graphviz (macos)
+  community.general.homebrew:
+    name: graphviz
+    state: latest
+  when: ansible_distribution == 'MacOSX'
