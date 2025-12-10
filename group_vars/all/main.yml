@@ -20,7 +20,6 @@ code:
     - arcticicestudio.nord-visual-studio-code
     - mechatroner.rainbow-csv
     - ms-vsliveshare.vsliveshare
-    - VisualStudioExptTeam.vscodeintellicode
     # Golang
     - golang.go
     # HCL
