@@ -1,5 +1,10 @@
 ---
-# TODO: install displaylink (linux)
+- name: Install displaylink (linux)
+  become: true
+  ansible.builtin.apt:
+    name: displaylink-driver
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install displaylink (macos)
   community.general.homebrew_cask:

@@ -1,5 +1,10 @@
 ---
-# TODO: install logitech driver (linux)
+- name: Install logitech driver (linux)
+  become: true
+  ansible.builtin.apt:
+    name: logiops
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install logitech driver (macos)
   community.general.homebrew_cask:
