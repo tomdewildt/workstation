@@ -47,6 +47,7 @@
     - common/wget
     - drivers/cpu
     - drivers/displaylink
+    - drivers/fingerprint
     - drivers/gpu
     - drivers/logitech
     - browsing/brave
