@@ -12,6 +12,7 @@
     - common/curl
     - common/dig
     - common/exfat
+    - common/ffmpeg
     - common/git
     - common/htop
     - common/jq
@@ -42,7 +43,6 @@
     - tools/aws
     - tools/az
     - tools/drive
-    - tools/ffmpeg
     - tools/gcp
     - tools/granola
     - tools/graphviz
