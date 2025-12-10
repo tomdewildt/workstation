@@ -82,10 +82,10 @@
     - development/ngrok
     - development/psql
     - development/uv
+    - media/loom
     - media/spotify
     - security/bitwarden
     - tools/drive
     - tools/granola
-    - tools/loom
     - config/files
     - config/time
