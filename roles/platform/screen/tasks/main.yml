@@ -1,74 +1,127 @@
 ---
-- name: Configure screen (linux)
+- name: Setup screen (linux)
   become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Create lightdm directory (linux)
-      ansible.builtin.file:
-        path: /usr/share/lightdm/lightdm-gtk-greeter.conf.d
-        owner: root
-        group: root
-        mode: "0755"
-        state: directory
+    - name: Install gdm3 (linux)
+      ansible.builtin.apt:
+        name: gdm3
+        state: latest
 
-    - name: Create background directory (linux)
-      ansible.builtin.file:
-        path: /usr/share/backgrounds
-        owner: root
-        group: root
-        mode: "0755"
-        state: directory
+    - name: Enable gdm3 (linux)
+      ansible.builtin.systemd:
+        name: gdm3
+        enabled: true
 
-    - name: Configure lightdm (linux)
+    - name: Set boot target to graphical (linux)
+      ansible.builtin.file:
+        src: /lib/systemd/system/graphical.target
+        dest: /lib/systemd/system/default.target
+        state: link
+        force: true
+
+    - name: Add regolith repository (linux)
+      ansible.builtin.deb822_repository:
+        name: regolith
+        types: [deb]
+        uris: [https://archive.regolith-desktop.com/debian/unstable]
+        suites: [trixie]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://archive.regolith-desktop.com/regolith.key
+        state: present
+
+    - name: Install regolith (linux)
+      ansible.builtin.apt:
+        name:
+          - regolith-desktop
+          - regolith-session-sway
+          - regolith-compositor-picom-glx
+          - regolith-look-nord
+          - fonts-source-code-pro-ttf
+        update_cache: true
+        state: latest
+
+    - name: Check regolith session (linux)
+      ansible.builtin.stat:
+        path: /usr/share/wayland-sessions/regolith-wayland.desktop
+      register: session
+
+    - name: Rename regolith session (linux)
       ansible.builtin.copy:
-        src: lightdm/
-        dest: /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
+        src: /usr/share/wayland-sessions/regolith-wayland.desktop
+        dest: /usr/share/wayland-sessions/regolith.desktop
         owner: root
         group: root
         mode: "0644"
-
-    - name: Download lightdm theme install script (linux)
-      ansible.builtin.unarchive:
-        src: https://github.com/tomdewildt/cahuella-lightdm-theme/archive/v0.1.0.zip
-        dest: /tmp
         remote_src: true
-        creates: /tmp/cahuella-lightdm-theme-0.1.0
+      when: session.stat.exists
 
-    - name: Install lightdm theme (linux)
-      community.general.make:
-        chdir: /tmp/cahuella-lightdm-theme-0.1.0
-        file: Makefile
-        target: install
-      changed_when: false
-
-    - name: Add regolith repository (linux)
-      ansible.builtin.apt_repository:
-        repo: ppa:regolith-linux/release
-        filename: regolith-linux-ubuntu-release-focal
+    - name: Modify regolith session (linux)
+      ansible.builtin.lineinfile:
+        path: /usr/share/wayland-sessions/regolith.desktop
+        regexp: ^#?Name=
+        line: Name=Regolith
         state: present
 
-    - name: Install regolith looks (linux)
-      ansible.builtin.apt:
-        name:
-          - regolith-look-ayu
-          - regolith-look-ayu-dark
-          - regolith-look-ayu-mirage
-          - regolith-look-cahuella
-          - regolith-look-lascaille
-          - regolith-look-nord
-          - regolith-look-solarized-dark
-          - regolith-look-ubuntu
-        state: latest
+    - name: Find default sessions (linux)
+      ansible.builtin.find:
+        paths:
+          - /usr/share/wayland-sessions
+          - /usr/share/xsessions
+        file_type: file
+        excludes:
+          - regolith.desktop
+      register: sessions
 
-    - name: Install i3xrocks extensions (linux)
-      ansible.builtin.apt:
-        name:
-          - i3xrocks-battery
-          - i3xrocks-cpu-usage
-          - i3xrocks-memory
-          - i3xrocks-net-traffic
-          - i3xrocks-time
-        state: latest
+    - name: Remove default sessions (linux)
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ sessions.files }}"
+
+    - name: Download gtklock theme install script (linux)
+      ansible.builtin.unarchive:
+        src: https://github.com/tomdewildt/gnome-gtklock-theme/archive/v0.1.0.zip
+        dest: /tmp
+        remote_src: true
+        creates: /tmp/gnome-gtklock-theme-0.1.0
+
+    - name: Install gtklock theme (linux)
+      community.general.make:
+        chdir: /tmp/gnome-gtklock-theme-0.1.0
+        file: Makefile
+        target: install
+      become: false # Install for local user
+      changed_when: false
+
+    - name: Ensure regolith config folder exists (linux)
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/.config/regolith3
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+        state: directory
+
+    - name: Copy background (linux)
+      ansible.builtin.copy:
+        src: backgrounds/nord.png
+        dest: /home/{{ ansible_user }}/Pictures/Backgrounds/
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0644"
+        directory_mode: "0775"
+
+    - name: Set background (linux)
+      ansible.builtin.lineinfile:
+        path: /home/{{ ansible_user }}/.config/regolith3/Xresources
+        regexp: "^regolith.wallpaper.file:"
+        line: "regolith.wallpaper.file: /home/{{ ansible_user }}/Pictures/Backgrounds/nord.png"
+        create: true
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0644"
+        state: present
 
 - name: Configure screen (macos)
   when: ansible_distribution == 'MacOSX'
