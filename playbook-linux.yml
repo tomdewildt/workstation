@@ -27,6 +27,11 @@
     - drivers/fingerprint
     - drivers/gpu
     - drivers/logitech
+    - platform/boot
+    - platform/hid
+    - platform/power
+    - platform/screen
+    - platform/clean
     - browsing/brave
     - browsing/chrome
     - browsing/firefox
@@ -35,11 +40,6 @@
     - communication/slack
     - communication/whatsapp
     - media/spotify
-    - platform/boot
-    - platform/clean
-    - platform/hid
-    - platform/power
-    - platform/screen
     - security/bitwarden
     - tools/aws
     - tools/az
