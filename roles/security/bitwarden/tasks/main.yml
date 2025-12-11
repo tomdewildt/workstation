@@ -1,5 +1,20 @@
 ---
-# TODO: install bitwarden (linux)
+- name: Install bitwarden (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Install bitwarden (linux)
+      become: true
+      ansible.builtin.apt:
+        deb: https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb
+        state: present
+
+    - name: Set ownership of sandbox binary (linux)
+      ansible.builtin.file:
+        path: /opt/Bitwarden/chrome-sandbox
+        owner: root
+        group: root
+        mode: "4755"
 
 - name: Install bitwarden (macos)
   ansible.builtin.command: mas install 1352778147
