@@ -1,0 +1,7 @@
+---
+- name: Install text editor (linux)
+  become: true
+  ansible.builtin.apt:
+    name: gnome-text-editor
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
