@@ -1,0 +1,7 @@
+---
+- name: Install disk utility (linux)
+  become: true
+  ansible.builtin.apt:
+    name: gnome-disk-utility
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

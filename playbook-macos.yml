@@ -100,5 +100,11 @@
     - productivity/sheets
     - productivity/slides
     - security/bitwarden
+    - utilities/baobab
+    - utilities/characters
+    - utilities/disk-utility
+    - utilities/font-viewer
+    - utilities/system-monitor
+    - utilities/text-editor
     - config/files
     - config/time
