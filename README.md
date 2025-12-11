@@ -2,7 +2,8 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/tomdewildt/workstation/ci.yml?branch=master)](https://github.com/tomdewildt/workstation/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/tomdewildt/workstation)](https://github.com/tomdewildt/workstation/blob/master/LICENSE)
 
-This repository contains the configuration and setup scripts for my development workstation. I use [Regolith](https://regolith-linux.org/) ([Ubuntu 20.04](https://ubuntu.com/)) as my operating system and my primary workstation is a Dell XPS 15 7590.
+This repository includes the configuration and setup scripts for both my personal and work machines. My personal Framework 13 laptop runs [Regolith](https://regolith-desktop.com/) on [Debian 13](https://www.debian.org/releases/trixie/). My work MacBook Pro 16 M3 uses [macOS](https://www.apple.com/os/macos/).
+
 
 # How to run
 
@@ -14,8 +15,6 @@ Prerequisites:
 
 1. Run ```make init``` to initialize the environment.
 2. Run ```make run/linux``` to execute the playbook on a linux machine.
-
-Please download version ```8.1.1``` of the proprietary [NVIDIA cuDNN](https://developer.nvidia.com/rdp/cudnn-download) library to `./roles/drivers/nvidia/files/cudnn/cudnn-v8.1.1.tgz` before executing the playbook.
 
 ### MacOS
 
