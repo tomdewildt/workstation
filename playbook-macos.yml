@@ -89,8 +89,16 @@
     - media/sound-recorder
     - media/spotify
     - media/totem
+    - productivity/calculator
+    - productivity/calendar
+    - productivity/clocks
+    - productivity/docs
     - productivity/drive
+    - productivity/evince
     - productivity/granola
+    - productivity/maps
+    - productivity/sheets
+    - productivity/slides
     - security/bitwarden
     - config/files
     - config/time
