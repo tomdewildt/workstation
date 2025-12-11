@@ -1,0 +1,7 @@
+---
+- name: Install baobab (linux)
+  become: true
+  ansible.builtin.apt:
+    name: baobab
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
