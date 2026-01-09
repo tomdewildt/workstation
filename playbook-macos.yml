@@ -28,6 +28,7 @@
         state: latest
 
     - name: Update mas apps
+      become: true
       ansible.builtin.command: mas upgrade
       register: mas_result
       changed_when: mas_result.stdout != ""

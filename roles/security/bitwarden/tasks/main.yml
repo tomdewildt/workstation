@@ -17,6 +17,7 @@
         mode: "4755"
 
 - name: Install bitwarden (macos)
+  become: true
   ansible.builtin.command: mas install 1352778147
   register: bitwarden_result
   changed_when: bitwarden_result.stdout != "" and "is already installed" not in bitwarden_result.stdout
