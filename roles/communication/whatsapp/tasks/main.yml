@@ -35,6 +35,7 @@
         mode: "0644"
 
 - name: Install whatsapp (macos)
+  become: true
   ansible.builtin.command: mas install 310633997
   register: whatsapp_result
   changed_when: whatsapp_result.stdout != "" and "is already installed" not in whatsapp_result.stdout
