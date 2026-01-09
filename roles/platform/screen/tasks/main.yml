@@ -126,6 +126,16 @@
 - name: Configure screen (macos)
   when: ansible_distribution == 'MacOSX'
   block:
+    - name: Install yabai (macos)
+      community.general.homebrew:
+        name: asmvik/formulae/yabai
+        state: latest
+
+    - name: Install skhd (macos)
+      community.general.homebrew:
+        name: asmvik/formulae/skhd
+        state: latest
+
     - name: Configure dock (macos)
       community.general.osx_defaults:
         domain: "{{ item.domain }}"
