@@ -1,9 +1,15 @@
 ---
 - name: Install fingerprint driver (linux)
   become: true
-  ansible.builtin.apt:
-    name:
-      - fprintd
-      - libpam-fprintd
-    state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Install fingerprint driver (linux)
+      ansible.builtin.apt:
+        name:
+          - fprintd
+          - libpam-fprintd
+        state: latest
+
+    - name: Enable fingerprint authentication (linux)
+      ansible.builtin.command: pam-auth-update --package --enable fprintd
+      changed_when: false
