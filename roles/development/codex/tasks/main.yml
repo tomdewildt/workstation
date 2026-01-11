@@ -9,12 +9,8 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install codex (macos)
-  become: true
-  community.general.npm:
-    name: "@openai/codex"
-    unsafe_perm: true
-    global: true
+  community.general.homebrew_cask:
+    name: codex
+    install_options: appdir=/Applications
     state: latest
-  environment:
-    PATH: "/opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin:{{ ansible_env.PATH }}"
   when: ansible_distribution == 'MacOSX'

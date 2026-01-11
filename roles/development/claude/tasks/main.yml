@@ -1,20 +1,28 @@
 ---
 - name: Install claude (linux)
-  become: true
-  community.general.npm:
-    name: "@anthropic-ai/claude-code"
-    unsafe_perm: true
-    global: true
-    state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if claude is installed
+      ansible.builtin.stat:
+        path: /home/{{ ansible_user }}/.local/bin/claude
+      register: claude
+
+    - name: Download claude install script (linux)
+      ansible.builtin.get_url:
+        url: https://claude.ai/install.sh
+        dest: /tmp/claude.sh
+        mode: "0755"
+      when: not claude.stat.exists
+
+    - name: Install claude (linux)
+      ansible.builtin.command: /tmp/claude.sh
+      changed_when: "'successfully installed' in claude_result.stdout"
+      register: claude_result
+      when: not claude.stat.exists
 
 - name: Install claude (macos)
-  become: true
-  community.general.npm:
-    name: "@anthropic-ai/claude-code"
-    unsafe_perm: true
-    global: true
+  community.general.homebrew_cask:
+    name: claude-code
+    install_options: appdir=/Applications
     state: latest
-  environment:
-    PATH: "/opt/homebrew/opt/node@{{ node.version.split('.')[0] }}/bin:{{ ansible_env.PATH }}"
   when: ansible_distribution == 'MacOSX'
