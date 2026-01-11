@@ -95,6 +95,14 @@
       become: false # Install for local user
       changed_when: false
 
+    - name: Configure gtklock (linux)
+      ansible.builtin.copy:
+        src: gtklock/gtklock
+        dest: /etc/pam.d/gtklock
+        owner: root
+        group: root
+        mode: "0644"
+
     - name: Ensure regolith config folder exists (linux)
       ansible.builtin.file:
         path: /home/{{ ansible_user }}/.config/regolith3
