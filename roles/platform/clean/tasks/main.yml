@@ -21,17 +21,10 @@
         state: present
         create: true
       with_items:
-        - org.gnome.Settings.desktop
+        - org.regolith.Settings.desktop
         - htop.desktop
         - picom.desktop
         - regolith-wayland.desktop
-
-    - name: Rename applications (linux)
-      ansible.builtin.lineinfile:
-        path: /usr/share/applications/org.regolith.Settings.desktop
-        regexp: ^#?Icon=
-        line: Icon=org.gnome.Settings
-        state: present
 
 - name: Clean applications (macos)
   when: ansible_distribution == 'MacOSX'
