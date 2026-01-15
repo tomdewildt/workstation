@@ -20,6 +20,11 @@
         update_cache: true
         state: latest
 
+    - name: Remove chrome generated desktop entry (linux)
+      ansible.builtin.file:
+        path: /usr/share/applications/com.google.Chrome.desktop
+        state: absent
+
     - name: Remove chrome generated repository (linux)
       ansible.builtin.file:
         path: /etc/apt/sources.list.d/google-chrome.list
