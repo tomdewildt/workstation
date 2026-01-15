@@ -81,6 +81,7 @@
     - development/claude
     - development/codex
     - development/gcp
+    - development/github
     - development/graphviz
     - development/imager
     - development/ngrok
