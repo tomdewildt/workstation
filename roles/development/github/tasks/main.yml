@@ -1,0 +1,27 @@
+---
+- name: Install github (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add github repository (linux)
+      ansible.builtin.deb822_repository:
+        name: github
+        types: [deb]
+        uris: [https://cli.github.com/packages]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+        state: present
+
+    - name: Install github (linux)
+      ansible.builtin.apt:
+        name: gh
+        update_cache: true
+        state: latest
+
+- name: Install github (macos)
+  community.general.homebrew:
+    name: gh
+    state: latest
+  when: ansible_distribution == 'MacOSX'
