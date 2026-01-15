@@ -34,6 +34,7 @@
     - common/dig
     - common/exfat
     - common/ffmpeg
+    - common/fzf
     - common/git
     - common/htop
     - common/jq
