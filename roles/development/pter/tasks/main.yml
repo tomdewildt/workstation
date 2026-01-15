@@ -1,0 +1,13 @@
+---
+- name: Install pter (linux)
+  community.general.pipx:
+    name: pter
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install pter (macos)
+  community.general.pipx:
+    name: pter
+    executable: /opt/homebrew/bin/pipx
+    state: latest
+  when: ansible_distribution == 'MacOSX'

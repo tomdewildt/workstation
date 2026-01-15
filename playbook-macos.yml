@@ -86,6 +86,7 @@
     - development/imager
     - development/ngrok
     - development/psql
+    - development/pter
     - development/uv
     - media/eog
     - media/loom
