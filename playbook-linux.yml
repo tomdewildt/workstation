@@ -33,6 +33,7 @@
     - common/curl
     - common/dig
     - common/exfat
+    - common/fx
     - common/ffmpeg
     - common/fzf
     - common/git
