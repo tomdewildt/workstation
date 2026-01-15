@@ -111,6 +111,13 @@
         mode: "0755"
         state: directory
 
+    - name: Install fonts (linux)
+      ansible.builtin.apt:
+        name:
+          - fonts-noto
+          - fonts-recommended
+        state: latest
+
     - name: Copy background (linux)
       ansible.builtin.copy:
         src: backgrounds/nord.png
