@@ -1,0 +1,28 @@
+---
+- name: Install fx (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if fx is installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/fx
+      register: fx
+
+    - name: Download fx install script (linux)
+      ansible.builtin.get_url:
+        url: https://fx.wtf/install.sh
+        dest: /tmp/fx.sh
+        mode: "0755"
+      when: not fx.stat.exists
+
+    - name: Install fx (linux)
+      ansible.builtin.command: /tmp/fx.sh
+      changed_when: "'100' in fx_result.stdout"
+      register: fx_result
+      when: not fx.stat.exists
+
+- name: Install fx (macos)
+  community.general.homebrew:
+    name: fx
+    state: latest
+  when: ansible_distribution == 'MacOSX'
