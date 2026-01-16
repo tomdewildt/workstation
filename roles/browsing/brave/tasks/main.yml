@@ -20,6 +20,11 @@
         update_cache: true
         state: latest
 
+    - name: Remove brave generated desktop entry (linux)
+      ansible.builtin.file:
+        path: /usr/share/applications/com.brave.Browser.desktop
+        state: absent
+
 - name: Install brave (macos)
   community.general.homebrew_cask:
     name: brave-browser
