@@ -1,0 +1,21 @@
+---
+- name: Install dive (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Get dive release (linux)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/wagoodman/dive/releases/latest
+        return_content: true
+      register: dive_release
+
+    - name: Install dive package (linux)
+      ansible.builtin.apt:
+        deb: https://github.com/wagoodman/dive/releases/download/{{ dive_release.json.tag_name }}/dive_{{ dive_release.json.tag_name | regex_replace('^v', '') }}_linux_amd64.deb
+        state: present
+
+- name: Install dive (macos)
+  community.general.homebrew:
+    name: dive
+    state: latest
+  when: ansible_distribution == 'MacOSX'
