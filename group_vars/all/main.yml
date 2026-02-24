@@ -2,6 +2,12 @@
 browser:
   default: brave-browser
 
+claude:
+  plugins:
+    - gopls-lsp
+    - pyright-lsp
+    - typescript-lsp
+
 config:
   repository: https://github.com/tomdewildt/config.git
   timezone: Europe/Amsterdam
