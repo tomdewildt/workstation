@@ -8,6 +8,6 @@
 
 - name: Install notify (macos)
   community.general.homebrew:
-    name: terminal-notifier
+    name: vjeantet/tap/alerter
     state: latest
   when: ansible_distribution == 'MacOSX'
