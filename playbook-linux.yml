@@ -41,6 +41,7 @@
     - common/htop
     - common/jq
     - common/lfs
+    - common/macmon
     - common/make
     - common/nmap
     - common/notify
