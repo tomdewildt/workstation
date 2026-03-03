@@ -141,14 +141,20 @@
 - name: Configure screen (macos)
   when: ansible_distribution == 'MacOSX'
   block:
-    - name: Install yabai (macos)
-      community.general.homebrew:
-        name: asmvik/formulae/yabai
-        state: latest
+    # TODO(tomdewildt): add tap to homebrew
+    - name: Add skhd and yabai tap to homebrew (macos)
+      community.general.homebrew_tap:
+        name: asmvik/formulae
+        state: presentq
 
     - name: Install skhd (macos)
       community.general.homebrew:
         name: asmvik/formulae/skhd
+        state: latest
+
+    - name: Install yabai (macos)
+      community.general.homebrew:
+        name: asmvik/formulae/yabai
         state: latest
 
     - name: Configure dock (macos)

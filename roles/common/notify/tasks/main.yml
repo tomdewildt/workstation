@@ -7,7 +7,14 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install notify (macos)
-  community.general.homebrew:
-    name: vjeantet/tap/alerter
-    state: latest
   when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Add tap to homebrew (macos)
+      community.general.homebrew_tap:
+        name: vjeantet/tap
+        state: present
+
+    - name: Install alerter (macos)
+      community.general.homebrew:
+        name: vjeantet/tap/alerter
+        state: latest
