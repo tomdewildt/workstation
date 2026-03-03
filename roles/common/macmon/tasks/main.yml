@@ -1,0 +1,6 @@
+---
+- name: Install macmon (macos)
+  community.general.homebrew:
+    name: macmon
+    state: latest
+  when: ansible_distribution == 'MacOSX'
