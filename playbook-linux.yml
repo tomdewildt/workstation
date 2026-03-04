@@ -73,6 +73,7 @@
     - development/node
     - development/packer
     - development/python
+    - development/ruby
     - development/terraform
     - development/vagrant
     - development/aws
