@@ -1,0 +1,8 @@
+---
+# TODO: install gitlab cli on linux
+
+- name: Install gitlab (macos)
+  community.general.homebrew:
+    name: glab
+    state: latest
+  when: ansible_distribution == 'MacOSX'
