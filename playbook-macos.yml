@@ -84,6 +84,7 @@
     - development/dive
     - development/gcp
     - development/github
+    - development/gitlab
     - development/graphviz
     - development/imager
     - development/ngrok
