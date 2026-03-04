@@ -1,0 +1,8 @@
+---
+# TODO: install ruby on linux
+
+- name: Install ruby (macos)
+  community.general.homebrew:
+    name: ruby
+    state: latest
+  when: ansible_distribution == 'MacOSX'
