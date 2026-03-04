@@ -145,7 +145,7 @@
     - name: Add skhd and yabai tap to homebrew (macos)
       community.general.homebrew_tap:
         name: asmvik/formulae
-        state: presentq
+        state: present
 
     - name: Install skhd (macos)
       community.general.homebrew:
