@@ -1,0 +1,9 @@
+---
+# TODO: install mattermost on linux
+
+- name: Install mattermost (macos)
+  community.general.homebrew_cask:
+    name: mattermost
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
