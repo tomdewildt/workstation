@@ -66,6 +66,7 @@ node:
 python:
   version: 3.11.14
   packages:
+    - ansible-lint
     - ruff
     - pyright
     - virtualenv
