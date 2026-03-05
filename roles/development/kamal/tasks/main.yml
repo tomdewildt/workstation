@@ -1,0 +1,9 @@
+---
+# TODO: install kamal on linux
+
+- name: Install kamal (macos)
+  community.general.gem:
+    name: kamal
+    executable: /opt/homebrew/opt/ruby/bin/gem
+    state: latest
+  when: ansible_distribution == 'MacOSX'
