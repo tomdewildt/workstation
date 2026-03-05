@@ -90,6 +90,7 @@
     - development/graphviz
     - development/imager
     - development/kamal
+    - development/mise
     - development/ngrok
     - development/psql
     - development/pter
