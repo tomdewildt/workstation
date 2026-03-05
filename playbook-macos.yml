@@ -89,6 +89,7 @@
     - development/gitlab
     - development/graphviz
     - development/imager
+    - development/kamal
     - development/ngrok
     - development/psql
     - development/pter
