@@ -89,6 +89,7 @@
     - development/kamal
     - development/mise
     - development/ngrok
+    - development/ollama
     - development/psql
     - development/pter
     - development/uv
