@@ -1,0 +1,9 @@
+---
+# TODO: install 1password on linux
+
+- name: Install 1password (macos)
+  community.general.homebrew_cask:
+    name: 1password
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
