@@ -1,0 +1,8 @@
+---
+# TODO: install mise on linux
+
+- name: Install mise (macos)
+  community.general.homebrew:
+    name: mise
+    state: latest
+  when: ansible_distribution == 'MacOSX'
