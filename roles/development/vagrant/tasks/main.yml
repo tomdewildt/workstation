@@ -49,4 +49,5 @@
       community.general.homebrew_cask:
         name: hashicorp/tap/hashicorp-vagrant
         install_options: appdir=/Applications
+        sudo_password: "{{ ansible_become_pass }}"
         state: latest
