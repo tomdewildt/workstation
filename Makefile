@@ -18,10 +18,10 @@ init: ## Initialize the environment
 ##
 
 run/linux: ## Run on a linux machine
-	ansible-playbook playbook-linux.yml --ask-become-pass --inventory inventory/default.yml
+	ansible-playbook playbook-linux.yml --inventory inventory/default.yml
 
 run/macos: ## Run on a macos machine
-	ansible-playbook playbook-macos.yml --ask-become-pass --inventory inventory/default.yml
+	ansible-playbook playbook-macos.yml --inventory inventory/default.yml
 
 ##
 

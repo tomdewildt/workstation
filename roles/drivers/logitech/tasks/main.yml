@@ -10,5 +10,6 @@
   community.general.homebrew_cask:
     name: logi-options-plus
     install_options: appdir=/Applications
+    sudo_password: "{{ ansible_become_pass }}"
     state: latest
   when: ansible_distribution == 'MacOSX'
