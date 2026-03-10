@@ -1,6 +1,10 @@
 ---
 - name: Linux Workstation Playbook
   hosts: workstation
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: "Enter sudo password"
+      private: true
   pre_tasks:
     - name: Add contrib and non-free repositories
       become: true

@@ -1,6 +1,10 @@
 ---
 - name: MacOS Workstation Playbook
   hosts: workstation
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: "Enter sudo password"
+      private: true
   pre_tasks:
     - name: Check if homebrew is installed
       ansible.builtin.stat:
