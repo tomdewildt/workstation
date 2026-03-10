@@ -41,6 +41,7 @@ code:
     # PDF
     - tomoki1207.pdf
     # Python
+    - charliermarsh.ruff
     - ms-python.python
     - ms-python.vscode-pylance
     - teticio.python-envy
