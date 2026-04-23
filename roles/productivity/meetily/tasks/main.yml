@@ -1,0 +1,37 @@
+---
+# TODO: install meetily on linux
+
+- name: Install meetily (macOS)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Get meetily release (macos)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/Zackriya-Solutions/meeting-minutes/releases/latest
+        return_content: true
+      register: meetily_release
+
+    - name: Download meetily dmg (macos)
+      ansible.builtin.get_url:
+        url: https://github.com/Zackriya-Solutions/meeting-minutes/releases/download/{{ meetily_release.json.tag_name }}/meetily_{{ meetily_release.json.tag_name | regex_replace('^v', '') }}_aarch64.dmg
+        dest: /tmp/meetily.dmg
+        mode: "0644"
+
+    - name: Mount meetily dmg (macos)
+      ansible.builtin.command:
+        cmd: hdiutil attach /tmp/meetily.dmg -nobrowse -mountpoint /tmp/meetily-mount
+        creates: /tmp/meetily-mount
+
+    - name: Copy meetily to applications (macos)
+      ansible.builtin.command:
+        cmd: cp -R /tmp/meetily-mount/meetily.app /Applications/meetily.app
+      changed_when: true
+
+    - name: Unmount meetily dmg (macos)
+      ansible.builtin.command:
+        cmd: hdiutil detach /tmp/meetily-mount
+        removes: /tmp/meetily-mount
+
+    - name: Remove meetily dmg (macos)
+      ansible.builtin.file:
+        path: /tmp/meetily.dmg
+        state: absent
