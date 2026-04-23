@@ -1,13 +1,24 @@
 ---
 - name: Install git (linux)
   become: true
-  ansible.builtin.apt:
-    name: git
-    state: latest
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Install git (linux)
+      ansible.builtin.apt:
+        name: git
+        state: latest
+
+# TODO: install git-filter-repo on linux
 
 - name: Install git (macos)
-  community.general.homebrew:
-    name: git
-    state: latest
   when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Install git (macos)
+      community.general.homebrew:
+        name: git
+        state: latest
+
+    - name: Install git-filter-repo (macos)
+      community.general.homebrew:
+        name: git-filter-repo
+        state: latest
