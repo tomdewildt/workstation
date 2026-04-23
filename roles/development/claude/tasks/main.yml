@@ -22,7 +22,7 @@
 
 - name: Install claude (macos)
   community.general.homebrew_cask:
-    name: claude-code
+    name: claude-code@latest
     install_options: appdir=/Applications
     state: latest
   when: ansible_distribution == 'MacOSX'
