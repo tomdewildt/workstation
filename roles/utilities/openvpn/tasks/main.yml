@@ -1,0 +1,8 @@
+---
+# TODO: install openvpn-connect on linux
+
+- name: Install openvpn-connect (macos)
+  community.general.homebrew_cask:
+    name: openvpn-connect
+    state: latest
+  when: ansible_distribution == 'MacOSX'

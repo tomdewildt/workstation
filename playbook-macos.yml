@@ -125,6 +125,7 @@
     - utilities/characters
     - utilities/disk-utility
     - utilities/font-viewer
+    - utilities/openvpn
     - utilities/system-monitor
     - utilities/text-editor
     - config/files
