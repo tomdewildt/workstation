@@ -1,0 +1,8 @@
+---
+# TODO: install poppler on linux
+
+- name: Install poppler (macos)
+  community.general.homebrew:
+    name: poppler
+    state: latest
+  when: ansible_distribution == 'MacOSX'
