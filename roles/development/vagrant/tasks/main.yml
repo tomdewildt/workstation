@@ -40,6 +40,12 @@
 - name: Install vagrant (macOS)
   when: ansible_distribution == 'MacOSX'
   block:
+    - name: Install vagrant dependencies (macos)
+      community.general.homebrew_cask:
+        name: virtualbox
+        sudo_password: "{{ ansible_become_pass }}"
+        state: latest
+
     - name: Add vagrant tap (macos)
       community.general.homebrew_tap:
         name: hashicorp/tap
