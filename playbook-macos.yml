@@ -52,6 +52,7 @@
     - common/make
     - common/nmap
     - common/notify
+    - common/poppler
     - common/unzip
     - common/wget
     - drivers/cpu
