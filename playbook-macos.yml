@@ -101,6 +101,7 @@
     - development/ollama
     - development/psql
     - development/pter
+    - development/rtk
     - development/uv
     - media/easy-effects
     - media/eog

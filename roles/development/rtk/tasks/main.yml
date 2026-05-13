@@ -1,0 +1,8 @@
+---
+# TODO: install rtk on linux
+
+- name: Install rtk (macos)
+  community.general.homebrew:
+    name: rtk
+    state: latest
+  when: ansible_distribution == 'MacOSX'
