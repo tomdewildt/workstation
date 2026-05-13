@@ -34,6 +34,7 @@
         update_cache: true
         state: latest
   roles:
+    - common/age
     - common/curl
     - common/dig
     - common/exfat

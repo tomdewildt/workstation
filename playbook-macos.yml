@@ -37,6 +37,7 @@
       register: mas_result
       changed_when: mas_result.stdout != ""
   roles:
+    - common/age
     - common/curl
     - common/dig
     - common/exfat
