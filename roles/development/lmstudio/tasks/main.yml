@@ -1,0 +1,23 @@
+---
+# TODO: install lmstudio on linux
+
+- name: Install lmstudio (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Check if lmstudio is installed
+      ansible.builtin.stat:
+        path: /Users/{{ ansible_user }}/.lmstudio/bin/lms
+      register: lmstudio
+
+    - name: Download lmstudio install script (macos)
+      ansible.builtin.get_url:
+        url: https://lmstudio.ai/install.sh
+        dest: /tmp/lmstudio.sh
+        mode: "0755"
+      when: not lmstudio.stat.exists
+
+    - name: Install lmstudio (macos)
+      ansible.builtin.command: /tmp/lmstudio.sh
+      changed_when: "'Installing' in lmstudio_result.stdout"
+      register: lmstudio_result
+      when: not lmstudio.stat.exists
