@@ -96,6 +96,7 @@
     - development/graphviz
     - development/imager
     - development/kamal
+    - development/lmstudio
     - development/mise
     - development/ngrok
     - development/ollama
