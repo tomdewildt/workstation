@@ -1,0 +1,10 @@
+---
+# TODO: install microsoft-office on linux
+
+- name: Install microsoft-office (macos)
+  community.general.homebrew_cask:
+    name: microsoft-office
+    install_options: appdir=/Applications
+    sudo_password: "{{ ansible_become_pass }}"
+    state: latest
+  when: ansible_distribution == 'MacOSX'
