@@ -146,6 +146,11 @@
         name: asmvik/formulae
         state: present
 
+    - name: Trust skhd and yabai tap (macos)
+      ansible.builtin.command:
+        cmd: brew trust --tap asmvik/formulae
+      changed_when: false
+
     - name: Install skhd (macos)
       community.general.homebrew:
         name: asmvik/formulae/skhd
