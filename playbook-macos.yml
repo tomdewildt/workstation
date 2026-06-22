@@ -75,6 +75,7 @@
     - communication/meet
     - communication/signal
     - communication/slack
+    - communication/teams
     - communication/whatsapp
     - development/code
     - development/docker
