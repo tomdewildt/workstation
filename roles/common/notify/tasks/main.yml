@@ -14,6 +14,11 @@
         name: vjeantet/tap
         state: present
 
+    - name: Trust alerter tap (macos)
+      ansible.builtin.command:
+        cmd: brew trust --tap vjeantet/tap
+      changed_when: false
+
     - name: Install alerter (macos)
       community.general.homebrew:
         name: vjeantet/tap/alerter
