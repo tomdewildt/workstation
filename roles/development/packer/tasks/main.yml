@@ -34,6 +34,11 @@
         name: hashicorp/tap
         state: present
 
+    - name: Trust hashicorp tap (macos)
+      ansible.builtin.command:
+        cmd: brew trust --tap hashicorp/tap
+      changed_when: false
+
     - name: Install packer (macos)
       community.general.homebrew:
         name: hashicorp/tap/packer
