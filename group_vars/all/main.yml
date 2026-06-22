@@ -14,8 +14,6 @@ config:
 
 code:
   extensions:
-    # AI
-    - github.copilot
     # Ansible
     - redhat.ansible
     # Docker
