@@ -130,6 +130,7 @@
     - utilities/characters
     - utilities/disk-utility
     - utilities/font-viewer
+    - utilities/netbird
     - utilities/openvpn
     - utilities/system-monitor
     - utilities/text-editor
