@@ -31,6 +31,7 @@ code:
     # Javascript
     - dbaeumer.vscode-eslint
     - esbenp.prettier-vscode
+    - oxc.oxc-vscode
     - vitest.explorer
     # Jupyter
     - ms-toolsai.jupyter
