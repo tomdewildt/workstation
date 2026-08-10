@@ -77,6 +77,7 @@
     - communication/slack
     - communication/teams
     - communication/whatsapp
+    - development/bun
     - development/code
     - development/docker
     - development/golang
