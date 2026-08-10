@@ -1,0 +1,8 @@
+---
+# TODO: install bun on linux
+
+- name: Install bun (macos)
+  community.general.homebrew:
+    name: bun
+    state: latest
+  when: ansible_distribution == 'MacOSX'
