@@ -92,6 +92,7 @@
     - development/claude
     - development/codex
     - development/dive
+    - development/duckdb
     - development/gcp
     - development/github
     - development/gitlab
