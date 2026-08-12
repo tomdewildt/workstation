@@ -1,0 +1,8 @@
+---
+# TODO: install duckdb on linux
+
+- name: Install duckdb (macos)
+  community.general.homebrew:
+    name: duckdb
+    state: latest
+  when: ansible_distribution == 'MacOSX'
