@@ -1,6 +1,55 @@
 ---
-# TODO: install 1password on linux
-# TODO: install 1password cli on linux
+- name: Install 1password (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add 1password repository (linux)
+      ansible.builtin.deb822_repository:
+        name: 1password
+        types: [deb]
+        uris: [https://downloads.1password.com/linux/debian/amd64]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://downloads.1password.com/linux/keys/1password.asc
+        state: present
+
+    - name: Create 1password debsig policy directory (linux)
+      ansible.builtin.file:
+        path: /etc/debsig/policies/AC2D62742012EA22
+        state: directory
+        mode: "0755"
+
+    - name: Add 1password debsig policy (linux)
+      ansible.builtin.get_url:
+        url: https://downloads.1password.com/linux/debian/debsig/1password.pol
+        dest: /etc/debsig/policies/AC2D62742012EA22/1password.pol
+        mode: "0644"
+
+    - name: Create 1password debsig keyring directory (linux)
+      ansible.builtin.file:
+        path: /usr/share/debsig/keyrings/AC2D62742012EA22
+        state: directory
+        mode: "0755"
+
+    - name: Download 1password debsig key (linux)
+      ansible.builtin.get_url:
+        url: https://downloads.1password.com/linux/keys/1password.asc
+        dest: /tmp/1password.asc
+        mode: "0644"
+
+    - name: Add 1password debsig keyring (linux)
+      ansible.builtin.command:
+        cmd: gpg --dearmor --yes --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg /tmp/1password.asc
+        creates: /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+
+    - name: Install 1password (linux)
+      ansible.builtin.apt:
+        name:
+          - 1password
+          - 1password-cli
+        update_cache: true
+        state: latest
 
 - name: Install 1password (macOS)
   when: ansible_distribution == 'MacOSX'
