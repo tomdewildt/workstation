@@ -82,6 +82,7 @@
     - development/packer
     - development/python
     - development/ruby
+    - development/rust
     - development/terraform
     - development/vagrant
     - development/aws
@@ -103,7 +104,6 @@
     - development/psql
     - development/pter
     - development/rtk
-    - development/rust
     - development/uv
     - media/easy-effects
     - media/eog

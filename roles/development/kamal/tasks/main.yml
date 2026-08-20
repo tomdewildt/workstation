@@ -1,5 +1,11 @@
 ---
-# TODO: install kamal on linux
+- name: Install kamal (linux)
+  become: true
+  community.general.gem:
+    name: kamal
+    user_install: false
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install kamal (macos)
   community.general.gem:
