@@ -1,5 +1,26 @@
 ---
-# TODO: install lmstudio on linux
+- name: Install lmstudio (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if lmstudio is installed
+      ansible.builtin.stat:
+        path: /home/{{ ansible_user }}/.lmstudio/bin/lms
+      register: lmstudio
+
+    - name: Download lmstudio install script (linux)
+      ansible.builtin.get_url:
+        url: https://lmstudio.ai/install.sh
+        dest: /tmp/lmstudio.sh
+        mode: "0755"
+      when: not lmstudio.stat.exists
+
+    - name: Install lmstudio (linux)
+      ansible.builtin.command: /tmp/lmstudio.sh
+      environment:
+        PATH: "/usr/sbin:/sbin:{{ ansible_env.PATH }}"
+      changed_when: "'Installing' in lmstudio_result.stdout"
+      register: lmstudio_result
+      when: not lmstudio.stat.exists
 
 - name: Install lmstudio (macos)
   when: ansible_distribution == 'MacOSX'

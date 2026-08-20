@@ -1,6 +1,4 @@
 ---
-# TODO: install microsoft-office on linux
-
 - name: Install microsoft-office (macos)
   community.general.homebrew_cask:
     name: microsoft-office

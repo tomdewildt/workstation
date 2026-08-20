@@ -1,5 +1,24 @@
 ---
-# TODO: install mattermost on linux
+- name: Install mattermost (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add mattermost repository (linux)
+      ansible.builtin.deb822_repository:
+        name: mattermost
+        types: [deb]
+        uris: [https://deb.packages.mattermost.com]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://deb.packages.mattermost.com/pubkey.gpg
+        state: present
+
+    - name: Install mattermost (linux)
+      ansible.builtin.apt:
+        name: mattermost-desktop
+        update_cache: true
+        state: latest
 
 - name: Install mattermost (macos)
   community.general.homebrew_cask:
