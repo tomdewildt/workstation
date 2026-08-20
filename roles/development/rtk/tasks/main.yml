@@ -1,5 +1,25 @@
 ---
-# TODO: install rtk on linux
+- name: Install rtk (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Get rtk release (linux)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/rtk-ai/rtk/releases/latest
+        return_content: true
+      register: rtk_release
+
+    - name: Create local bin directory (linux)
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/.local/bin
+        state: directory
+        mode: "0755"
+
+    - name: Install rtk (linux)
+      ansible.builtin.unarchive:
+        src: https://github.com/rtk-ai/rtk/releases/download/{{ rtk_release.json.tag_name }}/rtk-x86_64-unknown-linux-musl.tar.gz
+        dest: /home/{{ ansible_user }}/.local/bin
+        remote_src: true
+        mode: "0755"
 
 - name: Install rtk (macos)
   community.general.homebrew:
