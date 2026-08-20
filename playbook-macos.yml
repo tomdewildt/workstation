@@ -85,6 +85,7 @@
     - development/packer
     - development/python
     - development/ruby
+    - development/rust
     - development/terraform
     - development/vagrant
     - development/aws

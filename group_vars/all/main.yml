@@ -6,6 +6,7 @@ claude:
   plugins:
     - gopls-lsp
     - pyright-lsp
+    - rust-analyzer-lsp
     - typescript-lsp
 
 config:
@@ -44,6 +45,8 @@ code:
     - ms-python.python
     - ms-python.vscode-pylance
     - teticio.python-envy
+    # Rust
+    - rust-lang.rust-analyzer
     # Spellcheck
     - streetsidesoftware.code-spell-checker
     - streetsidesoftware.code-spell-checker-dutch
@@ -71,6 +74,13 @@ python:
     - pre-commit
     - pyright
     - virtualenv
+
+rust:
+  components:
+    - rustfmt
+    - clippy
+    - rust-analyzer
+    - rust-src
 
 vagrant:
   version: 2.4.0
