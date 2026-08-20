@@ -1,5 +1,31 @@
 ---
-# TODO: install duckdb on linux
+- name: Install duckdb (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Get duckdb release (linux)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/duckdb/duckdb/releases/latest
+        return_content: true
+      register: duckdb_release
+
+    - name: Create duckdb directory (linux)
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/.duckdb/cli/{{ duckdb_release.json.tag_name | regex_replace('^v', '') }}
+        state: directory
+        mode: "0755"
+
+    - name: Install duckdb (linux)
+      ansible.builtin.unarchive:
+        src: https://github.com/duckdb/duckdb/releases/download/{{ duckdb_release.json.tag_name }}/duckdb_cli-linux-amd64.zip
+        dest: /home/{{ ansible_user }}/.duckdb/cli/{{ duckdb_release.json.tag_name | regex_replace('^v', '') }}
+        remote_src: true
+        mode: "0755"
+
+    - name: Link duckdb latest (linux)
+      ansible.builtin.file:
+        src: /home/{{ ansible_user }}/.duckdb/cli/{{ duckdb_release.json.tag_name | regex_replace('^v', '') }}
+        dest: /home/{{ ansible_user }}/.duckdb/cli/latest
+        state: link
 
 - name: Install duckdb (macos)
   community.general.homebrew:
