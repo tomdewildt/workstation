@@ -1,5 +1,10 @@
 ---
-# TODO: install ruby on linux
+- name: Install ruby (linux)
+  become: true
+  ansible.builtin.apt:
+    name: ruby-full
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install ruby (macos)
   community.general.homebrew:
