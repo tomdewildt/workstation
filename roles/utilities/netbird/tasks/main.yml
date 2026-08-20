@@ -1,5 +1,24 @@
 ---
-# TODO: install netbird on linux
+- name: Install netbird (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add netbird repository (linux)
+      ansible.builtin.deb822_repository:
+        name: netbird
+        types: [deb]
+        uris: [https://pkgs.netbird.io/debian]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://pkgs.netbird.io/debian/public.key
+        state: present
+
+    - name: Install netbird (linux)
+      ansible.builtin.apt:
+        name: netbird
+        update_cache: true
+        state: latest
 
 - name: Install netbird (macOS)
   when: ansible_distribution == 'MacOSX'
