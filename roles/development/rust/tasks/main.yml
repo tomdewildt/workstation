@@ -1,26 +1,35 @@
 ---
-# TODO: install rust on linux
+- name: Install rustup (linux)
+  become: true
+  ansible.builtin.apt:
+    name: rustup
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Install rust (macos)
+- name: Install rustup (macos)
+  community.general.homebrew:
+    name: rustup
+    state: latest
   when: ansible_distribution == 'MacOSX'
-  block:
-    - name: Install rustup (macos)
-      community.general.homebrew:
-        name: rustup
-        state: latest
 
-    - name: Check rust active toolchain (macos)
-      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup show active-toolchain
-      register: rust_toolchain
-      changed_when: false
-      failed_when: false
+- name: Check rust active toolchain (linux/macos)
+  ansible.builtin.command: rustup show active-toolchain
+  environment:
+    PATH: "/opt/homebrew/opt/rustup/bin:{{ ansible_env.PATH }}"
+  register: rust_toolchain
+  changed_when: false
+  failed_when: false
 
-    - name: Install rust stable toolchain (macos)
-      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup default stable
-      changed_when: true
-      when: "'stable' not in (rust_toolchain.stdout | default(''))"
+- name: Install rust stable toolchain (linux/macos)
+  ansible.builtin.command: rustup default stable
+  environment:
+    PATH: "/opt/homebrew/opt/rustup/bin:{{ ansible_env.PATH }}"
+  changed_when: true
+  when: "'stable' not in (rust_toolchain.stdout | default(''))"
 
-    - name: Install rust components (macos)
-      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup component add {{ rust.components | join(' ') }}
-      register: rust_components
-      changed_when: "'installing component' in rust_components.stderr"
+- name: Install rust components (linux/macos)
+  ansible.builtin.command: rustup component add {{ rust.components | join(' ') }}
+  environment:
+    PATH: "/opt/homebrew/opt/rustup/bin:{{ ansible_env.PATH }}"
+  register: rust_components
+  changed_when: "'installing component' in rust_components.stderr"

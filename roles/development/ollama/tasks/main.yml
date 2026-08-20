@@ -1,5 +1,25 @@
 ---
-# TODO: install ollama on linux
+- name: Install ollama (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if ollama is installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/ollama
+      register: ollama
+
+    - name: Download ollama install script (linux)
+      ansible.builtin.get_url:
+        url: https://ollama.com/install.sh
+        dest: /tmp/ollama.sh
+        mode: "0755"
+      when: not ollama.stat.exists
+
+    - name: Install ollama (linux)
+      ansible.builtin.command: /tmp/ollama.sh
+      changed_when: "'Install complete' in ollama_result.stderr"
+      register: ollama_result
+      when: not ollama.stat.exists
 
 - name: Install ollama (macos)
   community.general.homebrew:
