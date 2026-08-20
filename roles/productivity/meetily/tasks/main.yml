@@ -1,6 +1,4 @@
 ---
-# TODO: install meetily on linux
-
 - name: Install meetily (macOS)
   when: ansible_distribution == 'MacOSX'
   block:
