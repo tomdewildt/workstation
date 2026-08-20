@@ -1,5 +1,24 @@
 ---
-# TODO: install mise on linux
+- name: Install mise (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Add mise repository (linux)
+      ansible.builtin.deb822_repository:
+        name: mise
+        types: [deb]
+        uris: [https://mise.jdx.dev/deb]
+        suites: [stable]
+        components: [main]
+        architectures: [amd64]
+        signed_by: https://mise.jdx.dev/gpg-key.pub
+        state: present
+
+    - name: Install mise (linux)
+      ansible.builtin.apt:
+        name: mise
+        update_cache: true
+        state: latest
 
 - name: Install mise (macos)
   community.general.homebrew:

@@ -1,5 +1,18 @@
 ---
-# TODO: install gitlab cli on linux
+- name: Install gitlab (linux)
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Get gitlab release (linux)
+      ansible.builtin.uri:
+        url: https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases/permalink/latest
+        return_content: true
+      register: gitlab_release
+
+    - name: Install gitlab (linux)
+      ansible.builtin.apt:
+        deb: https://gitlab.com/gitlab-org/cli/-/releases/{{ gitlab_release.json.tag_name }}/downloads/glab_{{ gitlab_release.json.tag_name | regex_replace('^v', '') }}_linux_amd64.deb
+        state: present
 
 - name: Install gitlab (macos)
   community.general.homebrew:
