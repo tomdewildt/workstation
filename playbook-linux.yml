@@ -103,6 +103,7 @@
     - development/psql
     - development/pter
     - development/rtk
+    - development/rust
     - development/uv
     - media/easy-effects
     - media/eog

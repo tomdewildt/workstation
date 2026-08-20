@@ -1,0 +1,26 @@
+---
+# TODO: install rust on linux
+
+- name: Install rust (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Install rustup (macos)
+      community.general.homebrew:
+        name: rustup
+        state: latest
+
+    - name: Check rust active toolchain (macos)
+      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup show active-toolchain
+      register: rust_toolchain
+      changed_when: false
+      failed_when: false
+
+    - name: Install rust stable toolchain (macos)
+      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup default stable
+      changed_when: true
+      when: "'stable' not in (rust_toolchain.stdout | default(''))"
+
+    - name: Install rust components (macos)
+      ansible.builtin.command: /opt/homebrew/opt/rustup/bin/rustup component add {{ rust.components | join(' ') }}
+      register: rust_components
+      changed_when: "'installing component' in rust_components.stderr"
