@@ -1,0 +1,62 @@
+---
+- name: Install claude (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if claude is installed
+      ansible.builtin.stat:
+        path: /home/{{ ansible_user }}/.local/bin/claude
+      register: claude
+
+    - name: Download claude install script (linux)
+      ansible.builtin.get_url:
+        url: https://claude.ai/install.sh
+        dest: /tmp/claude.sh
+        mode: "0755"
+      when: not claude.stat.exists
+
+    - name: Install claude (linux)
+      ansible.builtin.command: /tmp/claude.sh
+      changed_when: "'successfully installed' in claude_result.stdout"
+      register: claude_result
+      when: not claude.stat.exists
+
+- name: Install claude (macos)
+  community.general.homebrew_cask:
+    name: claude-code@latest
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
+
+- name: Install opencode (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Check if opencode is installed
+      ansible.builtin.stat:
+        path: /home/{{ ansible_user }}/.opencode/bin/opencode
+      register: opencode
+
+    - name: Download opencode install script (linux)
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/anomalyco/opencode/refs/heads/dev/install
+        dest: /tmp/opencode.sh
+        mode: "0755"
+      when: not opencode.stat.exists
+
+    - name: Install opencode (linux)
+      ansible.builtin.command: /tmp/opencode.sh --no-modify-path
+      changed_when: "'Installing' in opencode_result.stdout"
+      register: opencode_result
+      when: not opencode.stat.exists
+
+- name: Install opencode (macos)
+  when: ansible_distribution == 'MacOSX'
+  block:
+    - name: Add opencode tap (macos)
+      community.general.homebrew_tap:
+        name: anomalyco/tap
+        state: present
+
+    - name: Install opencode (macos)
+      community.general.homebrew:
+        name: anomalyco/tap/opencode
+        state: latest

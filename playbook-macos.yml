@@ -101,6 +101,7 @@
     - development/lmstudio
     - development/mise
     - development/ngrok
+    - development/opencode
     - development/psql
     - development/pter
     - development/rtk
