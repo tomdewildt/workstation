@@ -17,6 +17,12 @@ config:
   repository: https://github.com/tomdewildt/config.git
   timezone: Europe/Amsterdam
 
+codex:
+  marketplaces:
+    ponytail: DietrichGebert/ponytail
+  plugins:
+    - ponytail@ponytail
+
 code:
   extensions:
     # Ansible
