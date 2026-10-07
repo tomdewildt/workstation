@@ -14,3 +14,27 @@
     install_options: appdir=/Applications
     state: latest
   when: ansible_distribution == 'MacOSX'
+
+- name: Find codex marketplaces (linux/macos)
+  ansible.builtin.command: codex plugin marketplace list
+  changed_when: false
+  register: marketplaces
+
+- name: Add codex marketplaces (linux/macos)
+  ansible.builtin.command: codex plugin marketplace add {{ item.value }}
+  changed_when: "'Added marketplace' in marketplace_result.stdout"
+  register: marketplace_result
+  with_dict: "{{ codex.marketplaces }}"
+  when: item.key not in marketplaces.stdout
+
+- name: Find codex plugins (linux/macos)
+  ansible.builtin.command: codex plugin list --json
+  changed_when: false
+  register: plugins
+
+- name: Install codex plugins (linux/macos)
+  ansible.builtin.command: codex plugin add {{ item }}
+  changed_when: "'Added plugin' in plugin_result.stdout"
+  register: plugin_result
+  with_items: "{{ codex.plugins }}"
+  when: item not in (plugins.stdout | from_json).installed | map(attribute='pluginId')
