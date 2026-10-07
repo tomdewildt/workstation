@@ -32,11 +32,12 @@
   changed_when: false
   register: marketplaces
 
-- name: Add claude marketplace (linux/macos)
-  ansible.builtin.command: claude plugin marketplace add anthropics/claude-plugins-official
+- name: Add claude marketplaces (linux/macos)
+  ansible.builtin.command: claude plugin marketplace add {{ item.value }}
   changed_when: "'successfully' not in marketplace_result.stdout"
   register: marketplace_result
-  when: "'anthropics/claude-plugins-official' not in marketplaces.stdout"
+  with_dict: "{{ claude.marketplaces }}"
+  when: item.key not in marketplaces.stdout
 
 - name: Find claude plugins (linux/macos)
   ansible.builtin.command: claude plugin list
@@ -44,7 +45,7 @@
   changed_when: false
 
 - name: Install claude plugins (linux/macos)
-  ansible.builtin.command: claude plugin install {{ item }}@claude-plugins-official --scope user
+  ansible.builtin.command: claude plugin install {{ item }} --scope user
   changed_when: "'successfully' in plugin_result.stdout"
   register: plugin_result
   with_items: "{{ claude.plugins }}"
