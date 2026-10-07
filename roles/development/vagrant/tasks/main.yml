@@ -20,6 +20,23 @@
         update_cache: true
         state: present
 
+    - name: Blacklist kvm modules to avoid virtualbox conflict (linux)
+      ansible.builtin.copy:
+        dest: /etc/modprobe.d/kvm-blacklist.conf
+        content: |
+          blacklist kvm_amd
+          blacklist kvm
+        mode: "0644"
+
+    - name: Unload kvm modules (linux)
+      community.general.modprobe:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - kvm_amd
+        - kvm
+      failed_when: false
+
     - name: Add vagrant repository (linux)
       ansible.builtin.deb822_repository:
         name: hashicorp
