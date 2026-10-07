@@ -1,5 +1,5 @@
 ---
-- name: Install claude (linux)
+- name: Install opencode (linux)
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
     - name: Check if claude is installed
@@ -20,16 +20,6 @@
       register: claude_result
       when: not claude.stat.exists
 
-- name: Install claude (macos)
-  community.general.homebrew_cask:
-    name: claude-code@latest
-    install_options: appdir=/Applications
-    state: latest
-  when: ansible_distribution == 'MacOSX'
-
-- name: Install opencode (linux)
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  block:
     - name: Check if opencode is installed
       ansible.builtin.stat:
         path: /home/{{ ansible_user }}/.opencode/bin/opencode
@@ -51,6 +41,12 @@
 - name: Install opencode (macos)
   when: ansible_distribution == 'MacOSX'
   block:
+    - name: Install claude (macos)
+      community.general.homebrew_cask:
+        name: claude-code@latest
+        install_options: appdir=/Applications
+        state: latest
+
     - name: Add opencode tap (macos)
       community.general.homebrew_tap:
         name: anomalyco/tap
