@@ -90,7 +90,6 @@
     - development/vagrant
     - development/aws
     - development/az
-    - development/claude
     - development/codex
     - development/dive
     - development/duckdb
