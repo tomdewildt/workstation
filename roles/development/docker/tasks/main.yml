@@ -22,6 +22,7 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+          - docker-sbx
         update_cache: true
         state: latest
 
@@ -30,6 +31,7 @@
         name: "{{ ansible_user }}"
         groups:
           - docker
+          - kvm
         append: true
 
 - name: Install docker (macos)
@@ -44,4 +46,19 @@
         name: docker
         install_options: appdir=/Applications
         sudo_password: "{{ ansible_become_pass }}"
+        state: latest
+
+    - name: Add docker tap (macos)
+      community.general.homebrew_tap:
+        name: docker/tap
+        state: present
+
+    - name: Trust docker tap (macos)
+      ansible.builtin.command:
+        cmd: brew trust --tap docker/tap
+      changed_when: false
+
+    - name: Install docker sbx (macos)
+      community.general.homebrew:
+        name: docker/tap/sbx
         state: latest
