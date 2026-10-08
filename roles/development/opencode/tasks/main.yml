@@ -2,51 +2,41 @@
 - name: Install opencode (linux)
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   block:
-    - name: Check if claude is installed
-      ansible.builtin.stat:
-        path: /home/{{ ansible_user }}/.local/bin/claude
-      register: claude
-
-    - name: Download claude install script (linux)
-      ansible.builtin.get_url:
-        url: https://claude.ai/install.sh
-        dest: /tmp/claude.sh
-        mode: "0755"
-      when: not claude.stat.exists
-
-    - name: Install claude (linux)
-      ansible.builtin.command: /tmp/claude.sh
-      changed_when: "'successfully installed' in claude_result.stdout"
-      register: claude_result
-      when: not claude.stat.exists
-
     - name: Check if opencode is installed
       ansible.builtin.stat:
         path: /home/{{ ansible_user }}/.opencode/bin/opencode
       register: opencode
 
-    - name: Download opencode install script (linux)
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/anomalyco/opencode/refs/heads/dev/install
-        dest: /tmp/opencode.sh
+    - name: Get opencode v2 formula (linux)
+      ansible.builtin.uri:
+        url: https://raw.githubusercontent.com/anomalyco/homebrew-tap/master/opencode-v2.rb
+        return_content: true
+      register: opencode_formula
+      when: not opencode.stat.exists
+
+    - name: Set opencode version (linux)
+      ansible.builtin.set_fact:
+        opencode_version: "{{ opencode_formula.content | regex_findall('version \"([^\"]+)\"') | first }}"
+      when: not opencode.stat.exists
+
+    - name: Create opencode directory (linux)
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/.opencode/bin
+        state: directory
         mode: "0755"
       when: not opencode.stat.exists
 
     - name: Install opencode (linux)
-      ansible.builtin.command: /tmp/opencode.sh --no-modify-path
-      changed_when: "'Installing' in opencode_result.stdout"
-      register: opencode_result
+      ansible.builtin.unarchive:
+        src: https://opencode.ai/files/bin/{{ opencode_version }}/opencode-linux-x64.tar.gz
+        dest: /home/{{ ansible_user }}/.opencode/bin
+        remote_src: true
+        mode: "0755"
       when: not opencode.stat.exists
 
 - name: Install opencode (macos)
   when: ansible_distribution == 'MacOSX'
   block:
-    - name: Install claude (macos)
-      community.general.homebrew_cask:
-        name: claude-code@latest
-        install_options: appdir=/Applications
-        state: latest
-
     - name: Add opencode tap (macos)
       community.general.homebrew_tap:
         name: anomalyco/tap
@@ -54,5 +44,5 @@
 
     - name: Install opencode (macos)
       community.general.homebrew:
-        name: anomalyco/tap/opencode
+        name: anomalyco/tap/opencode-v2
         state: latest
