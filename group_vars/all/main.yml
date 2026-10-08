@@ -2,26 +2,9 @@
 browser:
   default: brave-browser
 
-claude:
-  marketplaces:
-    claude-plugins-official: anthropics/claude-plugins-official
-    ponytail: DietrichGebert/ponytail
-  plugins:
-    - gopls-lsp@claude-plugins-official
-    - ponytail@ponytail
-    - pyright-lsp@claude-plugins-official
-    - rust-analyzer-lsp@claude-plugins-official
-    - typescript-lsp@claude-plugins-official
-
 config:
   repository: https://github.com/tomdewildt/config.git
   timezone: Europe/Amsterdam
-
-codex:
-  marketplaces:
-    ponytail: DietrichGebert/ponytail
-  plugins:
-    - ponytail@ponytail
 
 code:
   extensions:

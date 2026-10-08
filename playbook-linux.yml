@@ -87,8 +87,6 @@
     - development/vagrant
     - development/aws
     - development/az
-    - development/claude
-    - development/codex
     - development/dive
     - development/duckdb
     - development/gcp
@@ -100,6 +98,7 @@
     - development/lmstudio
     - development/mise
     - development/ngrok
+    - development/opencode
     - development/psql
     - development/pter
     - development/rtk
