@@ -1,0 +1,22 @@
+---
+- name: Install caffeine (linux)
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  block:
+    - name: Create local bin directory (linux)
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/.local/bin
+        state: directory
+        mode: "0755"
+
+    - name: Install caffeine (linux)
+      ansible.builtin.copy:
+        src: caffeine
+        dest: /home/{{ ansible_user }}/.local/bin/caffeine
+        mode: "0755"
+
+- name: Install caffeine (macos)
+  community.general.homebrew_cask:
+    name: caffeine
+    install_options: appdir=/Applications
+    state: latest
+  when: ansible_distribution == 'MacOSX'
