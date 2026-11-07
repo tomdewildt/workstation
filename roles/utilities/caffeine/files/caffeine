@@ -1,0 +1,7 @@
+#!/bin/sh
+if pkill -f 'systemd-inhibit --why=caffeine'; then
+  notify-send "Caffeine off"
+else
+  systemd-inhibit --what=idle:sleep --why=caffeine sleep infinity &
+  notify-send "Caffeine on"
+fi
