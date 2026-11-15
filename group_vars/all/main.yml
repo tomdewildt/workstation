@@ -51,7 +51,7 @@ code:
     - redhat.vscode-yaml
 
 golang:
-  version: 1.21.4
+  version: 1.27.4
 
 node:
   version: 24.x
